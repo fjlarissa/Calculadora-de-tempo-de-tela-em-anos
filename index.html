@@ -8,19 +8,12 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* Adicionando a animação de fade-in */
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         body {
@@ -43,9 +36,10 @@
             border-radius: 12px; 
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
             text-align: center;
-            max-width: 450px;
+            max-width: 480px;
             width: 100%;
             border: 1px solid rgba(0, 0, 0, 0.07);
+            animation: fadeIn 0.8s ease-out;
         }
 
         h1 {
@@ -65,6 +59,7 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
+            margin-bottom: 30px;
         }
         
         input[type="number"] {
@@ -72,12 +67,12 @@
             font-size: 1em;
             width: 100%;
             padding: 16px;
-            border-radius: 20px; 
+            border-radius: 10px; 
             background-color: #f7f7f5;
-            border: none;
+            border: 1px solid transparent;
             box-sizing: border-box;
-            /* Adicionando transição suave */
-            transition: background-color 0.3s ease;
+            text-align: center;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         input::placeholder {
@@ -86,113 +81,136 @@
 
         input[type="number"]:focus {
             outline: none;
-            background-color: #e9e9e7;
+            background-color: #ffffff;
+            border-color: #37352F;
         }
 
+        /* Estilos da Barra de Progresso */
+        .gauge-container {
+            width: 100%;
+            height: 25px;
+            background-color: #e9e9e7;
+            border-radius: 25px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        
+        .gauge-fill {
+            width: 0%; /* Começa vazia */
+            height: 100%;
+            background-color: #e03131;
+            border-radius: 25px;
+            transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1); /* Transição suave */
+        }
+        
+        /* Área de Resultado */
+        #resultado-container {
+            margin-top: 30px;
+            min-height: 90px;
+        }
+
+        #resultado-texto {
+            font-size: 1.1em;
+            line-height: 1.5;
+            color: rgba(55, 53, 47, 0.8);
+        }
+
+        #resultado-numero {
+            font-size: 2.8em;
+            font-weight: 700;
+            color: #e03131;
+            display: block;
+        }
+
+        /* Remove as setas do campo de número */
         input[type=number]::-webkit-inner-spin-button, 
         input[type=number]::-webkit-outer-spin-button { 
-            -webkit-appearance: none; 
-            margin: 0; 
+            -webkit-appearance: none; margin: 0; 
         }
-        input[type=number] {
-            -moz-appearance: textfield;
-        }
+        input[type=number] { -moz-appearance: textfield; }
 
-        button {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            background-color: #37352F;
-            color: #ffffff;
-            padding: 16px 30px;
-            border: none;
-            border-radius: 20px;
-            font-size: 1.1em;
-            cursor: pointer;
-            margin-top: 25px;
-            width: 100%;
-            /* Adicionando transição suave */
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        button:hover {
-            background-color: #4a4844;
-        }
-        
-        button:active {
-            transform: scale(0.98);
-        }
-
-        #resultado {
-            margin-top: 30px;
-            font-size: 1.2em;
-            font-weight: 600;
-            min-height: 50px;
-            line-height: 1.5;
-        }
-        
-        /* Classe para ativar a animação do resultado */
-        .resultado-animado {
-            animation: fadeIn 0.6s ease-out forwards;
-        }
-
-        #resultado strong {
-            color: #d93025;
-        }
     </style>
 </head>
 <body>
 
     <div class="container">
         <h1>Time Well Spent?</h1>
-        <p>Já pensou em quanto tempo, ao longo de sua vida, você desperdiçará pelo uso do seu celular? É hora de descobrir.</p>
+        <p>Veja em tempo real como seu tempo de tela hoje impacta o resto da sua vida.</p>
         
         <div class="input-group">
             <input type="number" id="idadeAtual" placeholder="Sua idade atual">
-            <input type="number" id="horasDiarias" placeholder="Média de tempo de tela (horas diárias utilizando o celular">
+            <input type="number" id="horasDiarias" placeholder="Média de tempo de tela diário">
         </div>
 
-        <button onclick="calcularTempo()">Calcular</button>
-
-        <div id="resultado"></div>
+        <div id="resultado-container">
+            <span id="resultado-numero">0.0</span>
+            <p id="resultado-texto">anos da sua vida em frente a uma tela.</p>
+            <div class="gauge-container">
+                <div class="gauge-fill" id="gaugeFill"></div>
+            </div>
+        </div>
     </div>
 
     <script>
-        function calcularTempo() {
-            const idadeAtualInput = document.getElementById('idadeAtual');
-            const horasDiariasInput = document.getElementById('horasDiarias');
-            
-            const idadeAtual = idadeAtualInput.value;
-            const horasDiarias = horasDiariasInput.value;
-            const resultadoDiv = document.getElementById('resultado');
-            
-            // Limpa a animação anterior para que possa ser executada novamente
-            resultadoDiv.classList.remove('resultado-animado');
+        const idadeInput = document.getElementById('idadeAtual');
+        const horasInput = document.getElementById('horasDiarias');
+        
+        const resultadoNumeroEl = document.getElementById('resultado-numero');
+        const resultadoTextoEl = document.getElementById('resultado-texto');
+        const gaugeFillEl = document.getElementById('gaugeFill');
+        
+        // Adiciona "listeners" que rodam a função a cada alteração nos inputs
+        idadeInput.addEventListener('input', calcularTempo);
+        horasInput.addEventListener('input', calcularTempo);
 
+        let numeroInterval; // Para a animação do número
+
+        function calcularTempo() {
+            const idade = parseFloat(idadeInput.value);
+            const horas = parseFloat(horasInput.value);
             const expectativaDeVida = 80;
 
-            if (idadeAtual === '' || horasDiarias === '') {
-                resultadoDiv.innerHTML = "Por favor, preencha sua idade e as horas diárias.";
-                resultadoDiv.classList.add('resultado-animado');
-                return;
-            }
-            if (idadeAtual < 1 || idadeAtual >= expectativaDeVida) {
-                resultadoDiv.innerHTML = `Por favor, insira uma idade válida (entre 1 e ${expectativaDeVida - 1}).`;
-                resultadoDiv.classList.add('resultado-animado');
-                return;
-            }
-            if (horasDiarias < 0 || horasDiarias > 24) {
-                resultadoDiv.innerHTML = "Por favor, insira um valor de horas válido (entre 0 e 24).";
-                resultadoDiv.classList.add('resultado-animado');
+            // Validação para não calcular com valores inválidos
+            if (isNaN(idade) || isNaN(horas) || idade < 1 || idade >= expectativaDeVida || horas < 0 || horas > 24) {
+                resultadoNumeroEl.textContent = "0.0";
+                gaugeFillEl.style.width = `0%`;
                 return;
             }
 
-            const anosRestantes = expectativaDeVida - idadeAtual;
-            const anosPerdidosNoFuturo = (horasDiarias / 24) * anosRestantes;
+            const anosRestantes = expectativaDeVida - idade;
+            const anosPerdidos = (horas / 24) * anosRestantes;
+            
+            // Lógica para a Barra de Progresso
+            const porcentagemVidaPerdida = (anosPerdidos / expectativaDeVida) * 100;
+            gaugeFillEl.style.width = `${porcentagemVidaPerdida}%`;
 
-            resultadoDiv.innerHTML = `Mantendo esse ritmo, ao alcançar 80 anos, você irá ter desperdiçado o equivalente a <strong>${anosPerdidosNoFuturo.toFixed(1)} anos</strong> da sua vida em frente ao celular.`;
+            // Lógica para o texto dinâmico
+            if (anosPerdidos > 10) {
+                resultadoTextoEl.textContent = "anos da sua vida serão dedicados às telas. Um alerta importante.";
+            } else if (anosPerdidos > 5) {
+                resultadoTextoEl.textContent = "anos da sua vida em frente a uma tela. Uma porção considerável.";
+            } else {
+                resultadoTextoEl.textContent = "anos da sua vida em frente a uma tela. Mantenha o equilíbrio.";
+            }
 
-            // Adiciona a classe para ativar a animação do resultado
-            resultadoDiv.classList.add('resultado-animado');
+            // Lógica para animar o número
+            animarContador(anosPerdidos);
+        }
+        
+        function animarContador(valorFinal) {
+            clearInterval(numeroInterval); // Limpa a animação anterior
+            let valorAtual = parseFloat(resultadoNumeroEl.textContent);
+            let passo = (valorFinal - valorAtual) / 50; // Anima em 50 passos
+
+            numeroInterval = setInterval(() => {
+                if (Math.abs(valorFinal - valorAtual) < Math.abs(passo)) {
+                    valorAtual = valorFinal;
+                    clearInterval(numeroInterval);
+                } else {
+                    valorAtual += passo;
+                }
+                resultadoNumeroEl.textContent = valorAtual.toFixed(1);
+            }, 10); // Intervalo rápido para uma animação fluida
         }
     </script>
 
