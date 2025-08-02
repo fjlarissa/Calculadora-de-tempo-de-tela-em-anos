@@ -12,16 +12,21 @@
 
     <style>
         :root {
-            --background-color: #f7f7f5;
-            --text-color: #37352F;
+            --background-color: #f5f5f5;
+            --text-color: #000000;
             --card-background: #ffffff;
-            --subtle-border: rgba(0, 0, 0, 0.07);
-            --accent-color: #e03131;
+            --subtle-border: #e8e8e8;
+            --accent-color: #000000; /* Cor de destaque agora é preta */
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Animações de Entrada Mais Impactantes */
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         body {
@@ -31,6 +36,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            overflow-x: hidden; /* Previne scroll horizontal por causa das animações */
         }
 
         .page-header {
@@ -46,49 +52,58 @@
             gap: 60px;
             padding: 40px;
             min-height: 80vh;
-            animation: fadeIn 0.8s ease-out;
         }
 
         .hero-text {
             max-width: 500px;
+            animation: slideInLeft 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
 
         .hero-text h1 {
-            font-size: 3.5rem;
+            font-size: 3.8rem; /* Um pouco maior para mais impacto */
             font-weight: 700;
-            line-height: 1.2;
+            line-height: 1.1;
             margin: 0 0 20px 0;
         }
         
-        /* Efeito de gradiente no título */
-        .gradient-text {
-            background: linear-gradient(45deg, #4A00E0, #8E2DE2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-fill-color: transparent;
-        }
-
         .hero-text p {
             font-size: 1.2rem;
             line-height: 1.6;
-            color: rgba(55, 53, 47, 0.8);
+            color: #555; /* Cinza escuro para o texto de apoio */
         }
 
         .calculator-card {
             background-color: var(--card-background);
             padding: 30px;
             border-radius: 12px; 
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
             text-align: center;
             width: 100%;
             max-width: 420px;
             border: 1px solid var(--subtle-border);
+            animation: slideInRight 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            position: relative; /* Necessário para o efeito de hover */
+            overflow: hidden;   /* Necessário para o efeito de hover */
         }
         
+        /* Efeito de brilho no hover */
+        .calculator-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 75%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .calculator-card:hover::before {
+            left: 125%;
+        }
+
         .calculator-card p {
             font-size: 0.9em;
-             color: rgba(55, 53, 47, 0.65);
+            color: #777;
         }
 
         .input-group {
@@ -104,14 +119,10 @@
             padding: 16px;
             border-radius: 8px; 
             background-color: var(--background-color);
-            border: 1px solid transparent;
+            border: 2px solid transparent; /* Bordas mais grossas para um foco mais forte */
             box-sizing: border-box;
             text-align: center;
             transition: background-color 0.3s ease, border-color 0.3s ease;
-        }
-
-        input::placeholder {
-            color: rgba(55, 53, 47, 0.4);
         }
 
         input[type="number"]:focus {
@@ -123,7 +134,7 @@
         .gauge-container {
             width: 100%;
             height: 15px;
-            background-color: #e9e9e7;
+            background-color: #e8e8e8;
             border-radius: 15px;
             overflow: hidden;
             margin-top: 15px;
@@ -134,7 +145,8 @@
             height: 100%;
             background-color: var(--accent-color);
             border-radius: 15px;
-            transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+            /* Curva de transição mais dramática */
+            transition: width 1.8s cubic-bezier(0.65, 0, 0.35, 1); 
         }
         
         #resultado-container {
@@ -144,10 +156,11 @@
 
         #resultado-texto {
             margin: 5px 0 0 0;
+            color: #555;
         }
 
         #resultado-numero {
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 700;
             color: var(--accent-color);
             display: block;
@@ -159,7 +172,6 @@
         }
         input[type=number] { -moz-appearance: textfield; }
         
-        /* Media Query para telas menores (celulares) */
         @media (max-width: 900px) {
             main {
                 flex-direction: column;
@@ -185,8 +197,8 @@
 
     <main>
         <div class="hero-text">
-            <h1>Repense seu <span class="gradient-text">tempo digital.</span></h1>
-            <p>Sua vida é finita. Seu tempo de tela também deveria ser. Use nossa calculadora para visualizar o impacto dos seus hábitos digitais e tomar controle do seu bem mais precioso: o tempo.</p>
+            <h1>Seu tempo é o seu bem mais valioso.</h1>
+            <p>Sua vida é finita. Seu tempo de tela também deveria ser. Use nossa calculadora para visualizar o impacto dos seus hábitos digitais e tomar controle do seu futuro.</p>
         </div>
 
         <div class="calculator-card">
@@ -208,67 +220,4 @@
 
     <script>
         const idadeInput = document.getElementById('idadeAtual');
-        const horasInput = document.getElementById('horasDiarias');
-        
-        const resultadoNumeroEl = document.getElementById('resultado-numero');
-        const resultadoTextoEl = document.getElementById('resultado-texto');
-        const gaugeFillEl = document.getElementById('gaugeFill');
-        
-        idadeInput.addEventListener('input', calcularTempo);
-        horasInput.addEventListener('input', calcularTempo);
-
-        let numeroInterval;
-
-        function calcularTempo() {
-            const idade = parseFloat(idadeInput.value);
-            const horas = parseFloat(horasInput.value);
-            const expectativaDeVida = 80;
-
-            if (isNaN(idade) || isNaN(horas) || idade < 1 || idade >= expectativaDeVida || horas < 0 || horas > 24) {
-                animarContador(0); // Anima o número de volta para 0
-                gaugeFillEl.style.width = '0%';
-                resultadoTextoEl.textContent = "anos da sua vida em frente a uma tela.";
-                return;
-            }
-
-            const anosRestantes = expectativaDeVida - idade;
-            const anosPerdidos = (horas / 24) * anosRestantes;
-            
-            const porcentagemVidaPerdida = (anosPerdidos / expectativaDeVida) * 100;
-            gaugeFillEl.style.width = `${porcentagemVidaPerdida}%`;
-
-            if (anosPerdidos > 10) {
-                resultadoTextoEl.textContent = "da sua vida serão dedicados às telas. Um alerta importante.";
-            } else if (anosPerdidos > 5) {
-                resultadoTextoEl.textContent = "da sua vida em frente a uma tela. Uma porção considerável.";
-            } else {
-                resultadoTextoEl.textContent = "da sua vida em frente a uma tela. Mantenha o equilíbrio.";
-            }
-
-            animarContador(anosPerdidos);
-        }
-        
-        function animarContador(valorFinal) {
-            clearInterval(numeroInterval);
-            let valorAtual = parseFloat(resultadoNumeroEl.textContent);
-            if (isNaN(valorAtual)) valorAtual = 0;
-            
-            let duracao = 800; // Duração da animação em milissegundos
-            let totalPassos = 50;
-            let passo = (valorFinal - valorAtual) / totalPassos;
-            let intervalo = duracao / totalPassos;
-
-            numeroInterval = setInterval(() => {
-                if (Math.abs(valorFinal - valorAtual) < Math.abs(passo) || passo === 0) {
-                    valorAtual = valorFinal;
-                    clearInterval(numeroInterval);
-                } else {
-                    valorAtual += passo;
-                }
-                resultadoNumeroEl.textContent = valorAtual.toFixed(1);
-            }, intervalo);
-        }
-    </script>
-
-</body>
-</html>
+        const horasInput = document.getElementById('horasDi
