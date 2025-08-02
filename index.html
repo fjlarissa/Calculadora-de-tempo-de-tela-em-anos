@@ -74,3 +74,127 @@
             padding: 16px;
             border-radius: 20px; 
             background-color: #f7f7f5;
+            border: none;
+            box-sizing: border-box;
+            /* Adicionando transição suave */
+            transition: background-color 0.3s ease;
+        }
+
+        input::placeholder {
+            color: rgba(55, 53, 47, 0.4);
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            background-color: #e9e9e7;
+        }
+
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        button {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            background-color: #37352F;
+            color: #ffffff;
+            padding: 16px 30px;
+            border: none;
+            border-radius: 20px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-top: 25px;
+            width: 100%;
+            /* Adicionando transição suave */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #4a4844;
+        }
+        
+        button:active {
+            transform: scale(0.98);
+        }
+
+        #resultado {
+            margin-top: 30px;
+            font-size: 1.2em;
+            font-weight: 600;
+            min-height: 50px;
+            line-height: 1.5;
+        }
+        
+        /* Classe para ativar a animação do resultado */
+        .resultado-animado {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        #resultado strong {
+            color: #d93025;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Time Well Spent?</h1>
+        <p>Já pensou em quanto tempo, ao longo de sua vida, você desperdiçará pelo uso do seu celular? É hora de descobrir.</p>
+        
+        <div class="input-group">
+            <input type="number" id="idadeAtual" placeholder="Sua idade atual">
+            <input type="number" id="horasDiarias" placeholder="Média de tempo de tela">
+        </div>
+
+        <button onclick="calcularTempo()">Calcular</button>
+
+        <div id="resultado"></div>
+    </div>
+
+    <script>
+        function calcularTempo() {
+            const idadeAtualInput = document.getElementById('idadeAtual');
+            const horasDiariasInput = document.getElementById('horasDiarias');
+            
+            const idadeAtual = idadeAtualInput.value;
+            const horasDiarias = horasDiariasInput.value;
+            const resultadoDiv = document.getElementById('resultado');
+            
+            // Limpa a animação anterior para que possa ser executada novamente
+            resultadoDiv.classList.remove('resultado-animado');
+
+            const expectativaDeVida = 80;
+
+            if (idadeAtual === '' || horasDiarias === '') {
+                resultadoDiv.innerHTML = "Por favor, preencha sua idade e as horas diárias.";
+                resultadoDiv.classList.add('resultado-animado');
+                return;
+            }
+            if (idadeAtual < 1 || idadeAtual >= expectativaDeVida) {
+                resultadoDiv.innerHTML = `Por favor, insira uma idade válida (entre 1 e ${expectativaDeVida - 1}).`;
+                resultadoDiv.classList.add('resultado-animado');
+                return;
+            }
+            if (horasDiarias < 0 || horasDiarias > 24) {
+                resultadoDiv.innerHTML = "Por favor, insira um valor de horas válido (entre 0 e 24).";
+                resultadoDiv.classList.add('resultado-animado');
+                return;
+            }
+
+            const anosRestantes = expectativaDeVida - idadeAtual;
+            const anosPerdidosNoFuturo = (horasDiarias / 24) * anosRestantes;
+
+            resultadoDiv.innerHTML = `Mantendo esse ritmo, ao alcançar 80 anos, você irá ter desperdiçado o equivalente a <strong>${anosPerdidosNoFuturo.toFixed(1)} anos</strong> da sua vida em frente ao celular.`;
+
+            // Adiciona a classe para ativar a animação do resultado
+            resultadoDiv.classList.add('resultado-animado');
+        }
+    </script>
+
+</body>
+</html>
