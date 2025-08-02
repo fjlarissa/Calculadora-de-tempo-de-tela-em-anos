@@ -16,10 +16,9 @@
             --text-color: #000000;
             --card-background: #ffffff;
             --subtle-border: #e8e8e8;
-            --accent-color: #000000; /* Cor de destaque agora é preta */
+            --accent-color: #000000;
         }
 
-        /* Animações de Entrada Mais Impactantes */
         @keyframes slideInLeft {
             from { opacity: 0; transform: translateX(-50px); }
             to { opacity: 1; transform: translateX(0); }
@@ -36,7 +35,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            overflow-x: hidden; /* Previne scroll horizontal por causa das animações */
+            overflow-x: hidden;
         }
 
         .page-header {
@@ -60,7 +59,7 @@
         }
 
         .hero-text h1 {
-            font-size: 3.8rem; /* Um pouco maior para mais impacto */
+            font-size: 3.8rem;
             font-weight: 700;
             line-height: 1.1;
             margin: 0 0 20px 0;
@@ -69,7 +68,7 @@
         .hero-text p {
             font-size: 1.2rem;
             line-height: 1.6;
-            color: #555; /* Cinza escuro para o texto de apoio */
+            color: #555;
         }
 
         .calculator-card {
@@ -82,11 +81,10 @@
             max-width: 420px;
             border: 1px solid var(--subtle-border);
             animation: slideInRight 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-            position: relative; /* Necessário para o efeito de hover */
-            overflow: hidden;   /* Necessário para o efeito de hover */
+            position: relative;
+            overflow: hidden;
         }
         
-        /* Efeito de brilho no hover */
         .calculator-card::before {
             content: '';
             position: absolute;
@@ -119,7 +117,7 @@
             padding: 16px;
             border-radius: 8px; 
             background-color: var(--background-color);
-            border: 2px solid transparent; /* Bordas mais grossas para um foco mais forte */
+            border: 2px solid transparent;
             box-sizing: border-box;
             text-align: center;
             transition: background-color 0.3s ease, border-color 0.3s ease;
@@ -145,7 +143,6 @@
             height: 100%;
             background-color: var(--accent-color);
             border-radius: 15px;
-            /* Curva de transição mais dramática */
             transition: width 1.8s cubic-bezier(0.65, 0, 0.35, 1); 
         }
         
@@ -220,4 +217,72 @@
 
     <script>
         const idadeInput = document.getElementById('idadeAtual');
-        const horasInput = document.getElementById('horasDi
+        const horasInput = document.getElementById('horasDiarias');
+        
+        const resultadoNumeroEl = document.getElementById('resultado-numero');
+        const resultadoTextoEl = document.getElementById('resultado-texto');
+        const gaugeFillEl = document.getElementById('gaugeFill');
+        
+        idadeInput.addEventListener('input', calcularTempo);
+        horasInput.addEventListener('input', calcularTempo);
+
+        // Variáveis para controlar a animação de rolagem
+        let roletaInterval;
+        let roletaTimeout;
+
+        function calcularTempo() {
+            const idade = parseFloat(idadeInput.value);
+            const horas = parseFloat(horasInput.value);
+            const expectativaDeVida = 80;
+
+            if (isNaN(idade) || isNaN(horas) || idade < 1 || idade >= expectativaDeVida || horas < 0 || horas > 24) {
+                animarRolagem(0); // Anima para 0 se os dados forem inválidos
+                gaugeFillEl.style.width = '0%';
+                resultadoTextoEl.textContent = "anos da sua vida em frente a uma tela.";
+                return;
+            }
+
+            const anosRestantes = expectativaDeVida - idade;
+            const anosPerdidos = (horas / 24) * anosRestantes;
+            
+            const porcentagemVidaPerdida = (anosPerdidos / expectativaDeVida) * 100;
+            gaugeFillEl.style.width = `${porcentagemVidaPerdida}%`;
+
+            if (anosPerdidos > 10) {
+                resultadoTextoEl.textContent = "da sua vida serão dedicados às telas. Um alerta importante.";
+            } else if (anosPerdidos > 5) {
+                resultadoTextoEl.textContent = "da sua vida em frente a uma tela. Uma porção considerável.";
+            } else {
+                resultadoTextoEl.textContent = "da sua vida em frente a uma tela. Mantenha o equilíbrio.";
+            }
+
+            animarRolagem(anosPerdidos);
+        }
+        
+        function animarRolagem(valorFinal) {
+            // Limpa animações anteriores para evitar sobreposição
+            clearInterval(roletaInterval);
+            clearTimeout(roletaTimeout);
+
+            // Se o valor final for 0, apenas define e sai.
+            if (valorFinal === 0) {
+                resultadoNumeroEl.textContent = '0.0';
+                return;
+            }
+
+            // Inicia a roleta de números aleatórios
+            roletaInterval = setInterval(() => {
+                const numeroAleatorio = (Math.random() * (valorFinal + 5)).toFixed(1);
+                resultadoNumeroEl.textContent = numeroAleatorio;
+            }, 60); // Intervalo da rolagem (em milissegundos)
+
+            // Define um tempo para parar a roleta e mostrar o resultado final
+            roletaTimeout = setTimeout(() => {
+                clearInterval(roletaInterval);
+                resultadoNumeroEl.textContent = valorFinal.toFixed(1);
+            }, 1500); // Duração total da animação de rolagem
+        }
+    </script>
+
+</body>
+</html>
