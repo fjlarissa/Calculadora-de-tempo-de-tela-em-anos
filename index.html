@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quanto da Sua Vida Você Desperdiça em Telas?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #1a1a1a;
+        }
+
+        .container {
+            background: #ffffff;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 48px;
+            max-width: 520px;
+            width: 100%;
+            text-align: center;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #1a1a1a;
+            font-size: 2rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .subtitle {
+            color: #666666;
+            font-size: 1rem;
+            margin-bottom: 48px;
+            font-weight: 400;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .input-group {
+            margin-bottom: 24px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            color: #1a1a1a;
+            font-weight: 500;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d0d0d0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+            background: #ffffff;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #1a1a1a;
+        }
+
+        .calculate-btn {
+            background: #1a1a1a;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            margin: 32px 0 24px 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .calculate-btn:hover {
+            background: #333333;
+        }
+
+        .results {
+            margin-top: 32px;
+            padding: 24px;
+            background: #f8f8f8;
+            border-radius: 4px;
+            color: #1a1a1a;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            border: 1px solid #e5e5e5;
+        }
+
+        .results.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .result-item {
+            margin-bottom: 16px;
+            padding: 16px;
+            background: #ffffff;
+            border-radius: 4px;
+            border: 1px solid #e5e5e5;
+        }
+
+        .result-number {
+            font-size: 1.8rem;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 4px;
+            color: #1a1a1a;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .result-label {
+            font-size: 0.9rem;
+            color: #666666;
+            font-weight: 400;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .warning {
+            background: #1a1a1a;
+            color: white;
+            padding: 16px;
+            border-radius: 4px;
+            margin-top: 16px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .reflection {
+            margin-top: 24px;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 4px;
+            font-style: italic;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #666666;
+            border: 1px solid #e5e5e5;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .result-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Tempo de Vida</h1>
+        <p class="subtitle">Quanto tempo da sua vida você passa no celular</p>
+        
+        <div class="input-group">
+            <label for="idade">Sua idade atual:</label>
+            <input type="number" id="idade" min="1" max="100" placeholder="Ex: 25">
+        </div>
+        
+        <div class="input-group">
+            <label for="horasDiarias">Horas diárias no celular:</label>
+            <input type="number" id="horasDiarias" min="0" max="24" step="0.5" placeholder="Ex: 4.5">
+        </div>
+        
+        <p style="font-size: 0.8rem; color: #999; margin-bottom: 16px; font-style: italic; font-family: 'Poppins', sans-serif;">
+            * Cálculo baseado em uma expectativa de vida de 80 anos
+        </p>
+        
+        <button class="calculate-btn" onclick="calcular()">
+            Calcular
+        </button>
+        
+        <div id="results" class="results">
+            <div class="result-item">
+                <span id="anosTotal" class="result-number">0</span>
+                <span class="result-label">anos da sua vida no celular</span>
+            </div>
+            
+            <div class="result-item">
+                <span id="porcentagemVida" class="result-number">0%</span>
+                <span class="result-label">da sua vida no celular</span>
+            </div>
+            
+            <div class="result-item">
+                <span id="diasTotal" class="result-number">0</span>
+                <span class="result-label">dias ininterruptos no celular</span>
+            </div>
+            
+            <div class="warning" id="warning">
+                
+            </div>
+            
+            <div class="reflection">
+                O tempo é o recurso mais valioso que temos. Uma vez gasto, nunca pode ser recuperado. Que tal usar essas informações para repensar seus hábitos?
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calcular() {
+            const idade = parseFloat(document.getElementById('idade').value);
+            const horasCelular = parseFloat(document.getElementById('horasDiarias').value);
+            
+            if (!idade || !horasCelular) {
+                alert('Por favor, preencha sua idade e horas no celular!');
+                return;
+            }
+            
+            const expectativaVida = 80;
+            const anosRestantes = expectativaVida - idade;
+            
+            // Cálculos
+            const horasPorAno = horasCelular * 365;
+            const horasTotaisVida = horasPorAno * anosRestantes;
+            const anosTotais = horasTotaisVida / (24 * 365);
+            const diasTotais = horasTotaisVida / 24;
+            const porcentagemVida = (anosTotais / anosRestantes) * 100;
+            
+            // Atualizar resultados
+            document.getElementById('anosTotal').textContent = anosTotais.toFixed(1);
+            document.getElementById('porcentagemVida').textContent = porcentagemVida.toFixed(1) + '%';
+            document.getElementById('diasTotal').textContent = Math.round(diasTotais).toLocaleString();
+            
+            // Mensagem de alerta baseada na porcentagem
+            let warningMessage = '';
+            if (porcentagemVida > 50) {
+                warningMessage = 'Mais da metade da sua vida restante será gasta no celular.';
+            } else if (porcentagemVida > 30) {
+                warningMessage = 'Um terço da sua vida será gasto olhando para o celular.';
+            } else if (porcentagemVida > 15) {
+                warningMessage = 'Você passará uma quantidade significativa da vida no celular.';
+            } else {
+                warningMessage = 'Seu uso do celular parece estar em um nível equilibrado.';
+            }
+            
+            document.getElementById('warning').textContent = warningMessage;
+            
+            // Mostrar resultados com animação
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.classList.add('show');
+            
+            // Scroll suave para os resultados
+            resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        
+        // Permitir calcular com Enter
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                calcular();
+            }
+        });
+        
+        // Validação em tempo real
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', function() {
+                if (this.value < 0) this.value = 0;
+                if (this.id === 'idade' && this.value > 100) this.value = 100;
+                if (this.id === 'horasDiarias' && this.value > 24) this.value = 24;
+            });
+        });
+    </script>
+</body>
+</html>
