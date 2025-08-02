@@ -11,9 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
-        /* CSS Reset e Estilos Gerais */
         body {
-            /* Aplicando a fonte Poppins */
             font-family: 'Poppins', sans-serif;
             font-weight: 300;
             background-color: #ffffff;
@@ -27,7 +25,6 @@
             box-sizing: border-box;
         }
 
-        /* Contêiner principal */
         .container {
             background-color: #ffffff;
             padding: 40px;
@@ -38,21 +35,24 @@
             width: 100%;
         }
 
-        /* Título */
         h1 {
             font-weight: 600;
-            font-size: 2.2em; /* Aumentei um pouco para dar mais destaque ao nome */
+            font-size: 2.2em;
             margin-bottom: 15px;
         }
 
-        /* Parágrafo de descrição */
         p {
             font-size: 1em;
             line-height: 1.5;
             margin-bottom: 25px;
         }
 
-        /* Campo de inserção de número */
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Espaçamento entre os campos de input */
+        }
+        
         input[type="number"] {
             font-family: 'Poppins', sans-serif;
             width: 100%;
@@ -63,7 +63,6 @@
             box-sizing: border-box;
         }
 
-        /* Remove as setas do campo de número */
         input[type=number]::-webkit-inner-spin-button, 
         input[type=number]::-webkit-outer-spin-button { 
             -webkit-appearance: none; 
@@ -73,7 +72,6 @@
             -moz-appearance: textfield;
         }
 
-        /* Botão */
         button {
             font-family: 'Poppins', sans-serif;
             font-weight: 400;
@@ -84,7 +82,7 @@
             border-radius: 12px;
             font-size: 1.1em;
             cursor: pointer;
-            margin-top: 20px;
+            margin-top: 25px;
             width: 100%;
             transition: transform 0.2s ease, opacity 0.2s ease;
         }
@@ -97,7 +95,6 @@
             transform: scale(0.98);
         }
 
-        /* Área do resultado */
         #resultado {
             margin-top: 30px;
             font-size: 1.15em;
@@ -111,9 +108,12 @@
 
     <div class="container">
         <h1>Vida em Pixels</h1>
-        <p>Descubra quantos anos da sua vida você passará em frente a telas, com base no seu uso diário (expectativa de vida de 80 anos).</p>
-
-        <input type="number" id="horasDiarias" placeholder="Horas por dia em frente a telas">
+        <p>Calcule quantos anos de sua vida você ainda passará em frente a uma tela, com base em sua idade e uso diário.</p>
+        
+        <div class="input-group">
+            <input type="number" id="idadeAtual" placeholder="Sua idade atual">
+            <input type="number" id="horasDiarias" placeholder="Horas por dia em frente a telas">
+        </div>
 
         <button onclick="calcularTempo()">Calcular</button>
 
@@ -122,19 +122,36 @@
 
     <script>
         function calcularTempo() {
+            // Pegando os valores dos dois campos
+            const idadeAtualInput = document.getElementById('idadeAtual');
             const horasDiariasInput = document.getElementById('horasDiarias');
+            
+            const idadeAtual = idadeAtualInput.value;
             const horasDiarias = horasDiariasInput.value;
             const resultadoDiv = document.getElementById('resultado');
 
-            if (horasDiarias === '' || horasDiarias < 0 || horasDiarias > 24) {
-                resultadoDiv.innerHTML = "Por favor, insira um valor válido entre 0 e 24.";
+            const expectativaDeVida = 80;
+
+            // Validação dos campos
+            if (idadeAtual === '' || horasDiarias === '') {
+                resultadoDiv.innerHTML = "Por favor, preencha sua idade e as horas diárias.";
+                return;
+            }
+            if (idadeAtual < 1 || idadeAtual >= expectativaDeVida) {
+                resultadoDiv.innerHTML = `Por favor, insira uma idade válida (entre 1 e ${expectativaDeVida - 1}).`;
+                return;
+            }
+            if (horasDiarias < 0 || horasDiarias > 24) {
+                resultadoDiv.innerHTML = "Por favor, insira um valor de horas válido (entre 0 e 24).";
                 return;
             }
 
-            const expectativaDeVida = 80;
-            const anosPerdidos = (horasDiarias / 24) * expectativaDeVida;
+            // Lógica do cálculo atualizada
+            const anosRestantes = expectativaDeVida - idadeAtual;
+            const anosPerdidosNoFuturo = (horasDiarias / 24) * anosRestantes;
 
-            resultadoDiv.innerHTML = `Com ${horasDiarias} horas diárias, você passará o equivalente a <strong>${anosPerdidos.toFixed(1)} anos</strong> de sua vida em frente a uma tela.`;
+            // Mensagem de resultado atualizada e mais pessoal
+            resultadoDiv.innerHTML = `A partir de agora, mantendo esse ritmo, você ainda passará o equivalente a <strong>${anosPerdidosNoFuturo.toFixed(1)} anos</strong> da sua vida em frente a uma tela.`;
         }
     </script>
 
