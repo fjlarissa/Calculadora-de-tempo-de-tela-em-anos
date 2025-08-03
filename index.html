@@ -106,16 +106,21 @@
         
         footer {
             width: 100%;
-            text-align: center;
-            padding-bottom: 30px;
-            padding-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 30px 40px;
             margin-top: auto;
         }
-        .footer-contact { /* NOVO CONTAINER PARA OS LINKS */
+        .footer-info {
+            text-align: left;
+        }
+        .footer-contact {
             display: flex;
-            justify-content: center;
             align-items: center;
-            gap: 24px; /* Espaçamento entre os links */
+            gap: 24px;
             flex-wrap: wrap;
         }
         .footer-credits {
@@ -142,8 +147,39 @@
             font-size: 0.8em;
             color: #aaa;
         }
+        .footer-qrcode {
+            text-align: center;
+        }
+        .footer-qrcode img {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        .footer-qrcode p {
+            font-size: 0.8em;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            font-weight: 500;
+        }
 
-        @media (max-width: 992px) { main { flex-direction: column; gap: 40px; padding-top: 20px; padding-bottom: 20px; text-align: center; } .hero-text h1 { font-size: 2.8rem; } .hero-text p { font-size: 1.1rem; } .page-header { text-align: center; } }
+        @media (max-width: 992px) { 
+            main { flex-direction: column; gap: 40px; padding-top: 20px; padding-bottom: 20px; text-align: center; } 
+            .hero-text h1 { font-size: 2.8rem; } 
+            .hero-text p { font-size: 1.1rem; } 
+            .page-header { text-align: center; }
+            footer {
+                flex-direction: column;
+                justify-content: center;
+                gap: 30px;
+            }
+            .footer-info, .copyright {
+                text-align: center;
+            }
+            .footer-contact {
+                justify-content: center;
+            }
+        }
         @media (max-width: 480px) { .calculator-card { padding: 32px 24px; } .stats-grid { grid-template-columns: 1fr; } .page-header, main, footer { padding-left: 20px; padding-right: 20px; } }
     </style>
 </head>
@@ -158,18 +194,24 @@
     </main>
 
     <footer>
-        <div class="footer-contact">
-            <a href="https://instagram.com/larissajordaoto" target="_blank" rel="noopener noreferrer" class="footer-credits">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                <span>@larissajordaoto</span>
-            </a>
-            <a href="mailto:larissajordaoto@gmail.com" class="footer-credits">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                <span>larissajordaoto@gmail.com</span>
-            </a>
+        <div class="footer-info">
+            <div class="footer-contact">
+                <a href="https://instagram.com/larissajordaoto" target="_blank" rel="noopener noreferrer" class="footer-credits">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    <span>@larissajordaoto</span>
+                </a>
+                <a href="mailto:larissajordaoto@gmail.com" class="footer-credits">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <span>Contato via E-mail</span>
+                </a>
+            </div>
+            <div class="copyright">
+                © <span id="current-year"></span> Larissa Jordão. Todos os direitos reservados.
+            </div>
         </div>
-        <div class="copyright">
-            © <span id="current-year"></span> Larissa Jordão. Todos os direitos reservados.
+        <div class="footer-qrcode">
+            <img src="qrcode-timewellspent.png" alt="QR Code para acessar o site">
+            <p>Acesse e compartilhe</p>
         </div>
     </footer>
     
