@@ -1,285 +1,178 @@
 <!DOCTYPE html>
- <html lang="pt-BR">
- <head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Time Well Spent?</title>
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-     <style>
-         :root {
-             --background-color: #f5f5f5;
-             --card-background: #ffffff;
-             --text-color: #1a1a1a;
-             --text-secondary: #666666;
-             --border-color: #e8e8e8;
-             --transition-speed: 0.3s;
-             --arrow-color: var(--text-secondary);
-         }
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Well Spent?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --background-color: #f5f5f5;
+            --card-background: #ffffff;
+            --text-color: #1a1a1a;
+            --text-secondary: #666666;
+            --border-color: #e8e8e8;
+            --transition-speed: 0.3s;
+        }
 
-         * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-         @keyframes fadeOut { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(0.98); } }
-         @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
-         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-         .animating-out { animation: fadeOut 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
-         .animating-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
-         .result-content.visible { animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
-         @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
-         @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
-         @keyframes smoothSpin {
-             0% { transform: translateY(0px) scale(1); opacity: 1; }
-             30% { transform: translateY(-8px) scale(0.98); opacity: 0.8; }
-             70% { transform: translateY(-16px) scale(0.96); opacity: 0.5; }
-             100% { transform: translateY(-24px) scale(0.94); opacity: 0.2; }
-         }
+        @keyframes fadeOut { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(0.98); } }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .animating-out { animation: fadeOut 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        .animating-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        .result-content.visible { animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes smoothSpin {
+            0% { transform: translateY(0px) scale(1); opacity: 1; }
+            30% { transform: translateY(-8px) scale(0.98); opacity: 0.8; }
+            70% { transform: translateY(-16px) scale(0.96); opacity: 0.5; }
+            100% { transform: translateY(-24px) scale(0.94); opacity: 0.2; }
+        }
 
-         @keyframes pulse {
-             0% { transform: scale(1); opacity: 0.8; }
-             50% { transform: scale(1.05); opacity: 1; }
-             100% { transform: scale(1); opacity: 0.8; }
-         }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color); 
+            color: var(--text-color); 
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
 
-         body {
-             font-family: 'Poppins', sans-serif;
-             background-color: var(--background-color);
-             color: var(--text-color);
-             line-height: 1.6;
-             min-height: 100vh;
-             display: flex;
-             flex-direction: column;
-             overflow-x: hidden;
-         }
+        .page-header, main, footer { padding-left: 40px; padding-right: 40px; }
+        .page-header { padding-top: 20px; padding-bottom: 20px; font-weight: 600; font-size: 1.2em; width: 100%; }
+        main { display: flex; flex: 1; align-items: center; justify-content: center; gap: 60px; width: 100%; }
+        .hero-text { max-width: 500px; animation: slideInLeft 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+        .hero-text h1 { font-size: 3.5rem; font-weight: 700; line-height: 1.1; margin: 0 0 20px 0; }
+        .hero-text p { font-size: 1.2rem; line-height: 1.6; color: var(--text-secondary); }
+        .calculator-card { background-color: var(--card-background); padding: 48px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); width: 100%; max-width: 520px; border: 1px solid var(--border-color); animation: slideInRight 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+        .header { text-align: center; margin-bottom: 40px; }
+        .icon { width: 64px; height: 64px; background: var(--background-color); border-radius: 16px; margin: 0 auto 24px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color); }
+        .icon svg { width: 32px; height: 32px; stroke: var(--text-secondary); fill: none; }
+        .header h1 { font-size: 28px; font-weight: 600; margin-bottom: 12px; }
+        .subtitle { font-size: 16px; color: var(--text-secondary); max-width: 480px; margin: 0 auto; }
+        .input-group { margin-bottom: 24px; }
+        label { display: block; font-size: 15px; font-weight: 500; margin-bottom: 10px; }
+        input { width: 100%; padding: 16px 20px; border: 1px solid var(--border-color); border-radius: 12px; font-size: 16px; font-family: 'Poppins', sans-serif; background: var(--card-background); transition: all var(--transition-speed) ease; }
+        input:focus { outline: none; border-color: #999; box-shadow: 0 0 0 3px rgba(153, 153, 153, 0.1); }
+        .calculate-btn, .reset-btn { width: 100%; padding: 18px 24px; font-size: 16px; font-weight: 500; border-radius: 12px; cursor: pointer; transition: all var(--transition-speed) ease; font-family: 'Poppins', sans-serif; }
+        .calculate-btn { background: var(--text-color); color: white; border: none; }
+        .calculate-btn:hover { background: #333; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transform: translateY(-2px); }
+        .calculate-btn:active { transform: translateY(0px); box-shadow: none; }
+        .result-container { display: none; }
+        .slot-machine { background: var(--background-color); border: 1px solid var(--border-color); border-radius: 16px; padding: 32px; text-align: center; position: relative; }
+        .slot-label { font-size: 13px; color: var(--text-secondary); margin-bottom: 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+        .slot-display { background: var(--card-background); border: 2px solid var(--border-color); color: var(--text-color); font-family: 'Poppins', sans-serif; font-size: 56px; font-weight: 700; padding: 32px; border-radius: 12px; min-height: 120px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; letter-spacing: -2px; }
+        .slot-number.spinning { animation: smoothSpin 0.15s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+        .years-label { font-size: 16px; color: var(--text-secondary); margin-top: 12px; font-weight: 500; }
+        .expectancy-note { font-size: 12px; color: #999; margin-top: 24px; }
+        .result-content { padding-top: 32px; opacity: 0; }
+        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 32px; }
+        .stat-item, .equivalency-item { text-align: center; background: var(--card-background); border-radius: 12px; border: 1px solid var(--border-color); transition: all var(--transition-speed) ease; }
+        .stat-item:hover, .equivalency-item:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.07); }
+        .stat-item { padding: 24px 20px; }
+        .stat-icon { width: 40px; height: 40px; background: var(--background-color); border-radius: 10px; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color); }
+        .stat-icon svg { width: 20px; height: 20px; stroke: var(--text-secondary); fill: none; }
+        .stat-number { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+        .stat-label { font-size: 13px; color: var(--text-secondary); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+        .equivalency-section { margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--border-color); }
+        .equivalency-title { font-size: 16px; font-weight: 600; text-align: center; margin-bottom: 24px; }
+        .equivalency-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px; }
+        .equivalency-item { display: flex; align-items: center; padding: 16px; text-align: left;}
+        .equivalency-icon { margin-right: 16px; flex-shrink: 0; }
+        .equivalency-icon svg { width: 24px; height: 24px; stroke: var(--text-secondary); }
+        .reset-btn { background: transparent; color: var(--text-secondary); border: 1px solid var(--border-color); margin-top: 32px; display: flex; align-items: center; justify-content: center; }
+        .reset-btn:hover { background: var(--background-color); color: var(--text-color); box-shadow: 0 4px 15px rgba(0,0,0,0.05); transform: translateY(-2px); }
+        .reset-btn svg { width: 16px; height: 16px; margin-right: 8px; stroke: currentColor; fill: none; }
+        
+        footer { width: 100%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; padding: 30px 40px; margin-top: auto; }
+        .footer-info { text-align: left; }
+        .footer-contact { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+        .footer-credits { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-secondary); font-size: 0.9em; font-weight: 500; transition: color var(--transition-speed) ease; }
+        .footer-credits:hover { color: var(--text-color); }
+        .footer-credits svg { width: 20px; height: 20px; stroke-width: 2px; stroke: currentColor; }
+        .copyright { margin-top: 16px; font-size: 0.8em; color: #aaa; }
+        .footer-qrcode { text-align: center; cursor: pointer; }
+        .footer-qrcode img { width: 100px; height: 100px; border-radius: 8px; border: 1px solid var(--border-color); transition: all var(--transition-speed) ease; }
+        .footer-qrcode:hover img { transform: scale(1.05); border-color: var(--text-color); box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        .footer-qrcode p { font-size: 0.8em; color: var(--text-secondary); margin-top: 8px; font-weight: 500; }
+        
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s ease; }
+        .modal-overlay.visible { opacity: 1; visibility: visible; }
+        .modal-content { background-color: var(--card-background); padding: 30px; border-radius: 16px; text-align: center; position: relative; transform: scale(0.95); transition: transform 0.4s ease; }
+        .modal-overlay.visible .modal-content { transform: scale(1); }
+        .modal-content img { width: 250px; height: 250px; border-radius: 8px; border: 1px solid var(--border-color); }
+        .modal-content p {
+            margin-top: 15px;
+            font-weight: 600; /* Estilo ajustado */
+            font-size: 1.1em; /* Estilo ajustado */
+            color: var(--text-color); /* Estilo ajustado */
+        }
+        .close-button { position: absolute; top: 10px; right: 15px; font-size: 28px; font-weight: bold; color: #aaa; cursor: pointer; transition: color var(--transition-speed) ease; }
+        .close-button:hover { color: var(--text-color); }
 
-         .page-header, main, footer { padding-left: 40px; padding-right: 40px; }
-         .page-header { padding-top: 20px; padding-bottom: 20px; font-weight: 600; font-size: 1.2em; width: 100%; }
-         main { display: flex; flex: 1; align-items: center; justify-content: center; gap: 60px; width: 100%; }
-         .hero-text { max-width: 500px; animation: slideInLeft 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
-         .hero-text h1 { font-size: 3.5rem; font-weight: 700; line-height: 1.1; margin: 0 0 20px 0; }
-         .hero-text p { font-size: 1.2rem; line-height: 1.6; color: var(--text-secondary); }
-         .calculator-card { background-color: var(--card-background); padding: 48px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); width: 100%; max-width: 520px; border: 1px solid var(--border-color); animation: slideInRight 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
-         .header { text-align: center; margin-bottom: 40px; }
-         .icon { width: 64px; height: 64px; background: var(--background-color); border-radius: 16px; margin: 0 auto 24px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color); }
-         .icon svg { width: 32px; height: 32px; stroke: var(--text-secondary); fill: none; }
-         .header h1 { font-size: 28px; font-weight: 600; margin-bottom: 12px; }
-         .subtitle { font-size: 16px; color: var(--text-secondary); max-width: 480px; margin: 0 auto; }
-         .input-group { margin-bottom: 24px; }
-         label { display: block; font-size: 15px; font-weight: 500; margin-bottom: 10px; }
-         input { width: 100%; padding: 16px 20px; border: 1px solid var(--border-color); border-radius: 12px; font-size: 16px; font-family: 'Poppins', sans-serif; background: var(--card-background); transition: all var(--transition-speed) ease; }
-         input:focus { outline: none; border-color: #999; box-shadow: 0 0 0 3px rgba(153, 153, 153, 0.1); }
-         .calculate-btn, .reset-btn { width: 100%; padding: 18px 24px; font-size: 16px; font-weight: 500; border-radius: 12px; cursor: pointer; transition: all var(--transition-speed) ease; font-family: 'Poppins', sans-serif; }
-         .calculate-btn { background: var(--text-color); color: white; border: none; }
-         .calculate-btn:hover { background: #333; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transform: translateY(-2px); }
-         .calculate-btn:active { transform: translateY(0px); box-shadow: none; }
-         .result-container { display: none; }
-         .slot-machine { background: var(--background-color); border: 1px solid var(--border-color); border-radius: 16px; padding: 32px; text-align: center; position: relative; }
-         .slot-label { font-size: 13px; color: var(--text-secondary); margin-bottom: 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
-         .slot-display { background: var(--card-background); border: 2px solid var(--border-color); color: var(--text-color); font-family: 'Poppins', sans-serif; font-size: 56px; font-weight: 700; padding: 32px; border-radius: 12px; min-height: 120px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; letter-spacing: -2px; }
-         .slot-number.spinning { animation: smoothSpin 0.15s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
-         .years-label { font-size: 16px; color: var(--text-secondary); margin-top: 12px; font-weight: 500; }
-         .expectancy-note { font-size: 12px; color: #999; margin-top: 24px; }
-         .result-content { padding-top: 32px; opacity: 0; }
-         .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 32px; }
-         .stat-item, .equivalency-item { text-align: center; background: var(--card-background); border-radius: 12px; border: 1px solid var(--border-color); transition: all var(--transition-speed) ease; }
-         .stat-item:hover, .equivalency-item:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.07); }
-         .stat-item { padding: 24px 20px; }
-         .stat-icon { width: 40px; height: 40px; background: var(--background-color); border-radius: 10px; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color); }
-         .stat-icon svg { width: 20px; height: 20px; stroke: var(--text-secondary); fill: none; }
-         .stat-number { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
-         .stat-label { font-size: 13px; color: var(--text-secondary); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
-         .equivalency-section { margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--border-color); }
-         .equivalency-title { font-size: 16px; font-weight: 600; text-align: center; margin-bottom: 24px; }
-         .equivalency-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px; }
-         .equivalency-item { display: flex; align-items: center; padding: 16px; text-align: left;}
-         .equivalency-icon { margin-right: 16px; flex-shrink: 0; }
-         .equivalency-icon svg { width: 24px; height: 24px; stroke: var(--text-secondary); }
-         .reset-btn { background: transparent; color: var(--text-secondary); border: 1px solid var(--border-color); margin-top: 32px; display: flex; align-items: center; justify-content: center; }
-         .reset-btn:hover { background: var(--background-color); color: var(--text-color); box-shadow: 0 4px 15px rgba(0,0,0,0.05); transform: translateY(-2px); }
-         .reset-btn svg { width: 16px; height: 16px; margin-right: 8px; stroke: currentColor; fill: none; }
+        @media (max-width: 992px) { main { flex-direction: column; gap: 40px; padding-top: 20px; padding-bottom: 20px; text-align: center; } .hero-text h1 { font-size: 2.8rem; } .hero-text p { font-size: 1.1rem; } .page-header { text-align: center; } footer { flex-direction: column; justify-content: center; gap: 30px; } .footer-info, .copyright { text-align: center; } .footer-contact { justify-content: center; } }
+        @media (max-width: 480px) { .calculator-card { padding: 32px 24px; } .stats-grid { grid-template-columns: 1fr; } .page-header, main, footer { padding-left: 20px; padding-right: 20px; } }
+    </style>
+</head>
+<body>
+    <header class="page-header">Time Well Spent?</header>
+    <main>
+        <div class="hero-text"><h1>Seu tempo é o seu bem mais valioso.</h1><p>Sua vida é finita. Seu tempo de tela também deveria ser.</p></div>
+        <div class="calculator-card">
+            <div id="inputForm"><div class="header"><div class="icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div><h1>Calculadora de Tempo</h1><p class="subtitle">Descubra quantos anos da sua vida você passará olhando para a tela do celular.</p></div><div class="input-group"><label for="age">Qual sua idade atual?</label><input type="number" id="age" min="1" max="79" placeholder="Digite sua idade"></div><div class="input-group"><label for="dailyHours">Quantas horas por dia você usa o celular?</label><input type="number" id="dailyHours" min="0.1" max="24" step="0.1" placeholder="Ex: 5.5"></div><button class="calculate-btn" onclick="calculateWastedTime()">Calcular</button><div class="expectancy-note">(Cálculo baseado em uma expectativa de vida de 80 anos)</div></div>
+            <div class="result-container" id="resultContainer"><div class="slot-machine"><div class="slot-label">Tempo de tela em anos</div><div class="slot-display"><span class="slot-number" id="slotNumber">0.0</span></div><div class="years-label">da sua vida</div></div><div id="resultContent"></div><button class="reset-btn" onclick="resetCalculator()"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="m15 18-6-6 6-6"/></svg>Fazer novo cálculo</button></div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-info">
+            <div class="footer-contact">
+                <a href="https://instagram.com/larissajordaoto" target="_blank" rel="noopener noreferrer" class="footer-credits"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg><span>@larissajordaoto</span></a>
+                <a href="mailto:larissajordaoto@gmail.com" class="footer-credits"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg><span>Contato via E-mail</span></a>
+            </div>
+            <div class="copyright">© <span id="current-year"></span> Larissa Jordão. Todos os direitos reservados.</div>
+        </div>
+        <div class="footer-qrcode" id="open-qr-modal">
+            <img src="qrcode-timewellspent.png" alt="QR Code para acessar o site">
+            <p>Aponte a câmera do seu celular!</p>
+        </div>
+    </footer>
 
-         footer { width: 100%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; padding: 30px 40px; margin-top: auto; }
-         .footer-info { text-align: left; }
-         .footer-contact { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
-         .footer-credits { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-secondary); font-size: 0.9em; font-weight: 500; transition: color var(--transition-speed) ease; }
-         .footer-credits:hover { color: var(--text-color); }
-         .footer-credits svg { width: 20px; height: 20px; stroke-width: 2px; stroke: currentColor; }
-         .copyright { margin-top: 16px; font-size: 0.8em; color: #aaa; }
-         .footer-qrcode {
-             text-align: center;
-             cursor: pointer;
-             position: relative; /* Para posicionar a seta */
-         }
-         .footer-qrcode img {
-             width: 100px;
-             height: 100px;
-             border-radius: 8px;
-             border: 1px solid var(--border-color);
-             transition: all var(--transition-speed) ease;
-         }
-         .footer-qrcode:hover img {
-             transform: scale(1.05);
-             border-color: var(--text-color);
-             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-         }
-         .footer-qrcode p { font-size: 0.8em; color: var(--text-secondary); margin-top: 8px; font-weight: 500; }
+    <div class="modal-overlay" id="qr-modal-overlay">
+        <div class="modal-content">
+            <span class="close-button" id="close-qr-modal">&times;</span>
+            <img src="qrcode-timewellspent.png" alt="QR Code para o site Time Well Spent?">
+            <p>Time Well Spent?</p>
+        </div>
+    </div>
+    
+    <script>
+        let finalResult = 0;
+        let isAnimating = false;
+        const inputForm = document.getElementById('inputForm');
+        const resultContainer = document.getElementById('resultContainer');
+        const resultContent = document.getElementById('resultContent');
 
-         .qr-code-arrow {
-             position: absolute;
-             top: 50%;
-             left: 50%;
-             transform: translate(-50%, -50%);
-             width: 120%;
-             height: 120%;
-             border-radius: 50%;
-             border: 2px solid var(--arrow-color);
-             opacity: 0.7;
-             animation: pulse 1.5s infinite ease-in-out;
-             pointer-events: none; /* Evita que a seta bloqueie o clique */
-         }
-         .qr-code-arrow::before {
-             content: '';
-             position: absolute;
-             top: 10px;
-             left: 10px;
-             width: 15px;
-             height: 15px;
-             border-top: 2px solid var(--arrow-color);
-             border-right: 2px solid var(--arrow-color);
-             transform: rotate(45deg);
-         }
+        function calculateWastedTime() { if (isAnimating) return; const age = parseInt(document.getElementById('age').value); const dailyHours = parseFloat(document.getElementById('dailyHours').value); if (!age || !dailyHours || age < 1 || age > 79 || dailyHours < 0.1) { alert('Por favor, insira valores válidos!'); return; } finalResult = (80 - age) * 365 * dailyHours / 8760; isAnimating = true; inputForm.classList.add('animating-out'); inputForm.addEventListener('animationend', () => { inputForm.style.display = 'none'; inputForm.classList.remove('animating-out'); resultContainer.style.display = 'block'; resultContainer.classList.add('animating-in'); startAnimation(); resultContainer.addEventListener('animationend', () => { resultContainer.classList.remove('animating-in'); isAnimating = false; }, { once: true }); }, { once: true }); }
+        function startAnimation() { const slotNumber = document.getElementById('slotNumber'); resultContent.innerHTML = ''; resultContent.classList.remove('visible'); slotNumber.classList.add('spinning'); let cycles = 0; const maxCycles = 120; const interval = setInterval(() => { slotNumber.textContent = (Math.random() * 20).toFixed(1); cycles++; if (cycles > maxCycles) { clearInterval(interval); slotNumber.classList.remove('spinning'); let currentVal = parseFloat(slotNumber.textContent); const targetVal = finalResult; const diff = targetVal - currentVal; const steps = 30; const increment = diff / steps; let step = 0; const finalInterval = setInterval(() => { step++; currentVal += increment; slotNumber.textContent = currentVal.toFixed(1); if (step >= steps) { clearInterval(finalInterval); slotNumber.textContent = targetVal.toFixed(1); setTimeout(showResult, 500); } }, 20); } }, 50); }
+        function showResult() { const age = parseInt(document.getElementById('age').value); const dailyHours = parseFloat(document.getElementById('dailyHours').value); const totalHours = Math.round((80 - age) * 365 * dailyHours); const totalDays = Math.round(totalHours / 24); resultContent.innerHTML = `<div class="stats-grid"><div class="stat-item"><div class="stat-icon"><svg viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div class="stat-number">${totalHours.toLocaleString('pt-BR')}</div><div class="stat-label">Total de horas</div></div><div class="stat-item"><div class="stat-icon"><svg viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><div class="stat-number">${totalDays.toLocaleString('pt-BR')}</div><div class="stat-label">Total de dias</div></div></div><div class="equivalency-section"><h3 class="equivalency-title">O que você poderia fazer com esse tempo?</h3><ul class="equivalency-list"><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 1-9.5 9.5a5 5 0 0 0 0 7l9.5 9.5 9.5-9.5a5 5 0 0 0 0-7L12 1z"></path><path d="M5.5 12.5 12 19l6.5-6.5"></path></svg></div><span class="equivalency-text">Praticar um esporte ou ir à academia regularmente.</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 2-4 14 4 4 4-14-4-4zM8 2l-4 14 4 4 4-14-4-4z"></path></svg></div><span class="equivalency-text">Aprender a tocar um instrumento musical como violão ou piano.</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><span class="equivalency-text">Passar tempo de qualidade com amigos e família.</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2h-4zM4.5 22a2 2 0 0 1-2-2V12a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-4z"/></svg></div><span class="equivalency-text">Iniciar um projeto pessoal ou um pequeno negócio.</span></li></ul></div>`; resultContent.classList.add('visible'); }
+        function resetCalculator() { if(isAnimating) return; isAnimating = true; resultContainer.classList.add('animating-out'); resultContainer.addEventListener('animationend', () => { resultContainer.style.display = 'none'; resultContainer.classList.remove('animating-out'); document.getElementById('age').value = ''; document.getElementById('dailyHours').value = ''; inputForm.style.display = 'block'; inputForm.classList.add('animating-in'); inputForm.addEventListener('animationend', () => { inputForm.classList.remove('animating-in'); isAnimating = false; }, { once: true }); }, { once: true }); }
+        
+        document.getElementById('current-year').textContent = new Date().getFullYear();
 
-         /* --- ESTILOS DO MODAL (QR CODE EXPANDIDO) --- */
-         .modal-overlay {
-             position: fixed;
-             top: 0; left: 0;
-             width: 100%; height: 100%;
-             background-color: rgba(0, 0, 0, 0.7);
-             display: flex;
-             justify-content: center;
-             align-items: center;
-             z-index: 1000;
-             opacity: 0;
-             visibility: hidden;
-             transition: opacity 0.4s ease, visibility 0.4s ease;
-         }
-         .modal-overlay.visible {
-             opacity: 1;
-             visibility: visible;
-         }
-         .modal-content {
-             background-color: var(--card-background);
-             padding: 30px;
-             border-radius: 16px;
-             text-align: center;
-             position: relative;
-             transform: scale(0.95);
-             transition: transform 0.4s ease;
-         }
-         .modal-overlay.visible .modal-content {
-             transform: scale(1);
-         }
-         .modal-content img {
-             width: 250px;
-             height: 250px;
-             border-radius: 8px;
-             border: 1px solid var(--border-color);
-         }
-         .modal-content p {
-             margin-top: 15px;
-             font-weight: 500;
-             color: var(--text-secondary);
-         }
-         .close-button {
-             position: absolute;
-             top: 10px;
-             right: 15px;
-             font-size: 28px;
-             font-weight: bold;
-             color: #aaa;
-             cursor: pointer;
-             transition: color var(--transition-speed) ease;
-         }
-         .close-button:hover {
-             color: var(--text-color);
-         }
-
-         @media (max-width: 992px) { main { flex-direction: column; gap: 40px; padding-top: 20px; padding-bottom: 20px; text-align: center; } .hero-text h1 { font-size: 2.8rem; } .hero-text p { font-size: 1.1rem; } .page-header { text-align: center; } footer { flex-direction: column; justify-content: center; gap: 30px; } .footer-info, .copyright { text-align: center; } .footer-contact { justify-content: center; } }
-         @media (max-width: 480px) { .calculator-card { padding: 32px 24px; } .stats-grid { grid-template-columns: 1fr; } .page-header, main, footer { padding-left: 20px; padding-right: 20px; } }
-     </style>
- </head>
- <body>
-     <header class="page-header">Time Well Spent?</header>
-     <main>
-         <div class="hero-text"><h1>Seu tempo é o seu bem mais valioso.</h1><p>Sua vida é finita. Seu tempo de tela também deveria ser.</p></div>
-         <div class="calculator-card">
-             <div id="inputForm"><div class="header"><div class="icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div><h1>Calculadora de Tempo</h1><p class="subtitle">Descubra quantos anos da sua vida você passará olhando para a tela do celular.</p></div><div class="input-group"><label for="age">Qual sua idade atual?</label><input type="number" id="age" min="1" max="79" placeholder="Digite sua idade"></div><div class="input-group"><label for="dailyHours">Quantas horas por dia você usa o celular?</label><input type="number" id="dailyHours" min="0.1" max="24" step="0.1" placeholder="Ex: 5.5"></div><button class="calculate-btn" onclick="calculateWastedTime()">Calcular</button><div class="expectancy-note">(Cálculo baseado em uma expectativa de vida de 80 anos)</div></div>
-             <div class="result-container" id="resultContainer"><div class="slot-machine"><div class="slot-label">Tempo de tela em anos</div><div class="slot-display"><span class="slot-number" id="slotNumber">0.0</span></div><div class="years-label">da sua vida</div></div><div id="resultContent"></div><button class="reset-btn" onclick="resetCalculator()"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="m15 18-6-6 6-6"/></svg>Fazer novo cálculo</button></div>
-         </div>
-     </main>
-     <footer>
-         <div class="footer-info">
-             <div class="footer-contact">
-                 <a href="https://instagram.com/larissajordaoto" target="_blank" rel="noopener noreferrer" class="footer-credits"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg><span>@larissajordaoto</span></a>
-                 <a href="mailto:larissajordaoto@gmail.com" class="footer-credits"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg><span>Contato via E-mail</span></a>
-             </div>
-             <div class="copyright">© <span id="current-year"></span> Larissa Jordão. Todos os direitos reservados.</div>
-         </div>
-         <div class="footer-qrcode" id="open-qr-modal">
-             <img src="qrcode-timewellspent.png" alt="QR Code para acessar o site">
-             <p>Aponte a câmera do seu celular!</p>
-             <div class="qr-code-arrow"></div>
-         </div>
-     </footer>
-
-     <div class="modal-overlay" id="qr-modal-overlay">
-         <div class="modal-content">
-             <span class="close-button" id="close-qr-modal">&times;</span>
-             <img src="qrcode-timewellspent.png" alt="QR Code para o site Time Well Spent?">
-             <p>Aponte a câmera e compartilhe o site!</p>
-         </div>
-     </div>
-
-     <script>
-         let finalResult = 0;
-         let isAnimating = false;
-         const inputForm = document.getElementById('inputForm');
-         const resultContainer = document.getElementById('resultContainer');
-         const resultContent = document.getElementById('resultContent');
-
-         function calculateWastedTime() { if (isAnimating) return; const age = parseInt(document.getElementById('age').value); const dailyHours = parseFloat(document.getElementById('dailyHours').value); if (!age || !dailyHours || age < 1 || age > 79 || dailyHours < 0.1) { alert('Por favor, insira valores válidos!'); return; } finalResult = (80 - age) * 365 * dailyHours / 8760; isAnimating = true; inputForm.classList.add('animating-out'); inputForm.addEventListener('animationend', () => { inputForm.style.display = 'none'; inputForm.classList.remove('animating-out'); resultContainer.style.display = 'block'; resultContainer.classList.add('animating-in'); startAnimation(); resultContainer.addEventListener('animationend', () => { resultContainer.classList.remove('animating-in'); isAnimating = false; }, { once: true }); }, { once: true }); }
-         function startAnimation() { const slotNumber = document.getElementById('slotNumber'); resultContent.innerHTML = ''; resultContent.classList.remove('visible'); slotNumber.classList.add('spinning'); let cycles = 0; const maxCycles = 120; const interval = setInterval(() => { slotNumber.textContent = (Math.random() * 20).toFixed(1); cycles++; if (cycles > maxCycles) { clearInterval(interval); slotNumber.classList.remove('spinning'); let currentVal = parseFloat(slotNumber.textContent); const targetVal = finalResult; const diff = targetVal - currentVal; const steps = 30; const increment = diff / steps; let step = 0; const finalInterval = setInterval(() => { step++; currentVal += increment; slotNumber.textContent = currentVal.toFixed(1); if (step >= steps) { clearInterval(finalInterval); slotNumber.textContent = targetVal.toFixed(1); setTimeout(showResult, 500); } }, 20); } }, 50); }
-         function showResult() { const age = parseInt(document.getElementById('age').value); const dailyHours = parseFloat(document.getElementById('dailyHours').value); const totalHours = Math.round((80 - age) * 365 * dailyHours); const totalDays = Math.round(totalHours / 24); resultContent.innerHTML = `<div class="stats-grid"><div class="stat-item"><div class="stat-icon"><svg viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div class="stat-number">${totalHours.toLocaleString('pt-BR')}</div><div class="stat-label">Total de horas</div></div><div class="stat-item"><div class="stat-icon"><svg viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><div class="stat-number">${totalDays.toLocaleString('pt-BR')}</div><div class="stat-label">Total de dias</div></div></div><div class="equivalency-section"><h3 class="equivalency-title">O que você poderia fazer com esse tempo?</h3><ul class="equivalency-list"><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 1-9.5 9.5a5 5 0 0 0 0 7l9.5 9.5 9.5-9.5a5 5 0 0 0 0-7L12 1z"></path><path d="M5.5 12.5 12 19l6.5-6.5"></path></svg></div><span class="equivalency-text">Praticar um esporte ou ir à academia regularmente.</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 2-4 14 4 4 4-14-4-4zM8 2l-4 14 4 4 4-14-4-4z"></path></svg></div><span class="equivalency-text">Aprender a tocar um instrumento musical como violão ou piano.</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><span class="equivalency-text">Passar tempo de qualidade com amigos e família.</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2h-4zM4.5 22a2 2 0 0 1-2-2V12a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-4z"/></svg></div><span class="equivalency-text">Iniciar um projeto pessoal ou um pequeno negócio.</span></li></ul></div>`; resultContent.classList.add('visible'); }
-         function resetCalculator() { if(isAnimating) return; isAnimating = true; resultContainer.classList.add('animating-out'); resultContainer.addEventListener('animationend', () => { resultContainer.style.display = 'none'; resultContainer.classList.remove('animating-out'); document.getElementById('age').value = ''; document.getElementById('dailyHours').value = ''; inputForm.style.display = 'block'; inputForm.classList.add('animating-in'); inputForm.addEventListener('animationend', () => { inputForm.classList.remove('animating-in'); isAnimating = false; }, { once: true }); }, { once: true }); }
-
-         document.getElementById('current-year').textContent = new Date().getFullYear();
-
-         // --- NOVO SCRIPT PARA O MODAL DO QR CODE ---
-         const qrModalOverlay = document.getElementById('qr-modal-overlay');
-         const openQrModalBtn = document.getElementById('open-qr-modal');
-         const closeQrModalBtn = document.getElementById('close-qr-modal');
-
-         openQrModalBtn.addEventListener('click', () => {
-             qrModalOverlay.classList.add('visible');
-         });
-
-         closeQrModalBtn.addEventListener('click', () => {
-             qrModalOverlay.classList.remove('visible');
-         });
-
-         // Fecha o modal se clicar fora do conteúdo (no overlay)
-         qrModalOverlay.addEventListener('click', (event) => {
-             if (event.target === qrModalOverlay) {
-                 qrModalOverlay.classList.remove('visible');
-             }
-         });
-
-         // Fecha o modal com a tecla "Esc"
-         window.addEventListener('keydown', (event) => {
-             if (event.key === 'Escape' && qrModalOverlay.classList.contains('visible')) {
-                 qrModalOverlay.classList.remove('visible');
-             }
-         });
-     </script>
- </body>
- </html>
+        const qrModalOverlay = document.getElementById('qr-modal-overlay');
+        const openQrModalBtn = document.getElementById('open-qr-modal');
+        const closeQrModalBtn = document.getElementById('close-qr-modal');
+        openQrModalBtn.addEventListener('click', () => { qrModalOverlay.classList.add('visible'); });
+        closeQrModalBtn.addEventListener('click', () => { qrModalOverlay.classList.remove('visible'); });
+        qrModalOverlay.addEventListener('click', (event) => { if (event.target === qrModalOverlay) { qrModalOverlay.classList.remove('visible'); } });
+        window.addEventListener('keydown', (event) => { if (event.key === 'Escape' && qrModalOverlay.classList.contains('visible')) { qrModalOverlay.classList.remove('visible'); } });
+    </script>
+</body>
+</html>
