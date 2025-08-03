@@ -108,12 +108,7 @@
         .modal-content { background-color: var(--card-background); padding: 30px; border-radius: 16px; text-align: center; position: relative; transform: scale(0.95); transition: transform 0.4s ease; }
         .modal-overlay.visible .modal-content { transform: scale(1); }
         .modal-content img { width: 250px; height: 250px; border-radius: 8px; border: 1px solid var(--border-color); }
-        .modal-content p {
-            margin-top: 15px;
-            font-weight: 600; /* Estilo ajustado */
-            font-size: 1.1em; /* Estilo ajustado */
-            color: var(--text-color); /* Estilo ajustado */
-        }
+        .modal-content p { margin-top: 15px; font-weight: 600; font-size: 1.1em; color: var(--text-color); }
         .close-button { position: absolute; top: 10px; right: 15px; font-size: 28px; font-weight: bold; color: #aaa; cursor: pointer; transition: color var(--transition-speed) ease; }
         .close-button:hover { color: var(--text-color); }
 
@@ -126,7 +121,17 @@
     <main>
         <div class="hero-text"><h1>Seu tempo é o seu bem mais valioso.</h1><p>Sua vida é finita. Seu tempo de tela também deveria ser.</p></div>
         <div class="calculator-card">
-            <div id="inputForm"><div class="header"><div class="icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div><h1>Calculadora de Tempo</h1><p class="subtitle">Descubra quantos anos da sua vida você passará olhando para a tela do celular.</p></div><div class="input-group"><label for="age">Qual sua idade atual?</label><input type="number" id="age" min="1" max="79" placeholder="Digite sua idade"></div><div class="input-group"><label for="dailyHours">Quantas horas por dia você usa o celular?</label><input type="number" id="dailyHours" min="0.1" max="24" step="0.1" placeholder="Ex: 5.5"></div><button class="calculate-btn" onclick="calculateWastedTime()">Calcular</button><div class="expectancy-note">(Cálculo baseado em uma expectativa de vida de 80 anos)</div></div>
+            <div id="inputForm">
+                <div class="header">
+                    <div class="icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+                    <h1>O scrolling é um custo.</h1>
+                    <p class="subtitle">Descubra o seu.</p>
+                </div>
+                <div class="input-group"><label for="age">Qual sua idade atual?</label><input type="number" id="age" min="1" max="79" placeholder="Digite sua idade"></div>
+                <div class="input-group"><label for="dailyHours">Quantas horas por dia você usa o celular?</label><input type="number" id="dailyHours" min="0.1" max="24" step="0.1" placeholder="Ex: 5.5"></div>
+                <button class="calculate-btn" onclick="calculateWastedTime()">Calcular</button>
+                <div class="expectancy-note">(Cálculo baseado em uma expectativa de vida de 80 anos)</div>
+            </div>
             <div class="result-container" id="resultContainer"><div class="slot-machine"><div class="slot-label">Tempo de tela em anos</div><div class="slot-display"><span class="slot-number" id="slotNumber">0.0</span></div><div class="years-label">da sua vida</div></div><div id="resultContent"></div><button class="reset-btn" onclick="resetCalculator()"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="m15 18-6-6 6-6"/></svg>Fazer novo cálculo</button></div>
         </div>
     </main>
@@ -143,7 +148,6 @@
             <p>Aponte a câmera do seu celular!</p>
         </div>
     </footer>
-
     <div class="modal-overlay" id="qr-modal-overlay">
         <div class="modal-content">
             <span class="close-button" id="close-qr-modal">&times;</span>
@@ -151,7 +155,6 @@
             <p>Time Well Spent?</p>
         </div>
     </div>
-    
     <script>
         let finalResult = 0;
         let isAnimating = false;
