@@ -186,6 +186,37 @@
         .reset-btn:hover { background: var(--background-color); color: var(--text-color); }
         .reset-btn svg { width: 16px; height: 16px; margin-right: 8px; stroke: currentColor; fill: none; }
 
+        /* --- ESTILOS DO NOVO RODAPÉ --- */
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 30px 40px;
+            margin-top: auto; /* Empurra para o final */
+        }
+        footer a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        footer a:hover {
+            color: var(--text-color);
+        }
+        footer svg {
+            width: 20px;
+            height: 20px;
+            stroke-width: 2px;
+            stroke: currentColor;
+        }
+        .footer-separator {
+            color: var(--border-color);
+        }
+        /* --- FIM DOS ESTILOS DO RODAPÉ --- */
+
         @media (max-width: 992px) {
             main { flex-direction: column; gap: 40px; padding: 20px; text-align: center; }
             .hero-text h1 { font-size: 2.8rem; }
@@ -243,6 +274,20 @@
             </div>
         </div>
     </main>
+
+    <footer>
+        <a href="https://instagram.com/larissajordaoto" target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+            <span>Larissa Jordão</span>
+            <span class="footer-separator">|</span>
+            <span>Estudante de Terapia Ocupacional</span>
+        </a>
+    </footer>
+    
     <script>
         let finalResult = 0;
         let isAnimating = false;
