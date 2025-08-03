@@ -146,10 +146,10 @@
         .slot-number.spinning { animation: smoothSpin 0.15s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
         .years-label { font-size: 16px; color: var(--text-secondary); margin-top: 12px; font-weight: 500; }
         
-        .expectancy-note { /* <--- NOVO ESTILO ADICIONADO */
+        .expectancy-note {
             font-size: 12px;
             color: #999;
-            margin-top: 16px;
+            margin-top: 24px;
         }
 
         .result-content { padding-top: 32px; }
@@ -169,17 +169,44 @@
         .stat-number { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
         .stat-label { font-size: 13px; color: var(--text-secondary); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
         
-        .insight-box {
-            margin-top: 24px; padding: 24px;
-            border-radius: 12px; background: var(--background-color);
+        .equivalency-section {
+            margin-top: 32px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border-color);
+        }
+        .equivalency-title {
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 24px;
+            color: var(--text-color);
+        }
+        .equivalency-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .equivalency-item {
+            display: flex;
+            align-items: center;
+            background: var(--background-color);
+            padding: 16px;
+            border-radius: 12px;
             border: 1px solid var(--border-color);
         }
-        .insight-header { display: flex; align-items: center; margin-bottom: 12px; }
-        .insight-icon { width: 24px; height: 24px; margin-right: 12px; }
-        .insight-icon svg { width: 18px; height: 18px; stroke: var(--text-secondary); }
-        .insight-title { font-size: 15px; font-weight: 600; }
-        .insight-text { font-size: 14px; color: var(--text-secondary); }
-        
+        .equivalency-icon {
+            margin-right: 16px;
+            flex-shrink: 0;
+        }
+        .equivalency-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--text-secondary);
+        }
+
         .reset-btn {
             width: 100%;
             background: transparent; color: var(--text-secondary);
@@ -238,7 +265,7 @@
     <main>
         <div class="hero-text">
             <h1>Seu tempo é o seu bem mais valioso.</h1>
-            <p>Seu tempo de vida é finito. Seu tempo de tela também deveria ser.</p>
+            <p>Sua vida é finita. Seu tempo de tela também deveria ser.</p>
         </div>
         <div class="calculator-card">
             <div id="inputForm">
@@ -261,6 +288,7 @@
                     <input type="number" id="dailyHours" min="0.1" max="24" step="0.1" placeholder="Ex: 5.5">
                 </div>
                 <button class="calculate-btn" onclick="calculateWastedTime()">Calcular</button>
+                <div class="expectancy-note">(Cálculo baseado em uma expectativa de vida de 80 anos)</div>
             </div>
             <div class="result-container" id="resultContainer">
                 <div class="slot-machine">
@@ -269,7 +297,6 @@
                         <span class="slot-number" id="slotNumber">0.0</span>
                     </div>
                     <div class="years-label">da sua vida</div>
-                    <div class="expectancy-note">(Baseado em uma expectativa de vida de 80 anos)</div>
                 </div>
                 <div id="resultContent"></div>
                 <button class="reset-btn" onclick="resetCalculator()">
@@ -372,21 +399,6 @@
             const totalHours = Math.round(remainingYears * 365 * dailyHours);
             const totalDays = Math.round(totalHours / 24);
             
-            let insightClass = 'insight-box';
-            let insightTitle = 'Uso equilibrado';
-            let insightText = 'Você mantém um uso relativamente equilibrado do celular. Continue priorizando experiências offline!';
-            let insightIcon = `<svg viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"><path d="m9 12 2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>`;
-            
-            if (finalResult > 10) {
-                insightTitle = 'Tempo significativo';
-                insightText = 'Isso representa mais de uma década da sua vida. Considere estabelecer limites para o uso do celular e dedicar mais tempo a atividades offline.';
-                insightIcon = `<svg viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4m0 4h.01"/></svg>`;
-            } else if (finalResult > 5) {
-                insightTitle = 'Uso moderado';
-                insightText = 'Um tempo considerável, mas ainda gerenciável. Pequenas reduções no tempo de tela podem liberar muito tempo para outras atividades.';
-                insightIcon = `<svg viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4"/></svg>`;
-            }
-            
             resultContent.innerHTML = `
                 <div class="stats-grid">
                     <div class="stat-item">
@@ -400,12 +412,35 @@
                         <div class="stat-label">Total de dias</div>
                     </div>
                 </div>
-                <div class="${insightClass}">
-                    <div class="insight-header">
-                        <div class="insight-icon">${insightIcon}</div>
-                        <div class="insight-title">${insightTitle}</div>
-                    </div>
-                    <div class="insight-text">${insightText}</div>
+
+                <div class="equivalency-section">
+                    <h3 class="equivalency-title">O que você poderia fazer com esse tempo?</h3>
+                    <ul class="equivalency-list">
+                        <li class="equivalency-item">
+                            <div class="equivalency-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 0 0 9-9c0-4.97-4.03-9-9-9s-9 4.03-9 9a9 9 0 0 0 9 9z"></path><path d="M12 21V12"></path><path d="m5 12 2.5 3"></path><path d="m16.5 15-2.5-3"></path></svg>
+                            </div>
+                            <span class="equivalency-text">Praticar um esporte ou ir à academia regularmente.</span>
+                        </li>
+                        <li class="equivalency-item">
+                            <div class="equivalency-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 8 4 4-4 4"></path><path d="M8 12h8"></path></svg>
+                            </div>
+                            <span class="equivalency-text">Aprender a tocar um instrumento musical como violão ou piano.</span>
+                        </li>
+                        <li class="equivalency-item">
+                            <div class="equivalency-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            </div>
+                            <span class="equivalency-text">Passar tempo de qualidade com amigos e família.</span>
+                        </li>
+                         <li class="equivalency-item">
+                            <div class="equivalency-icon">
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4c0-1.1.9-2 2-2h8a2 2 0 0 1 2 2v5Z"></path><path d="M18 9h2a2 2 0 0 1 2 2v10l-4-4h-6a2 2 0 0 1-2-2v-1"></path></svg>
+                            </div>
+                            <span class="equivalency-text">Iniciar um projeto pessoal ou um pequeno negócio.</span>
+                        </li>
+                    </ul>
                 </div>
             `;
         }
