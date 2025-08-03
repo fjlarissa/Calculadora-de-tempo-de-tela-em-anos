@@ -56,16 +56,15 @@
         .header-logo-link {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px; /* Aumentado para dar mais espaço */
             text-decoration: none;
             color: var(--text-color);
             font-size: 1.2em;
             font-weight: 600;
         }
         .header-logo-image {
-            height: 32px;
+            height: 44px; /* LOGO MAIOR AQUI */
         }
-
 
         main { display: flex; flex: 1; align-items: center; justify-content: center; gap: 60px; width: 100%; }
         .hero-text { max-width: 500px; animation: slideInLeft 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
@@ -73,8 +72,14 @@
         .hero-text p { font-size: 1.2rem; line-height: 1.6; color: var(--text-secondary); }
         .calculator-card { background-color: var(--card-background); padding: 48px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); width: 100%; max-width: 520px; border: 1px solid var(--border-color); animation: slideInRight 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
         .header { text-align: center; margin-bottom: 40px; }
-        .icon { width: 64px; height: 64px; background: var(--background-color); border-radius: 16px; margin: 0 auto 24px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color); }
-        .icon svg { width: 32px; height: 32px; stroke: var(--text-secondary); fill: none; }
+
+        /* NOVO ESTILO PARA A LOGO DENTRO DO CARD */
+        .card-logo-image {
+            height: 48px;
+            margin: 0 auto 24px;
+            display: block;
+        }
+        
         .header h1 { font-size: 28px; font-weight: 600; margin-bottom: 12px; }
         .subtitle { font-size: 16px; color: var(--text-secondary); max-width: 480px; margin: 0 auto; }
         .input-group { margin-bottom: 24px; }
@@ -148,7 +153,17 @@
     <main>
         <div class="hero-text"><h1>Seu tempo é o seu bem mais valioso.</h1><p>Sua vida é finita. Seu tempo de tela também deveria ser.</p></div>
         <div class="calculator-card">
-            <div id="inputForm"><div class="header"><div class="icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div><h1>O scrolling é um custo.</h1><p class="subtitle">Descubra o seu.</p></div><div class="input-group"><label for="age">Qual sua idade atual?</label><input type="number" id="age" min="1" max="79" placeholder="Digite sua idade"></div><div class="input-group"><label for="dailyHours">Quantas horas por dia você usa o celular?</label><input type="number" id="dailyHours" min="0.1" max="24" step="0.1" placeholder="Ex: 5.5"></div><button class="calculate-btn" onclick="calculateWastedTime()">Calcular</button><div class="expectancy-note">(Cálculo baseado em uma expectativa de vida de 80 anos)</div></div>
+            <div id="inputForm">
+                <div class="header">
+                    <img src="tws-logo-transparent.png" alt="Logo" class="card-logo-image">
+                    <h1>O scrolling é um custo.</h1>
+                    <p class="subtitle">Descubra o seu.</p>
+                </div>
+                <div class="input-group"><label for="age">Qual sua idade atual?</label><input type="number" id="age" min="1" max="79" placeholder="Digite sua idade"></div>
+                <div class="input-group"><label for="dailyHours">Quantas horas por dia você usa o celular?</label><input type="number" id="dailyHours" min="0.1" max="24" step="0.1" placeholder="Ex: 5.5"></div>
+                <button class="calculate-btn" onclick="calculateWastedTime()">Calcular</button>
+                <div class="expectancy-note">(Cálculo baseado em uma expectativa de vida de 80 anos)</div>
+            </div>
             <div class="result-container" id="resultContainer"><div class="slot-machine"><div class="slot-label">Tempo de tela em anos</div><div class="slot-display"><span class="slot-number" id="slotNumber">0.0</span></div><div class="years-label">da sua vida</div></div><div id="resultContent"></div><button class="reset-btn" onclick="resetCalculator()"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="m15 18-6-6 6-6"/></svg>Fazer novo cálculo</button></div>
         </div>
     </main>
@@ -179,6 +194,7 @@
         const inputForm = document.getElementById('inputForm');
         const resultContainer = document.getElementById('resultContainer');
         const resultContent = document.getElementById('resultContent');
+
         function calculateWastedTime() { if (isAnimating) return; const age = parseInt(document.getElementById('age').value); const dailyHours = parseFloat(document.getElementById('dailyHours').value); if (!age || !dailyHours || age < 1 || age > 79 || dailyHours < 0.1) { alert('Por favor, insira valores válidos!'); return; } finalResult = (80 - age) * 365 * dailyHours / 8760; isAnimating = true; inputForm.classList.add('animating-out'); inputForm.addEventListener('animationend', () => { inputForm.style.display = 'none'; inputForm.classList.remove('animating-out'); resultContainer.style.display = 'block'; resultContainer.classList.add('animating-in'); startAnimation(); resultContainer.addEventListener('animationend', () => { resultContainer.classList.remove('animating-in'); isAnimating = false; }, { once: true }); }, { once: true }); }
         function startAnimation() { const slotNumber = document.getElementById('slotNumber'); resultContent.innerHTML = ''; resultContent.classList.remove('visible'); slotNumber.classList.add('spinning'); let cycles = 0; const maxCycles = 120; const interval = setInterval(() => { slotNumber.textContent = (Math.random() * 20).toFixed(1); cycles++; if (cycles > maxCycles) { clearInterval(interval); slotNumber.classList.remove('spinning'); let currentVal = parseFloat(slotNumber.textContent); const targetVal = finalResult; const diff = targetVal - currentVal; const steps = 30; const increment = diff / steps; let step = 0; const finalInterval = setInterval(() => { step++; currentVal += increment; slotNumber.textContent = currentVal.toFixed(1); if (step >= steps) { clearInterval(finalInterval); slotNumber.textContent = targetVal.toFixed(1); setTimeout(showResult, 500); } }, 20); } }, 50); }
         function showResult() { const age = parseInt(document.getElementById('age').value); const dailyHours = parseFloat(document.getElementById('dailyHours').value); const totalHours = Math.round((80 - age) * 365 * dailyHours); const totalDays = Math.round(totalHours / 24); resultContent.innerHTML = `<div class="stats-grid"><div class="stat-item"><div class="stat-icon"><svg viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div class="stat-number">${totalHours.toLocaleString('pt-BR')}</div><div class="stat-label">Total de horas</div></div><div class="stat-item"><div class="stat-icon"><svg viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><div class="stat-number">${totalDays.toLocaleString('pt-BR')}</div><div class="stat-label">Total de dias</div></div></div><div class="equivalency-section"><h3 class="equivalency-title">O que você poderia fazer com esse tempo?</h3><ul class="equivalency-list"><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 1-9.5 9.5a5 5 0 0 0 0 7l9.5 9.5 9.5-9.5a5 5 0 0 0 0-7L12 1z"></path><path d="M5.5 12.5 12 19l6.5-6.5"></path></svg></div><span class="equivalency-text">Praticar um esporte ou ir à academia regularmente.</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 2-4 14 4 4 4-14-4-4zM8 2l-4 14 4 4 4-14-4-4z"></path></svg></div><span class="equivalency-text">Aprender a tocar um instrumento musical como violão ou piano.</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><span class="equivalency-text">Passar tempo de qualidade com amigos e família.</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2h-4zM4.5 22a2 2 0 0 1-2-2V12a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-4z"/></svg></div><span class="equivalency-text">Iniciar um projeto pessoal ou um pequeno negócio.</span></li></ul></div>`; resultContent.classList.add('visible'); }
