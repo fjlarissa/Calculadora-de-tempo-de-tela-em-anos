@@ -36,8 +36,8 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: var(--background-color); 
-            color: var(--text-color); 
+            background-color: var(--background-color);
+            color: var(--text-color);
             line-height: 1.6;
             min-height: 100vh;
             display: flex;
@@ -46,24 +46,24 @@
         }
 
         .page-header, main, footer { padding-left: 40px; padding-right: 40px; }
-        
-        .page-header { 
-            padding-top: 20px; 
-            padding-bottom: 20px; 
-            width: 100%; 
+
+        .page-header {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            width: 100%;
         }
-        
+
         .header-logo-link {
             display: inline-flex;
             align-items: center;
-            gap: 20px; /* Mais espaço entre a logo e o texto */
+            gap: 24px; /* Mais espaço entre a logo e o texto */
             text-decoration: none;
             color: var(--text-color);
             font-size: 1.2em;
             font-weight: 600;
         }
         .header-logo-image {
-            height: 60px; /* LOGO MAIOR NO CABEÇALHO */
+            height: 80px; /* LOGO BEM MAIOR NO CABEÇALHO */
         }
 
         main { display: flex; flex: 1; align-items: center; justify-content: center; gap: 60px; width: 100%; }
@@ -75,11 +75,11 @@
 
         /* NOVO ESTILO PARA A LOGO DENTRO DO CARD */
         .card-logo-image {
-            height: 72px; /* LOGO MAIOR NO CARD */
-            margin: 0 auto 32px; /* Mais margem abaixo para separar do título */
+            height: 96px; /* LOGO BEM MAIOR NO CARD */
+            margin: 0 auto 40px; /* Mais margem abaixo para separar do título */
             display: block;
         }
-        
+
         .header h1 { font-size: 28px; font-weight: 600; margin-bottom: 12px; }
         .subtitle { font-size: 16px; color: var(--text-secondary); max-width: 480px; margin: 0 auto; }
         .input-group { margin-bottom: 24px; }
@@ -115,7 +115,7 @@
         .reset-btn { background: transparent; color: var(--text-secondary); border: 1px solid var(--border-color); margin-top: 32px; display: flex; align-items: center; justify-content: center; }
         .reset-btn:hover { background: var(--background-color); color: var(--text-color); box-shadow: 0 4px 15px rgba(0,0,0,0.05); transform: translateY(-2px); }
         .reset-btn svg { width: 16px; height: 16px; margin-right: 8px; stroke: currentColor; fill: none; }
-        
+
         footer { width: 100%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; padding: 30px 40px; margin-top: auto; }
         .footer-info { text-align: left; }
         .footer-contact { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
@@ -127,7 +127,7 @@
         .footer-qrcode img { width: 100px; height: 100px; border-radius: 8px; border: 1px solid var(--border-color); transition: all var(--transition-speed) ease; }
         .footer-qrcode:hover img { transform: scale(1.05); border-color: var(--text-color); box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
         .footer-qrcode p { font-size: 0.8em; color: var(--text-secondary); margin-top: 8px; font-weight: 500; }
-        
+
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s ease; }
         .modal-overlay.visible { opacity: 1; visibility: visible; }
         .modal-content { background-color: var(--card-background); padding: 30px; border-radius: 16px; text-align: center; position: relative; transform: scale(0.95); transition: transform 0.4s ease; }
@@ -199,7 +199,7 @@
         function startAnimation() { const slotNumber = document.getElementById('slotNumber'); resultContent.innerHTML = ''; resultContent.classList.remove('visible'); slotNumber.classList.add('spinning'); let cycles = 0; const maxCycles = 120; const interval = setInterval(() => { slotNumber.textContent = (Math.random() * 20).toFixed(1); cycles++; if (cycles > maxCycles) { clearInterval(interval); slotNumber.classList.remove('spinning'); let currentVal = parseFloat(slotNumber.textContent); const targetVal = finalResult; const diff = targetVal - currentVal; const steps = 30; const increment = diff / steps; let step = 0; const finalInterval = setInterval(() => { step++; currentVal += increment; slotNumber.textContent = currentVal.toFixed(1); if (step >= steps) { clearInterval(finalInterval); slotNumber.textContent = targetVal.toFixed(1); setTimeout(showResult, 500); } }, 20); } }, 50); }
         function showResult() { const age = parseInt(document.getElementById('age').value); const dailyHours = parseFloat(document.getElementById('dailyHours').value); const totalHours = Math.round((80 - age) * 365 * dailyHours); const totalDays = Math.round(totalHours / 24); resultContent.innerHTML = `<div class="stats-grid"><div class="stat-item"><div class="stat-icon"><svg viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div class="stat-number">${totalHours.toLocaleString('pt-BR')}</div><div class="stat-label">Total de horas</div></div><div class="stat-item"><div class="stat-icon"><svg viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><div class="stat-number">${totalDays.toLocaleString('pt-BR')}</div><div class="stat-label">Total de dias</div></div></div><div class="equivalency-section"><h3 class="equivalency-title">O que você poderia fazer com esse tempo?</h3><ul class="equivalency-list"><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 1-9.5 9.5a5 5 0 0 0 0 7l9.5 9.5 9.5-9.5a5 5 0 0 0 0-7L12 1z"></path><path d="M5.5 12.5 12 19l6.5-6.5"></path></svg></div><span class="equivalency-text">Praticar um esporte ou ir à academia regularmente.</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 2-4 14 4 4 4-14-4-4zM8 2l-4 14 4 4 4-14-4-4z"></path></svg></div><span class="equivalency-text">Aprender a tocar um instrumento musical como violão ou piano.</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><span class="equivalency-text">Passar tempo de qualidade com amigos e família.</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2h-4zM4.5 22a2 2 0 0 1-2-2V12a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-4z"/></svg></div><span class="equivalency-text">Iniciar um projeto pessoal ou um pequeno negócio.</span></li></ul></div>`; resultContent.classList.add('visible'); }
         function resetCalculator() { if(isAnimating) return; isAnimating = true; resultContainer.classList.add('animating-out'); resultContainer.addEventListener('animationend', () => { resultContainer.style.display = 'none'; resultContainer.classList.remove('animating-out'); document.getElementById('age').value = ''; document.getElementById('dailyHours').value = ''; inputForm.style.display = 'block'; inputForm.classList.add('animating-in'); inputForm.addEventListener('animationend', () => { inputForm.classList.remove('animating-in'); isAnimating = false; }, { once: true }); }, { once: true }); }
-        
+
         document.getElementById('current-year').textContent = new Date().getFullYear();
         document.getElementById('modal-current-year').textContent = new Date().getFullYear();
 
