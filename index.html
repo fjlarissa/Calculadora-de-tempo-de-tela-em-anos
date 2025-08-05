@@ -92,17 +92,18 @@
             margin-bottom: 0;
             line-height: 1.4;
         }
-        .input-group { margin-top: 40px; margin-bottom: 24px; position: relative; }
+        .input-group { margin-bottom: 24px; }
         label { display: block; font-size: 15px; font-weight: 500; margin-bottom: 10px; }
-        /* --- NOVO ESTILO PARA O LINK DE AJUDA --- */
+        
         .help-link {
-            font-size: 12px;
+            display: block;
+            text-align: center;
+            font-size: 13px;
             font-weight: 500;
             color: var(--text-secondary);
             text-decoration: none;
-            position: absolute;
-            right: 0;
-            top: 4px;
+            margin-top: -12px;
+            margin-bottom: 24px;
             transition: color var(--transition-speed);
         }
         .help-link:hover {
@@ -149,11 +150,6 @@
         .footer-credits svg { width: 20px; height: 20px; stroke-width: 2px; stroke: currentColor; }
         .copyright { font-size: 0.8em; color: #aaa; }
         
-        .language-switcher { display: flex; gap: 8px; }
-        .lang-btn { background-color: transparent; border: 1px solid var(--border-color); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.8em; color: var(--text-secondary); transition: all var(--transition-speed) ease; }
-        .lang-btn:hover { background-color: var(--card-background); color: var(--text-color); }
-        .lang-btn.active { background-color: var(--text-color); color: var(--card-background); border-color: var(--text-color); }
-
         .footer-qrcode { text-align: center; cursor: pointer; }
         .footer-qrcode img { width: 100px; height: 100px; border-radius: 8px; border: 1px solid var(--border-color); transition: all var(--transition-speed) ease; }
         .footer-qrcode:hover img { transform: scale(1.05); border-color: var(--text-color); box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
@@ -169,7 +165,6 @@
         .close-button { position: absolute; top: 10px; right: 15px; font-size: 28px; font-weight: bold; color: #aaa; cursor: pointer; transition: color var(--transition-speed) ease; }
         .close-button:hover { color: var(--text-color); }
 
-        /* --- ESTILOS DO MODAL DE AJUDA --- */
         .help-modal { max-width: 600px; text-align: left; }
         .help-modal h2 { text-align: center; margin-bottom: 24px; font-size: 22px; }
         .instructions { display: flex; flex-direction: column; gap: 20px; }
@@ -212,9 +207,10 @@
                 </div>
                 <div class="input-group">
                     <label for="dailyHours" data-key="hoursLabel">Quantas horas por dia você usa o celular?</label>
-                    <a href="#" id="open-help-modal" class="help-link" data-key="helpLink">Não sabe onde encontrar?</a>
                     <input type="number" id="dailyHours" min="0.1" max="24" step="0.1" data-key-placeholder="hoursPlaceholder" placeholder="Ex: 5.5">
                 </div>
+                <a href="#" id="open-help-modal" class="help-link" data-key="helpLink">Não sabe onde encontrar?</a>
+                
                 <button class="calculate-btn" onclick="calculateWastedTime()" data-key="calculateButton">Calcular</button>
                 <div class="expectancy-note" data-key="expectancyNote">(Cálculo baseado em uma expectativa de vida de 80 anos)</div>
             </div>
@@ -262,16 +258,16 @@
             <h2 data-key="helpTitle">Como Encontrar seu Tempo de Tela</h2>
             <div class="instructions">
                 <div class="instruction-set">
-                    <h3 data-key="iosTitle"><svg class="instruction-set-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 21.7c.9.9 2.5.4 3.4-1.1.9-1.4.4-3.1-1.1-4.1 -1.5-1-3.1-.4-4.1 1.1 -1 1.5-.4 3.1 1.1 4.1Z"></path><path d="M16 12.5c2.3-2.3 2.3-6.1 0-8.5 -2.3-2.3-6.1-2.3-8.5 0 -2.3 2.3-2.3 6.1 0 8.5"></path><path d="M12.5 16c2.3 2.3 6.1 2.3 8.5 0 2.3-2.3 2.3-6.1 0-8.5"></path><path d="M18 6c-2.3 2.3-2.3 6.1 0 8.5"></path><path d="M22 6c-2.3 2.3-2.3 6.1 0 8.5"></path></svg>iPhone (iOS)</h3>
+                    <h3 data-key="iosTitle"><svg class="instruction-set-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 21.7c.9.9 2.5.4 3.4-1.1.9-1.4.4-3.1-1.1-4.1 -1.5-1-3.1-.4-4.1 1.1 -1 1.5-.4 3.1 1.1 4.1Z"/><path d="M16 12.5c2.3-2.3 2.3-6.1 0-8.5 -2.3-2.3-6.1-2.3-8.5 0 -2.3 2.3-2.3 6.1 0 8.5"/><path d="M12.5 16c2.3 2.3 6.1 2.3 8.5 0 2.3-2.3 2.3-6.1 0-8.5"/><path d="M18 6c-2.3 2.3-2.3 6.1 0 8.5"/><path d="M22 6c-2.3 2.3-2.3 6.1 0 8.5"/></svg>iPhone (iOS)</h3>
                     <ol>
                         <li data-key="iosStep1">Abra os <strong>Ajustes</strong>.</li>
                         <li data-key="iosStep2">Toque em <strong>Tempo de Uso</strong>.</li>
                         <li data-key="iosStep3">Toque em <strong>Ver Todas as Atividades</strong> para ver sua média diária.</li>
                     </ol>
                 </div>
-                <hr>
+                <hr style="border: none; border-top: 1px solid var(--border-color); margin: 0;">
                 <div class="instruction-set">
-                    <h3 data-key="androidTitle"><svg class="instruction-set-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 14.5c.3-1 .5-2.2.5-3.5a10.9 10.9 0 0 0-2.3-6.9"></path><path d="M7 14.5c-.3-1-.5-2.2-.5-3.5A10.9 10.9 0 0 1 8.8 4.1"></path><path d="M14.5 17c-1.2.4-2.6.6-4 .6-1.4 0-2.8-.2-4-.6"></path><path d="M10 4.1c1.2-.3 2.5-.5 3.8-.5 1.3 0 2.5.2 3.8.5"></path><circle cx="12" cy="12" r="10"></circle><path d="m8 10 1-2"></path><path d="m15 8 1 2"></path></svg>Android</h3>
+                    <h3 data-key="androidTitle"><svg class="instruction-set-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 14.5c.3-1 .5-2.2.5-3.5a10.9 10.9 0 0 0-2.3-6.9"/><path d="M7 14.5c-.3-1-.5-2.2-.5-3.5A10.9 10.9 0 0 1 8.8 4.1"/><path d="M14.5 17c-1.2.4-2.6.6-4 .6-1.4 0-2.8-.2-4-.6"/><path d="M10 4.1c1.2-.3 2.5-.5 3.8-.5 1.3 0 2.5.2 3.8.5"/><circle cx="12" cy="12" r="10"/><path d="m8 10 1-2"/><path d="m15 8 1 2"/></svg>Android</h3>
                     <p data-key="androidNote">A localização pode variar um pouco, mas geralmente o caminho é este:</p>
                     <ol>
                         <li data-key="androidStep1">Abra as <strong>Configurações</strong>.</li>
@@ -284,6 +280,7 @@
     </div>
     
     <script>
+        // (O SCRIPT COMPLETO E SEM ALTERAÇÕES VAI AQUI)
         let finalResult = 0;
         let isAnimating = false;
         const inputForm = document.getElementById('inputForm');
@@ -305,17 +302,45 @@
             }
         };
 
-        const setLanguage = (lang) => { /* ... Lógica de tradução ... */ };
+        const setLanguage = (lang) => {
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.dataset.key;
+                if (translations[lang]?.[key]) el.textContent = translations[lang][key];
+            });
+            document.querySelectorAll('[data-key-placeholder]').forEach(el => {
+                const key = el.dataset.keyPlaceholder;
+                if (translations[lang]?.[key]) el.placeholder = translations[lang][key];
+            });
+            document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
+            localStorage.setItem('userLanguage', lang);
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+        };
+
         document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
-        document.addEventListener('DOMContentLoaded', () => setLanguage(localStorage.getItem('userLanguage') || 'pt'));
         
-        function calculateWastedTime() { /* ... Lógica da calculadora ... */ }
-        function startAnimation() { /* ... Lógica da animação ... */ }
-        function showResult() { /* ... Lógica de exibir resultado ... */ }
-        function resetCalculator() { /* ... Lógica de reset ... */ }
+        function calculateWastedTime() { if (isAnimating) return; const age = parseInt(document.getElementById('age').value); const dailyHours = parseFloat(document.getElementById('dailyHours').value); if (!age || !dailyHours || age < 1 || age > 79 || dailyHours < 0.1) { alert('Por favor, insira valores válidos!'); return; } finalResult = (80 - age) * 365 * dailyHours / 8760; isAnimating = true; inputForm.classList.add('animating-out'); inputForm.addEventListener('animationend', () => { inputForm.style.display = 'none'; inputForm.classList.remove('animating-out'); resultContainer.style.display = 'block'; resultContainer.classList.add('animating-in'); startAnimation(); resultContainer.addEventListener('animationend', () => { resultContainer.classList.remove('animating-in'); isAnimating = false; }, { once: true }); }, { once: true }); }
+        function startAnimation() { const slotNumber = document.getElementById('slotNumber'); resultContent.innerHTML = ''; resultContent.classList.remove('visible'); slotNumber.classList.add('spinning'); let cycles = 0; const maxCycles = 120; const interval = setInterval(() => { slotNumber.textContent = (Math.random() * 20).toFixed(1); cycles++; if (cycles > maxCycles) { clearInterval(interval); slotNumber.classList.remove('spinning'); let currentVal = parseFloat(slotNumber.textContent); const targetVal = finalResult; const diff = targetVal - currentVal; const steps = 30; const increment = diff / steps; let step = 0; const finalInterval = setInterval(() => { step++; currentVal += increment; slotNumber.textContent = currentVal.toFixed(1); if (step >= steps) { clearInterval(finalInterval); slotNumber.textContent = targetVal.toFixed(1); setTimeout(showResult, 500); } }, 20); } }, 50); }
+        function showResult() {
+            const lang = localStorage.getItem('userLanguage') || 'pt';
+            const age = parseInt(document.getElementById('age').value);
+            const dailyHours = parseFloat(document.getElementById('dailyHours').value);
+            const totalHours = Math.round((80 - age) * 365 * dailyHours);
+            const totalDays = Math.round(totalHours / 24);
+            
+            resultContent.innerHTML = `<div class="stats-grid"><div class="stat-item"><div class="stat-icon"><svg viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div class="stat-number">${totalHours.toLocaleString(lang === 'pt' ? 'pt-BR' : lang)}</div><div class="stat-label">${translations[lang].totalHoursLabel}</div></div><div class="stat-item"><div class="stat-icon"><svg viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><div class="stat-number">${totalDays.toLocaleString(lang === 'pt' ? 'pt-BR' : lang)}</div><div class="stat-label">${translations[lang].totalDaysLabel}</div></div></div><div class="equivalency-section"><h3 class="equivalency-title">${translations[lang].equivalencyTitle}</h3><ul class="equivalency-list"><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 1-9.5 9.5a5 5 0 0 0 0 7l9.5 9.5 9.5-9.5a5 5 0 0 0 0-7L12 1z"></path><path d="M5.5 12.5 12 19l6.5-6.5"></path></svg></div><span class="equivalency-text">${translations[lang].equivalencySport}</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 2-4 14 4 4 4-14-4-4zM8 2l-4 14 4 4 4-14-4-4z"></path></svg></div><span class="equivalency-text">${translations[lang].equivalencyInstrument}</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><span class="equivalency-text">${translations[lang].equivalencyFamily}</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2h-4zM4.5 22a2 2 0 0 1-2-2V12a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-4z"/></svg></div><span class="equivalency-text">${translations[lang].equivalencyProject}</span></li></ul></div>`;
+            resultContent.classList.add('visible');
+            isAnimating = false;
+        }
+        function resetCalculator() { if(isAnimating) return; isAnimating = true; resultContainer.classList.add('animating-out'); resultContainer.addEventListener('animationend', () => { resultContainer.style.display = 'none'; resultContainer.classList.remove('animating-out'); document.getElementById('age').value = ''; document.getElementById('dailyHours').value = ''; inputForm.style.display = 'block'; inputForm.classList.add('animating-in'); inputForm.addEventListener('animationend', () => { inputForm.classList.remove('animating-in'); isAnimating = false; }, { once: true }); }, { once: true }); }
         
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-        document.getElementById('modal-current-year').textContent = new Date().getFullYear();
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('userLanguage') || 'pt';
+            setLanguage(savedLang);
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            document.getElementById('modal-current-year').textContent = new Date().getFullYear();
+        });
 
         const qrModalOverlay = document.getElementById('qr-modal-overlay');
         const openQrModalBtn = document.getElementById('open-qr-modal');
@@ -324,14 +349,13 @@
         closeQrModalBtn.addEventListener('click', () => qrModalOverlay.classList.remove('visible'));
         qrModalOverlay.addEventListener('click', (event) => { if (event.target === qrModalOverlay) qrModalOverlay.classList.remove('visible'); });
         
-        // --- SCRIPT PARA O NOVO MODAL DE AJUDA ---
         const helpModalOverlay = document.getElementById('help-modal-overlay');
         const openHelpModalBtn = document.getElementById('open-help-modal');
         const closeHelpModalBtn = document.getElementById('close-help-modal');
         openHelpModalBtn.addEventListener('click', (e) => { e.preventDefault(); helpModalOverlay.classList.add('visible'); });
         closeHelpModalBtn.addEventListener('click', () => helpModalOverlay.classList.remove('visible'));
         helpModalOverlay.addEventListener('click', (event) => { if (event.target === helpModalOverlay) helpModalOverlay.classList.remove('visible'); });
-
+        
         window.addEventListener('keydown', (event) => {
             if (event.key === 'Escape') {
                 qrModalOverlay.classList.remove('visible');
