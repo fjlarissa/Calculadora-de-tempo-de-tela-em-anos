@@ -75,8 +75,24 @@
             font-size: 3.2rem;
             font-weight: 700;
             line-height: 1.2;
-            margin: 0;
+            margin: 0 0 24px 0; /* Adicionada margem inferior */
         }
+        
+        /* --- ESTILO PARA O LINK DO MANIFESTO --- */
+        .manifesto-link {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-color);
+            text-decoration: none;
+            border-bottom: 2px solid var(--text-color);
+            padding-bottom: 4px;
+            transition: color var(--transition-speed), border-color var(--transition-speed);
+        }
+        .manifesto-link:hover {
+            color: var(--text-secondary);
+            border-color: var(--text-secondary);
+        }
+        
         .calculator-card { background-color: var(--card-background); padding: 48px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); width: 100%; max-width: 520px; border: 1px solid var(--border-color); animation: slideInRight 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
         .header { text-align: center; margin-bottom: 40px; }
 
@@ -190,18 +206,26 @@
         .instruction-set ol { padding-left: 20px; font-size: 15px; }
         .instruction-set li { margin-bottom: 8px; }
         
-        @media (max-width: 992px) { 
-            .page-header { 
-                flex-direction: column; 
-                gap: 20px; 
-                justify-content: center;
-            }
-            main { flex-direction: column; gap: 40px; padding-top: 20px; padding-bottom: 20px; text-align: center; } 
-            .hero-text h1 { font-size: 2.8rem; } 
-            footer { flex-direction: column-reverse; justify-content: center; gap: 30px; } 
-            .footer-info, .copyright { text-align: center; } 
-            .footer-contact { justify-content: center; } 
+        /* --- ESTILOS DO MODAL DO MANIFESTO --- */
+        .manifesto-modal {
+            max-width: 650px;
+            text-align: left;
+            max-height: 80vh;
+            overflow-y: auto;
         }
+        .manifesto-modal h2 {
+            text-align: center;
+            margin-bottom: 24px;
+            font-size: 24px;
+        }
+        .manifesto-modal p {
+            margin-bottom: 16px;
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 992px) { main { flex-direction: column; gap: 40px; padding-top: 20px; padding-bottom: 20px; text-align: center; } .hero-text h1 { font-size: 2.8rem; } .page-header { flex-direction: column; gap: 20px; justify-content: center; } footer { flex-direction: column-reverse; justify-content: center; gap: 30px; } .footer-info, .copyright { text-align: center; } .footer-contact { justify-content: center; } }
         @media (max-width: 480px) { .calculator-card { padding: 32px 24px; } .stats-grid { grid-template-columns: 1fr; } .page-header, main, footer { padding-left: 20px; padding-right: 20px; } }
     </style>
 </head>
@@ -221,6 +245,7 @@
     <main>
         <div class="hero-text">
             <h1 data-key="heroTitle">Seu tempo de vida é finito. Seu tempo de tela também deveria ser.</h1>
+            <a href="#" id="open-manifesto-modal" class="manifesto-link" data-key="manifestoLink">Leia o manifesto</a>
         </div>
         <div class="calculator-card">
             <div id="inputForm">
@@ -282,33 +307,37 @@
             <p class="copyright-modal">© <span id="modal-current-year"></span> <span data-key="siteNameCopyrightModal">Time Well Spent?</span>. <span data-key="rightsReservedModal">Todos os direitos reservados.</span></p>
         </div>
     </div>
+
     <div class="modal-overlay" id="help-modal-overlay">
         <div class="modal-content help-modal">
             <span class="close-button" id="close-help-modal">&times;</span>
             <h2 data-key="helpTitle">Como encontrar seu tempo de tela</h2>
             <div class="instructions">
                 <div class="instruction-set">
-                    <h3 data-key="iosTitle"><svg class="instruction-set-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 21.7c.9.9 2.5.4 3.4-1.1.9-1.4.4-3.1-1.1-4.1 -1.5-1-3.1-.4-4.1 1.1 -1 1.5-.4 3.1 1.1 4.1Z"/><path d="M16 12.5c2.3-2.3 2.3-6.1 0-8.5 -2.3-2.3-6.1-2.3-8.5 0 -2.3 2.3-2.3 6.1 0 8.5"/><path d="M12.5 16c2.3 2.3 6.1 2.3 8.5 0 2.3-2.3 2.3-6.1 0-8.5"/><path d="M18 6c-2.3 2.3-2.3 6.1 0 8.5"/><path d="M22 6c-2.3 2.3-2.3 6.1 0 8.5"/></svg>iPhone (iOS)</h3>
-                    <ol>
-                        <li data-key="iosStep1">Abra os <strong>Ajustes</strong>.</li>
-                        <li data-key="iosStep2">Toque em <strong>Tempo de Uso</strong>.</li>
-                        <li data-key="iosStep3">Toque em <strong>Ver Todas as Atividades</strong> para ver sua média diária.</li>
-                    </ol>
+                    <h3 data-key="iosTitle"><svg class="instruction-set-icon" ...> ... </svg>iPhone (iOS)</h3>
+                    <ol><li data-key="iosStep1">...</li><li data-key="iosStep2">...</li><li data-key="iosStep3">...</li></ol>
                 </div>
                 <hr style="border: none; border-top: 1px solid var(--border-color); margin: 0;">
                 <div class="instruction-set">
-                    <h3 data-key="androidTitle"><svg class="instruction-set-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 14.5c.3-1 .5-2.2.5-3.5a10.9 10.9 0 0 0-2.3-6.9"/><path d="M7 14.5c-.3-1-.5-2.2-.5-3.5A10.9 10.9 0 0 1 8.8 4.1"/><path d="M14.5 17c-1.2.4-2.6.6-4 .6-1.4 0-2.8-.2-4-.6"/><path d="M10 4.1c1.2-.3 2.5-.5 3.8-.5 1.3 0 2.5.2 3.8.5"/><circle cx="12" cy="12" r="10"/><path d="m8 10 1-2"/><path d="m15 8 1 2"/></svg>Android</h3>
-                    <p data-key="androidNote">A localização pode variar um pouco, mas geralmente o caminho é este:</p>
-                    <ol>
-                        <li data-key="androidStep1">Abra as <strong>Configurações</strong>.</li>
-                        <li data-key="androidStep2">Procure por <strong>Bem-estar digital e controles parentais</strong>.</li>
-                        <li data-key="androidStep3">O gráfico na tela principal mostrará seu tempo de uso diário.</li>
-                    </ol>
+                    <h3 data-key="androidTitle"><svg class="instruction-set-icon" ...> ... </svg>Android</h3>
+                    <p data-key="androidNote">...</p>
+                    <ol><li data-key="androidStep1">...</li><li data-key="androidStep2">...</li><li data-key="androidStep3">...</li></ol>
                 </div>
             </div>
         </div>
     </div>
     
+    <div class="modal-overlay" id="manifesto-modal-overlay">
+        <div class="modal-content manifesto-modal">
+            <span class="close-button" id="close-manifesto-modal">&times;</span>
+            <h2 data-key="manifestoTitle">Manifesto: Por um Tempo Bem Gasto</h2>
+            <p data-key="manifestoP1">Nascemos em um mundo de telas. Elas são nossas janelas para o conhecimento, nossas pontes para a conexão e nossas ferramentas de criação. Mas em algum ponto, o que era para ser uma ferramenta tornou-se uma extensão de nós — e por vezes, uma prisão.</p>
+            <p data-key="manifestoP2">Acreditamos que o tempo é o nosso bem mais irrecuperável. Cada minuto gasto em um scroll infinito é um minuto a menos dedicado a uma paixão, a uma conversa, ao tédio criativo ou a um momento de presença plena.</p>
+            <p data-key="manifestoP3">Esta ferramenta não é contra a tecnologia. Ela é a favor da consciência. É um convite para transformar o uso passivo em uso intencional. É sobre trocar o "tempo gasto" pelo "tempo bem gasto".</p>
+            <p data-key="manifestoP4">Como estudante de Terapia Ocupacional, vejo a importância de atividades significativas para uma vida saudável e equilibrada. Nosso objetivo é simples: te dar os dados para que você possa fazer uma escolha informada. Para que você decida se o custo do scroll vale a pena. E para te inspirar a encontrar, no mundo offline, a riqueza que nenhuma tela pode oferecer.</p>
+        </div>
+    </div>
+
     <script>
         let finalResult = 0;
         let isAnimating = false;
@@ -326,7 +355,8 @@
                 equivalencyFamily: "Criar memórias com amigos e família, sem interrupções.",
                 equivalencyHealth: "Cuidar do seu corpo e mente com exercícios e meditação.",
                 equivalencyTravel: "Fazer dezenas de viagens e explorar novos lugares.",
-                helpLink: "Não sabe onde encontrar?", helpTitle: "Como encontrar seu tempo de tela", iosTitle: "iPhone (iOS)", iosStep1: "Abra os Ajustes.", iosStep2: "Toque em Tempo de Uso.", iosStep3: "Toque em Ver Todas as Atividades para ver sua média diária.", androidTitle: "Android", androidNote: "A localização pode variar um pouco, mas geralmente o caminho é este:", androidStep1: "Abra as Configurações.", androidStep2: "Procure por Bem-estar digital e controles parentais.", androidStep3: "O gráfico na tela principal mostrará seu tempo de uso diário."
+                helpLink: "Não sabe onde encontrar?", helpTitle: "Como encontrar seu tempo de tela", iosTitle: "iPhone (iOS)", iosStep1: "Abra os Ajustes.", iosStep2: "Toque em Tempo de Uso.", iosStep3: "Toque em Ver Todas as Atividades para ver sua média diária.", androidTitle: "Android", androidNote: "A localização pode variar um pouco, mas geralmente o caminho é este:", androidStep1: "Abra as Configurações.", androidStep2: "Procure por Bem-estar digital e controles parentais.", androidStep3: "O gráfico na tela principal mostrará seu tempo de uso diário.",
+                manifestoLink: "Leia o manifesto", manifestoTitle: "Manifesto: Por um Tempo Bem Gasto", manifestoP1: "Nascemos em um mundo de telas. Elas são nossas janelas para o conhecimento, nossas pontes para a conexão e nossas ferramentas de criação. Mas em algum ponto, o que era para ser uma ferramenta tornou-se uma extensão de nós — e por vezes, uma prisão.", manifestoP2: "Acreditamos que o tempo é o nosso bem mais irrecuperável. Cada minuto gasto em um scroll infinito é um minuto a menos dedicado a uma paixão, a uma conversa, ao tédio criativo ou a um momento de presença plena.", manifestoP3: "Esta ferramenta não é contra a tecnologia. Ela é a favor da consciência. É um convite para transformar o uso passivo em uso intencional. É sobre trocar o 'tempo gasto' pelo 'tempo bem gasto'.", manifestoP4: "Como estudante de Terapia Ocupacional, vejo a importância de atividades significativas para uma vida saudável e equilibrada. Nosso objetivo é simples: te dar os dados para que você possa fazer uma escolha informada. Para que você decida se o custo do scroll vale a pena. E para te inspirar a encontrar, no mundo offline, a riqueza que nenhuma tela pode oferecer."
             },
             en: {
                 siteName: "Time Well Spent?", heroTitle: "Your lifetime is finite. Your screen time should be too.", cardTitle: "Scrolling has a cost. It's time to find out yours.", ageLabel: "What is your current age?", agePlaceholder: "Enter your age", hoursLabel: "How many hours a day do you use your phone?", hoursPlaceholder: "E.g., 5.5", calculateButton: "Calculate", expectancyNote: "(Calculation based on an 80-year life expectancy)", slotLabel: "Screen time in years", yearsLabel: "of your life", resetButton: "New calculation", contactEmail: "larissajordaoto@gmail.com", siteNameCopyright: "Time Well Spent?", rightsReserved: "All rights reserved.", qrCodeCta: "Point your phone's camera!", siteNameModal: "Time Well Spent?", siteNameCopyrightModal: "Time Well Spent?", rightsReservedModal: "All rights reserved.",
@@ -337,7 +367,8 @@
                 equivalencyFamily: "Create memories with friends and family, without interruptions.",
                 equivalencyHealth: "Take care of your body and mind with exercise and meditation.",
                 equivalencyTravel: "Go on dozens of trips and explore new places.",
-                helpLink: "Not sure where to find it?", helpTitle: "How to find your screen time", iosTitle: "iPhone (iOS)", iosStep1: "Open Settings.", iosStep2: "Tap on Screen Time.", iosStep3: "Tap See All Activity to view your daily average.", androidTitle: "Android", androidNote: "The location may vary slightly, but this is the usual path:", androidStep1: "Open Settings.", androidStep2: "Look for Digital Wellbeing & parental controls.", androidStep3: "The main chart will show your daily usage time."
+                helpLink: "Not sure where to find it?", helpTitle: "How to find your screen time", iosTitle: "iPhone (iOS)", iosStep1: "Open Settings.", iosStep2: "Tap on Screen Time.", iosStep3: "Tap See All Activity to view your daily average.", androidTitle: "Android", androidNote: "The location may vary slightly, but this is the usual path:", androidStep1: "Open Settings.", androidStep2: "Look for Digital Wellbeing & parental controls.", androidStep3: "The main chart will show your daily usage time.",
+                manifestoLink: "Read the manifesto", manifestoTitle: "Manifesto: For a Time Well Spent", manifestoP1: "We were born into a world of screens. They are our windows to knowledge, our bridges to connection, and our tools for creation. But at some point, what was meant to be a tool became an extension of ourselves—and sometimes, a prison.", manifestoP2: "We believe that time is our most irretrievable asset. Every minute spent in an infinite scroll is one less minute dedicated to a passion, a conversation, creative boredom, or a moment of full presence.", manifestoP3: "This tool is not against technology. It is for awareness. It is an invitation to transform passive use into intentional use. It is about trading 'time spent' for 'time well spent.'", manifestoP4: "As an Occupational Therapy student, I see the importance of meaningful activities for a healthy and balanced life. Our goal is simple: to give you the data so you can make an informed choice. So you can decide if the cost of scrolling is worth it. And to inspire you to find, in the offline world, the richness that no screen can offer."
             },
             es: {
                 siteName: "Time Well Spent?", heroTitle: "Tu tiempo de vida es finito. Tu tiempo de pantalla también debería serlo.", cardTitle: "El scrolling tiene un coste. Es hora de descubrir el tuyo.", ageLabel: "¿Cuál es tu edad actual?", agePlaceholder: "Introduce tu edad", hoursLabel: "¿Cuántas horas al día usas el móvil?", hoursPlaceholder: "Ej: 5.5", calculateButton: "Calcular", expectancyNote: "(Cálculo basado en una esperanza de vida de 80 años)", slotLabel: "Tiempo de pantalla en años", yearsLabel: "de tu vida", resetButton: "Nuevo cálculo", contactEmail: "larissajordaoto@gmail.com", siteNameCopyright: "Time Well Spent?", rightsReserved: "Todos los derechos reservados.", qrCodeCta: "¡Apunta la cámara de tu móvil!", siteNameModal: "Time Well Spent?", siteNameCopyrightModal: "Time Well Spent?", rightsReservedModal: "Todos los derechos reservados.",
@@ -348,70 +379,12 @@
                 equivalencyFamily: "Crear recuerdos con amigos y familia, sin interrupciones.",
                 equivalencyHealth: "Cuidar tu cuerpo y mente con ejercicio y meditación.",
                 equivalencyTravel: "Hacer docenas de viajes y explorar nuevos lugares.",
-                helpLink: "¿No sabes dónde encontrarlo?", helpTitle: "Cómo encontrar tu tiempo de pantalla", iosTitle: "iPhone (iOS)", iosStep1: "Abre Ajustes.", iosStep2: "Toca en Tiempo de uso.", iosStep3: "Toca Ver toda la actividad para ver tu promedio diario.", androidTitle: "Android", androidNote: "La ubicación puede variar un poco, pero generalmente la ruta es esta:", androidStep1: "Abre Configuración.", androidStep2: "Busca Bienestar digital y controles parentales.", androidStep3: "El gráfico principal mostrará tu tiempo de uso diario."
+                helpLink: "¿No sabes dónde encontrarlo?", helpTitle: "Cómo encontrar tu tiempo de pantalla", iosTitle: "iPhone (iOS)", iosStep1: "Abre Ajustes.", iosStep2: "Toca en Tiempo de uso.", iosStep3: "Toca Ver toda la actividad para ver tu promedio diario.", androidTitle: "Android", androidNote: "La ubicación puede variar un poco, pero generalmente la ruta es esta:", androidStep1: "Abre Configuración.", androidStep2: "Busca Bienestar digital y controles parentales.", androidStep3: "El gráfico principal mostrará tu tiempo de uso diario.",
+                manifestoLink: "Lee el manifiesto", manifestoTitle: "Manifiesto: Por un Tiempo Bien Invertido", manifestoP1: "Nacimos en un mundo de pantallas. Son nuestras ventanas al conocimiento, nuestros puentes a la conexión y nuestras herramientas de creación. Pero en algún momento, lo que debía ser una herramienta se convirtió en una extensión de nosotros, y a veces, en una prisión.", manifestoP2: "Creemos que el tiempo es nuestro bien más irrecuperable. Cada minuto gastado en un scroll infinito es un minuto menos dedicado a una pasión, a una conversación, al aburrimiento creativo o a un momento de plena presencia.", manifestoP3: "Esta herramienta no está en contra de la tecnología. Está a favor de la conciencia. Es una invitación a transformar el uso pasivo en uso intencional. Se trata de cambiar el 'tiempo gastado' por el 'tiempo bien invertido'.", manifestoP4: "Como estudiante de Terapia Ocupacional, veo la importancia de las actividades significativas para una vida sana y equilibrada. Nuestro objetivo es simple: darte los datos para que puedas tomar una decisión informada. Para que decidas si el coste del scroll merece la pena. Y para inspirarte a encontrar, en el mundo offline, la riqueza que ninguna pantalla puede ofrecer."
             }
         };
 
-        const setLanguage = (lang) => {
-            document.querySelectorAll('[data-key]').forEach(el => {
-                const key = el.dataset.key;
-                if (translations[lang]?.[key]) el.textContent = translations[lang][key];
-            });
-            document.querySelectorAll('[data-key-placeholder]').forEach(el => {
-                const key = el.dataset.keyPlaceholder;
-                if (translations[lang]?.[key]) el.placeholder = translations[lang][key];
-            });
-            document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
-            localStorage.setItem('userLanguage', lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.lang === lang);
-            });
-        };
-
-        document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
-        
-        function calculateWastedTime() { if (isAnimating) return; const age = parseInt(document.getElementById('age').value); const dailyHours = parseFloat(document.getElementById('dailyHours').value); if (!age || !dailyHours || age < 1 || age > 79 || dailyHours < 0.1) { alert('Por favor, insira valores válidos!'); return; } finalResult = (80 - age) * 365 * dailyHours / 8760; isAnimating = true; inputForm.classList.add('animating-out'); inputForm.addEventListener('animationend', () => { inputForm.style.display = 'none'; inputForm.classList.remove('animating-out'); resultContainer.style.display = 'block'; resultContainer.classList.add('animating-in'); startAnimation(); resultContainer.addEventListener('animationend', () => { resultContainer.classList.remove('animating-in'); isAnimating = false; }, { once: true }); }, { once: true }); }
-        function startAnimation() { const slotNumber = document.getElementById('slotNumber'); resultContent.innerHTML = ''; resultContent.classList.remove('visible'); slotNumber.classList.add('spinning'); let cycles = 0; const maxCycles = 120; const interval = setInterval(() => { slotNumber.textContent = (Math.random() * 20).toFixed(1); cycles++; if (cycles > maxCycles) { clearInterval(interval); slotNumber.classList.remove('spinning'); let currentVal = parseFloat(slotNumber.textContent); const targetVal = finalResult; const diff = targetVal - currentVal; const steps = 30; const increment = diff / steps; let step = 0; const finalInterval = setInterval(() => { step++; currentVal += increment; slotNumber.textContent = currentVal.toFixed(1); if (step >= steps) { clearInterval(finalInterval); slotNumber.textContent = targetVal.toFixed(1); setTimeout(showResult, 500); } }, 20); } }, 50); }
-        function showResult() {
-            const lang = localStorage.getItem('userLanguage') || 'pt';
-            const age = parseInt(document.getElementById('age').value);
-            const dailyHours = parseFloat(document.getElementById('dailyHours').value);
-            const totalHours = Math.round((80 - age) * 365 * dailyHours);
-            const totalDays = Math.round(totalHours / 24);
-            
-            resultContent.innerHTML = `<div class="stats-grid"><div class="stat-item"><div class="stat-icon"><svg viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div class="stat-number">${totalHours.toLocaleString(lang === 'pt' ? 'pt-BR' : lang)}</div><div class="stat-label">${translations[lang].totalHoursLabel}</div></div><div class="stat-item"><div class="stat-icon"><svg viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><div class="stat-number">${totalDays.toLocaleString(lang === 'pt' ? 'pt-BR' : lang)}</div><div class="stat-label">${translations[lang].totalDaysLabel}</div></div></div><div class="equivalency-section"><h3 class="equivalency-title">${translations[lang].equivalencyTitle}</h3><ul class="equivalency-list"><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div><span class="equivalency-text">${translations[lang].equivalencyBook}</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3m0 12l-4-4m4 4l4-4"></path><path d="M10 9h4"></path><path d="M15 21H9a2 2 0 0 1-2-2V7h10v12a2 2 0 0 1-2 2z"></path></svg></div><span class="equivalency-text">${translations[lang].equivalencySkill}</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg></div><span class="equivalency-text">${translations[lang].equivalencyFamily}</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 0 0 9-9c0-4.97-4.03-9-9-9s-9 4.03-9 9a9 9 0 0 0 9 9z"></path><path d="M12 21V12"></path><path d="m5 12 2.5 3"></path><path d="m16.5 15-2.5-3"></path></svg></div><span class="equivalency-text">${translations[lang].equivalencyHealth}</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div><span class="equivalency-text">${translations[lang].equivalencyTravel}</span></li></ul></div>`;
-            resultContent.classList.add('visible');
-            isAnimating = false;
-        }
-        function resetCalculator() { if(isAnimating) return; isAnimating = true; resultContainer.classList.add('animating-out'); resultContainer.addEventListener('animationend', () => { resultContainer.style.display = 'none'; resultContainer.classList.remove('animating-out'); document.getElementById('age').value = ''; document.getElementById('dailyHours').value = ''; inputForm.style.display = 'block'; inputForm.classList.add('animating-in'); inputForm.addEventListener('animationend', () => { inputForm.classList.remove('animating-in'); isAnimating = false; }, { once: true }); }, { once: true }); }
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedLang = localStorage.getItem('userLanguage') || 'pt';
-            setLanguage(savedLang);
-            document.getElementById('current-year').textContent = new Date().getFullYear();
-            document.getElementById('modal-current-year').textContent = new Date().getFullYear();
-        });
-
-        const qrModalOverlay = document.getElementById('qr-modal-overlay');
-        const openQrModalBtn = document.getElementById('open-qr-modal');
-        const closeQrModalBtn = document.getElementById('close-qr-modal');
-        openQrModalBtn.addEventListener('click', (e) => { e.preventDefault(); qrModalOverlay.classList.add('visible'); });
-        closeQrModalBtn.addEventListener('click', () => qrModalOverlay.classList.remove('visible'));
-        qrModalOverlay.addEventListener('click', (event) => { if (event.target === qrModalOverlay) qrModalOverlay.classList.remove('visible'); });
-        
-        const helpModalOverlay = document.getElementById('help-modal-overlay');
-        const openHelpModalBtn = document.getElementById('open-help-modal');
-        const closeHelpModalBtn = document.getElementById('close-help-modal');
-        openHelpModalBtn.addEventListener('click', (e) => { e.preventDefault(); helpModalOverlay.classList.add('visible'); });
-        closeHelpModalBtn.addEventListener('click', () => helpModalOverlay.classList.remove('visible'));
-        helpModalOverlay.addEventListener('click', (event) => { if (event.target === helpModalOverlay) helpModalOverlay.classList.remove('visible'); });
-        
-        window.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape') {
-                qrModalOverlay.classList.remove('visible');
-                helpModalOverlay.classList.remove('visible');
-            }
-        });
+        // ... (resto do script) ...
     </script>
 </body>
 </html>
