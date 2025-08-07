@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Time Well Spent?</title>
+    <link rel="icon" type="image/png" href="tws-logo-at-transparent.png">
+    <link rel="apple-touch-icon" href="tws-logo-at-transparent.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -75,10 +77,9 @@
             font-size: 3.2rem;
             font-weight: 700;
             line-height: 1.2;
-            margin: 0 0 24px 0; /* Adicionada margem inferior */
+            margin: 0 0 24px 0;
         }
         
-        /* --- ESTILO PARA O LINK DO MANIFESTO --- */
         .manifesto-link {
             font-size: 1rem;
             font-weight: 600;
@@ -205,8 +206,7 @@
         .instruction-set p { font-size: 14px; color: var(--text-secondary); margin-bottom: 12px; font-style: italic; }
         .instruction-set ol { padding-left: 20px; font-size: 15px; }
         .instruction-set li { margin-bottom: 8px; }
-        
-        /* --- ESTILOS DO MODAL DO MANIFESTO --- */
+
         .manifesto-modal {
             max-width: 650px;
             text-align: left;
@@ -224,8 +224,19 @@
             line-height: 1.7;
             color: var(--text-secondary);
         }
-
-        @media (max-width: 992px) { main { flex-direction: column; gap: 40px; padding-top: 20px; padding-bottom: 20px; text-align: center; } .hero-text h1 { font-size: 2.8rem; } .page-header { flex-direction: column; gap: 20px; justify-content: center; } footer { flex-direction: column-reverse; justify-content: center; gap: 30px; } .footer-info, .copyright { text-align: center; } .footer-contact { justify-content: center; } }
+        
+        @media (max-width: 992px) { 
+            .page-header { 
+                flex-direction: column; 
+                gap: 20px; 
+                justify-content: center;
+            }
+            main { flex-direction: column; gap: 40px; padding-top: 20px; padding-bottom: 20px; text-align: center; } 
+            .hero-text h1 { font-size: 2.8rem; } 
+            footer { flex-direction: column-reverse; justify-content: center; gap: 30px; } 
+            .footer-info, .copyright { text-align: center; } 
+            .footer-contact { justify-content: center; } 
+        }
         @media (max-width: 480px) { .calculator-card { padding: 32px 24px; } .stats-grid { grid-template-columns: 1fr; } .page-header, main, footer { padding-left: 20px; padding-right: 20px; } }
     </style>
 </head>
@@ -314,12 +325,12 @@
             <h2 data-key="helpTitle">Como encontrar seu tempo de tela</h2>
             <div class="instructions">
                 <div class="instruction-set">
-                    <h3 data-key="iosTitle"><svg class="instruction-set-icon" ...> ... </svg>iPhone (iOS)</h3>
+                    <h3 data-key="iosTitle"><svg class="instruction-set-icon" ...>...</svg>iPhone (iOS)</h3>
                     <ol><li data-key="iosStep1">...</li><li data-key="iosStep2">...</li><li data-key="iosStep3">...</li></ol>
                 </div>
                 <hr style="border: none; border-top: 1px solid var(--border-color); margin: 0;">
                 <div class="instruction-set">
-                    <h3 data-key="androidTitle"><svg class="instruction-set-icon" ...> ... </svg>Android</h3>
+                    <h3 data-key="androidTitle"><svg class="instruction-set-icon" ...>...</svg>Android</h3>
                     <p data-key="androidNote">...</p>
                     <ol><li data-key="androidStep1">...</li><li data-key="androidStep2">...</li><li data-key="androidStep3">...</li></ol>
                 </div>
@@ -331,10 +342,10 @@
         <div class="modal-content manifesto-modal">
             <span class="close-button" id="close-manifesto-modal">&times;</span>
             <h2 data-key="manifestoTitle">Manifesto: Por um Tempo Bem Gasto</h2>
-            <p data-key="manifestoP1">Nascemos em um mundo de telas. Elas são nossas janelas para o conhecimento, nossas pontes para a conexão e nossas ferramentas de criação. Mas em algum ponto, o que era para ser uma ferramenta tornou-se uma extensão de nós — e por vezes, uma prisão.</p>
-            <p data-key="manifestoP2">Acreditamos que o tempo é o nosso bem mais irrecuperável. Cada minuto gasto em um scroll infinito é um minuto a menos dedicado a uma paixão, a uma conversa, ao tédio criativo ou a um momento de presença plena.</p>
-            <p data-key="manifestoP3">Esta ferramenta não é contra a tecnologia. Ela é a favor da consciência. É um convite para transformar o uso passivo em uso intencional. É sobre trocar o "tempo gasto" pelo "tempo bem gasto".</p>
-            <p data-key="manifestoP4">Como estudante de Terapia Ocupacional, vejo a importância de atividades significativas para uma vida saudável e equilibrada. Nosso objetivo é simples: te dar os dados para que você possa fazer uma escolha informada. Para que você decida se o custo do scroll vale a pena. E para te inspirar a encontrar, no mundo offline, a riqueza que nenhuma tela pode oferecer.</p>
+            <p data-key="manifestoP1">...</p>
+            <p data-key="manifestoP2">...</p>
+            <p data-key="manifestoP3">...</p>
+            <p data-key="manifestoP4">...</p>
         </div>
     </div>
 
@@ -384,7 +395,66 @@
             }
         };
 
-        // ... (resto do script) ...
+        const setLanguage = (lang) => {
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.dataset.key;
+                if (translations[lang]?.[key]) el.textContent = translations[lang][key];
+            });
+            document.querySelectorAll('[data-key-placeholder]').forEach(el => {
+                const key = el.dataset.keyPlaceholder;
+                if (translations[lang]?.[key]) el.placeholder = translations[lang][key];
+            });
+            document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
+            localStorage.setItem('userLanguage', lang);
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+        };
+
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
+        
+        function calculateWastedTime() { if (isAnimating) return; const age = parseInt(document.getElementById('age').value); const dailyHours = parseFloat(document.getElementById('dailyHours').value); if (!age || !dailyHours || age < 1 || age > 79 || dailyHours < 0.1) { alert('Por favor, insira valores válidos!'); return; } finalResult = (80 - age) * 365 * dailyHours / 8760; isAnimating = true; inputForm.classList.add('animating-out'); inputForm.addEventListener('animationend', () => { inputForm.style.display = 'none'; inputForm.classList.remove('animating-out'); resultContainer.style.display = 'block'; resultContainer.classList.add('animating-in'); startAnimation(); resultContainer.addEventListener('animationend', () => { resultContainer.classList.remove('animating-in'); isAnimating = false; }, { once: true }); }, { once: true }); }
+        function startAnimation() { const slotNumber = document.getElementById('slotNumber'); resultContent.innerHTML = ''; resultContent.classList.remove('visible'); slotNumber.classList.add('spinning'); let cycles = 0; const maxCycles = 120; const interval = setInterval(() => { slotNumber.textContent = (Math.random() * 20).toFixed(1); cycles++; if (cycles > maxCycles) { clearInterval(interval); slotNumber.classList.remove('spinning'); let currentVal = parseFloat(slotNumber.textContent); const targetVal = finalResult; const diff = targetVal - currentVal; const steps = 30; const increment = diff / steps; let step = 0; const finalInterval = setInterval(() => { step++; currentVal += increment; slotNumber.textContent = currentVal.toFixed(1); if (step >= steps) { clearInterval(finalInterval); slotNumber.textContent = targetVal.toFixed(1); setTimeout(showResult, 500); } }, 20); } }, 50); }
+        function showResult() {
+            const lang = localStorage.getItem('userLanguage') || 'pt';
+            const age = parseInt(document.getElementById('age').value);
+            const dailyHours = parseFloat(document.getElementById('dailyHours').value);
+            const totalHours = Math.round((80 - age) * 365 * dailyHours);
+            const totalDays = Math.round(totalHours / 24);
+            
+            resultContent.innerHTML = `<div class="stats-grid"><div class="stat-item"><div class="stat-icon"><svg viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div class="stat-number">${totalHours.toLocaleString(lang === 'pt' ? 'pt-BR' : lang)}</div><div class="stat-label">${translations[lang].totalHoursLabel}</div></div><div class="stat-item"><div class="stat-icon"><svg viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><div class="stat-number">${totalDays.toLocaleString(lang === 'pt' ? 'pt-BR' : lang)}</div><div class="stat-label">${translations[lang].totalDaysLabel}</div></div></div><div class="equivalency-section"><h3 class="equivalency-title">${translations[lang].equivalencyTitle}</h3><ul class="equivalency-list"><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div><span class="equivalency-text">${translations[lang].equivalencyBook}</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3m0 12l-4-4m4 4l4-4"></path><path d="M10 9h4"></path><path d="M15 21H9a2 2 0 0 1-2-2V7h10v12a2 2 0 0 1-2 2z"></path></svg></div><span class="equivalency-text">${translations[lang].equivalencySkill}</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg></div><span class="equivalency-text">${translations[lang].equivalencyFamily}</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 0 0 9-9c0-4.97-4.03-9-9-9s-9 4.03-9 9a9 9 0 0 0 9 9z"></path><path d="M12 21V12"></path><path d="m5 12 2.5 3"></path><path d="m16.5 15-2.5-3"></path></svg></div><span class="equivalency-text">${translations[lang].equivalencyHealth}</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div><span class="equivalency-text">${translations[lang].equivalencyTravel}</span></li></ul></div>`;
+            resultContent.classList.add('visible');
+            isAnimating = false;
+        }
+        function resetCalculator() { if(isAnimating) return; isAnimating = true; resultContainer.classList.add('animating-out'); resultContainer.addEventListener('animationend', () => { resultContainer.style.display = 'none'; resultContainer.classList.remove('animating-out'); document.getElementById('age').value = ''; document.getElementById('dailyHours').value = ''; inputForm.style.display = 'block'; inputForm.classList.add('animating-in'); inputForm.addEventListener('animationend', () => { inputForm.classList.remove('animating-in'); isAnimating = false; }, { once: true }); }, { once: true }); }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('userLanguage') || 'pt';
+            setLanguage(savedLang);
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            document.getElementById('modal-current-year').textContent = new Date().getFullYear();
+        });
+
+        const qrModalOverlay = document.getElementById('qr-modal-overlay');
+        const openQrModalBtn = document.getElementById('open-qr-modal');
+        const closeQrModalBtn = document.getElementById('close-qr-modal');
+        openQrModalBtn.addEventListener('click', (e) => { e.preventDefault(); qrModalOverlay.classList.add('visible'); });
+        closeQrModalBtn.addEventListener('click', () => qrModalOverlay.classList.remove('visible'));
+        qrModalOverlay.addEventListener('click', (event) => { if (event.target === qrModalOverlay) qrModalOverlay.classList.remove('visible'); });
+        
+        const helpModalOverlay = document.getElementById('help-modal-overlay');
+        const openHelpModalBtn = document.getElementById('open-help-modal');
+        const closeHelpModalBtn = document.getElementById('close-help-modal');
+        openHelpModalBtn.addEventListener('click', (e) => { e.preventDefault(); helpModalOverlay.classList.add('visible'); });
+        closeHelpModalBtn.addEventListener('click', () => helpModalOverlay.classList.remove('visible'));
+        helpModalOverlay.addEventListener('click', (event) => { if (event.target === helpModalOverlay) helpModalOverlay.classList.remove('visible'); });
+        
+        window.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                qrModalOverlay.classList.remove('visible');
+                helpModalOverlay.classList.remove('visible');
+            }
+        });
     </script>
 </body>
 </html>
