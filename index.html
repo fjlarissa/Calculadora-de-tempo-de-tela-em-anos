@@ -206,7 +206,7 @@
         .instruction-set p { font-size: 14px; color: var(--text-secondary); margin-bottom: 12px; font-style: italic; }
         .instruction-set ol { padding-left: 20px; font-size: 15px; }
         .instruction-set li { margin-bottom: 8px; }
-
+        
         .manifesto-modal {
             max-width: 650px;
             text-align: left;
@@ -318,7 +318,6 @@
             <p class="copyright-modal">© <span id="modal-current-year"></span> <span data-key="siteNameCopyrightModal">Time Well Spent?</span>. <span data-key="rightsReservedModal">Todos os direitos reservados.</span></p>
         </div>
     </div>
-
     <div class="modal-overlay" id="help-modal-overlay">
         <div class="modal-content help-modal">
             <span class="close-button" id="close-help-modal">&times;</span>
@@ -326,29 +325,25 @@
             <div class="instructions">
                 <div class="instruction-set">
                     <h3 data-key="iosTitle"><svg class="instruction-set-icon" ...>...</svg>iPhone (iOS)</h3>
-                    <ol><li data-key="iosStep1">...</li><li data-key="iosStep2">...</li><li data-key="iosStep3">...</li></ol>
+                    <ol><li data-key="iosStep1">...</li></ol>
                 </div>
                 <hr style="border: none; border-top: 1px solid var(--border-color); margin: 0;">
                 <div class="instruction-set">
                     <h3 data-key="androidTitle"><svg class="instruction-set-icon" ...>...</svg>Android</h3>
                     <p data-key="androidNote">...</p>
-                    <ol><li data-key="androidStep1">...</li><li data-key="androidStep2">...</li><li data-key="androidStep3">...</li></ol>
+                    <ol><li data-key="androidStep1">...</li></ol>
                 </div>
             </div>
         </div>
     </div>
-    
     <div class="modal-overlay" id="manifesto-modal-overlay">
         <div class="modal-content manifesto-modal">
             <span class="close-button" id="close-manifesto-modal">&times;</span>
             <h2 data-key="manifestoTitle">Manifesto: Por um Tempo Bem Gasto</h2>
             <p data-key="manifestoP1">...</p>
-            <p data-key="manifestoP2">...</p>
-            <p data-key="manifestoP3">...</p>
-            <p data-key="manifestoP4">...</p>
         </div>
     </div>
-
+    
     <script>
         let finalResult = 0;
         let isAnimating = false;
@@ -358,38 +353,17 @@
 
         const translations = {
             pt: {
-                siteName: "Time Well Spent?", heroTitle: "Seu tempo de vida é finito. Seu tempo de tela também deveria ser.", cardTitle: "O scrolling é um custo. É hora de descobrir o seu.", ageLabel: "Qual sua idade atual?", agePlaceholder: "Digite sua idade", hoursLabel: "Quantas horas por dia você usa o celular?", hoursPlaceholder: "Ex: 5.5", calculateButton: "Calcular", expectancyNote: "(Cálculo baseado em uma expectativa de vida de 80 anos)", slotLabel: "Tempo de tela em anos", yearsLabel: "da sua vida", resetButton: "Fazer novo cálculo", contactEmail: "larissajordaoto@gmail.com", siteNameCopyright: "Time Well Spent?", rightsReserved: "Todos os direitos reservados.", qrCodeCta: "Aponte a câmera do seu celular!", siteNameModal: "Time Well Spent?", siteNameCopyrightModal: "Time Well Spent?", rightsReservedModal: "Todos os direitos reservados.",
-                totalHoursLabel: "Total de horas", totalDaysLabel: "Total de dias",
-                equivalencyTitle: "O que você poderia fazer com esse tempo?",
-                equivalencyBook: "Ler centenas de livros.",
-                equivalencySkill: "Dominar uma nova habilidade, como cozinhar ou desenhar.",
-                equivalencyFamily: "Criar memórias com amigos e família, sem interrupções.",
-                equivalencyHealth: "Cuidar do seu corpo e mente com exercícios e meditação.",
-                equivalencyTravel: "Fazer dezenas de viagens e explorar novos lugares.",
+                siteName: "Time Well Spent?", heroTitle: "Seu tempo de vida é finito. Seu tempo de tela também deveria ser.", cardTitle: "O scrolling é um custo. É hora de descobrir o seu.", ageLabel: "Qual sua idade atual?", agePlaceholder: "Digite sua idade", hoursLabel: "Quantas horas por dia você usa o celular?", hoursPlaceholder: "Ex: 5.5", calculateButton: "Calcular", expectancyNote: "(Cálculo baseado em uma expectativa de vida de 80 anos)", slotLabel: "Tempo de tela em anos", yearsLabel: "da sua vida", resetButton: "Fazer novo cálculo", contactEmail: "larissajordaoto@gmail.com", siteNameCopyright: "Time Well Spent?", rightsReserved: "Todos os direitos reservados.", qrCodeCta: "Aponte a câmera do seu celular!", siteNameModal: "Time Well Spent?", siteNameCopyrightModal: "Time Well Spent?", rightsReservedModal: "Todos os direitos reservados.", totalHoursLabel: "Total de horas", totalDaysLabel: "Total de dias", equivalencyTitle: "O que você poderia fazer com esse tempo?", equivalencyBook: "Ler centenas de livros.", equivalencySkill: "Dominar uma nova habilidade, como cozinhar ou desenhar.", equivalencyFamily: "Criar memórias com amigos e família, sem interrupções.", equivalencyHealth: "Cuidar do seu corpo e mente com exercícios e meditação.", equivalencyTravel: "Fazer dezenas de viagens e explorar novos lugares.",
                 helpLink: "Não sabe onde encontrar?", helpTitle: "Como encontrar seu tempo de tela", iosTitle: "iPhone (iOS)", iosStep1: "Abra os Ajustes.", iosStep2: "Toque em Tempo de Uso.", iosStep3: "Toque em Ver Todas as Atividades para ver sua média diária.", androidTitle: "Android", androidNote: "A localização pode variar um pouco, mas geralmente o caminho é este:", androidStep1: "Abra as Configurações.", androidStep2: "Procure por Bem-estar digital e controles parentais.", androidStep3: "O gráfico na tela principal mostrará seu tempo de uso diário.",
                 manifestoLink: "Leia o manifesto", manifestoTitle: "Manifesto: Por um Tempo Bem Gasto", manifestoP1: "Nascemos em um mundo de telas. Elas são nossas janelas para o conhecimento, nossas pontes para a conexão e nossas ferramentas de criação. Mas em algum ponto, o que era para ser uma ferramenta tornou-se uma extensão de nós — e por vezes, uma prisão.", manifestoP2: "Acreditamos que o tempo é o nosso bem mais irrecuperável. Cada minuto gasto em um scroll infinito é um minuto a menos dedicado a uma paixão, a uma conversa, ao tédio criativo ou a um momento de presença plena.", manifestoP3: "Esta ferramenta não é contra a tecnologia. Ela é a favor da consciência. É um convite para transformar o uso passivo em uso intencional. É sobre trocar o 'tempo gasto' pelo 'tempo bem gasto'.", manifestoP4: "Como estudante de Terapia Ocupacional, vejo a importância de atividades significativas para uma vida saudável e equilibrada. Nosso objetivo é simples: te dar os dados para que você possa fazer uma escolha informada. Para que você decida se o custo do scroll vale a pena. E para te inspirar a encontrar, no mundo offline, a riqueza que nenhuma tela pode oferecer."
             },
             en: {
-                siteName: "Time Well Spent?", heroTitle: "Your lifetime is finite. Your screen time should be too.", cardTitle: "Scrolling has a cost. It's time to find out yours.", ageLabel: "What is your current age?", agePlaceholder: "Enter your age", hoursLabel: "How many hours a day do you use your phone?", hoursPlaceholder: "E.g., 5.5", calculateButton: "Calculate", expectancyNote: "(Calculation based on an 80-year life expectancy)", slotLabel: "Screen time in years", yearsLabel: "of your life", resetButton: "New calculation", contactEmail: "larissajordaoto@gmail.com", siteNameCopyright: "Time Well Spent?", rightsReserved: "All rights reserved.", qrCodeCta: "Point your phone's camera!", siteNameModal: "Time Well Spent?", siteNameCopyrightModal: "Time Well Spent?", rightsReservedModal: "All rights reserved.",
-                totalHoursLabel: "Total hours", totalDaysLabel: "Total days",
-                equivalencyTitle: "What could you do with this time?",
-                equivalencyBook: "Read hundreds of books.",
-                equivalencySkill: "Master a new skill, like cooking or drawing.",
-                equivalencyFamily: "Create memories with friends and family, without interruptions.",
-                equivalencyHealth: "Take care of your body and mind with exercise and meditation.",
-                equivalencyTravel: "Go on dozens of trips and explore new places.",
+                siteName: "Time Well Spent?", heroTitle: "Your lifetime is finite. Your screen time should be too.", cardTitle: "Scrolling has a cost. It's time to find out yours.", ageLabel: "What is your current age?", agePlaceholder: "Enter your age", hoursLabel: "How many hours a day do you use your phone?", hoursPlaceholder: "E.g., 5.5", calculateButton: "Calculate", expectancyNote: "(Calculation based on an 80-year life expectancy)", slotLabel: "Screen time in years", yearsLabel: "of your life", resetButton: "New calculation", contactEmail: "larissajordaoto@gmail.com", siteNameCopyright: "Time Well Spent?", rightsReserved: "All rights reserved.", qrCodeCta: "Point your phone's camera!", siteNameModal: "Time Well Spent?", siteNameCopyrightModal: "Time Well Spent?", rightsReservedModal: "All rights reserved.", totalHoursLabel: "Total hours", totalDaysLabel: "Total days", equivalencyTitle: "What could you do with this time?", equivalencyBook: "Read hundreds of books.", equivalencySkill: "Master a new skill, like cooking or drawing.", equivalencyFamily: "Create memories with friends and family, without interruptions.", equivalencyHealth: "Take care of your body and mind with exercise and meditation.", equivalencyTravel: "Go on dozens of trips and explore new places.",
                 helpLink: "Not sure where to find it?", helpTitle: "How to find your screen time", iosTitle: "iPhone (iOS)", iosStep1: "Open Settings.", iosStep2: "Tap on Screen Time.", iosStep3: "Tap See All Activity to view your daily average.", androidTitle: "Android", androidNote: "The location may vary slightly, but this is the usual path:", androidStep1: "Open Settings.", androidStep2: "Look for Digital Wellbeing & parental controls.", androidStep3: "The main chart will show your daily usage time.",
                 manifestoLink: "Read the manifesto", manifestoTitle: "Manifesto: For a Time Well Spent", manifestoP1: "We were born into a world of screens. They are our windows to knowledge, our bridges to connection, and our tools for creation. But at some point, what was meant to be a tool became an extension of ourselves—and sometimes, a prison.", manifestoP2: "We believe that time is our most irretrievable asset. Every minute spent in an infinite scroll is one less minute dedicated to a passion, a conversation, creative boredom, or a moment of full presence.", manifestoP3: "This tool is not against technology. It is for awareness. It is an invitation to transform passive use into intentional use. It is about trading 'time spent' for 'time well spent.'", manifestoP4: "As an Occupational Therapy student, I see the importance of meaningful activities for a healthy and balanced life. Our goal is simple: to give you the data so you can make an informed choice. So you can decide if the cost of scrolling is worth it. And to inspire you to find, in the offline world, the richness that no screen can offer."
             },
             es: {
-                siteName: "Time Well Spent?", heroTitle: "Tu tiempo de vida es finito. Tu tiempo de pantalla también debería serlo.", cardTitle: "El scrolling tiene un coste. Es hora de descubrir el tuyo.", ageLabel: "¿Cuál es tu edad actual?", agePlaceholder: "Introduce tu edad", hoursLabel: "¿Cuántas horas al día usas el móvil?", hoursPlaceholder: "Ej: 5.5", calculateButton: "Calcular", expectancyNote: "(Cálculo basado en una esperanza de vida de 80 años)", slotLabel: "Tiempo de pantalla en años", yearsLabel: "de tu vida", resetButton: "Nuevo cálculo", contactEmail: "larissajordaoto@gmail.com", siteNameCopyright: "Time Well Spent?", rightsReserved: "Todos los derechos reservados.", qrCodeCta: "¡Apunta la cámara de tu móvil!", siteNameModal: "Time Well Spent?", siteNameCopyrightModal: "Time Well Spent?", rightsReservedModal: "Todos los derechos reservados.",
-                totalHoursLabel: "Total de horas", totalDaysLabel: "Total de días",
-                equivalencyTitle: "¿Qué podrías hacer con este tiempo?",
-                equivalencyBook: "Leer cientos de libros.",
-                equivalencySkill: "Dominar una nueva habilidad, como cocinar o dibujar.",
-                equivalencyFamily: "Crear recuerdos con amigos y familia, sin interrupciones.",
-                equivalencyHealth: "Cuidar tu cuerpo y mente con ejercicio y meditación.",
-                equivalencyTravel: "Hacer docenas de viajes y explorar nuevos lugares.",
+                siteName: "Time Well Spent?", heroTitle: "Tu tiempo de vida es finito. Tu tiempo de pantalla también debería serlo.", cardTitle: "El scrolling tiene un coste. Es hora de descubrir el tuyo.", ageLabel: "¿Cuál es tu edad actual?", agePlaceholder: "Introduce tu edad", hoursLabel: "¿Cuántas horas al día usas el móvil?", hoursPlaceholder: "Ej: 5.5", calculateButton: "Calcular", expectancyNote: "(Cálculo basado en una esperanza de vida de 80 años)", slotLabel: "Tiempo de pantalla en años", yearsLabel: "de tu vida", resetButton: "Nuevo cálculo", contactEmail: "larissajordaoto@gmail.com", siteNameCopyright: "Time Well Spent?", rightsReserved: "Todos los derechos reservados.", qrCodeCta: "¡Apunta la cámara de tu móvil!", siteNameModal: "Time Well Spent?", siteNameCopyrightModal: "Time Well Spent?", rightsReservedModal: "Todos los derechos reservados.", totalHoursLabel: "Total de horas", totalDaysLabel: "Total de días", equivalencyTitle: "¿Qué podrías hacer con este tiempo?", equivalencyBook: "Leer cientos de libros.", equivalencySkill: "Dominar una nueva habilidad, como cocinar o dibujar.", equivalencyFamily: "Crear recuerdos con amigos y familia, sin interrupciones.", equivalencyHealth: "Cuidar tu cuerpo y mente con ejercicio y meditación.", equivalencyTravel: "Hacer docenas de viajes y explorar nuevos lugares.",
                 helpLink: "¿No sabes dónde encontrarlo?", helpTitle: "Cómo encontrar tu tiempo de pantalla", iosTitle: "iPhone (iOS)", iosStep1: "Abre Ajustes.", iosStep2: "Toca en Tiempo de uso.", iosStep3: "Toca Ver toda la actividad para ver tu promedio diario.", androidTitle: "Android", androidNote: "La ubicación puede variar un poco, pero generalmente la ruta es esta:", androidStep1: "Abre Configuración.", androidStep2: "Busca Bienestar digital y controles parentales.", androidStep3: "El gráfico principal mostrará tu tiempo de uso diario.",
                 manifestoLink: "Lee el manifiesto", manifestoTitle: "Manifiesto: Por un Tiempo Bien Invertido", manifestoP1: "Nacimos en un mundo de pantallas. Son nuestras ventanas al conocimiento, nuestros puentes a la conexión y nuestras herramientas de creación. Pero en algún momento, lo que debía ser una herramienta se convirtió en una extensión de nosotros, y a veces, en una prisión.", manifestoP2: "Creemos que el tiempo es nuestro bien más irrecuperable. Cada minuto gastado en un scroll infinito es un minuto menos dedicado a una pasión, a una conversación, al aburrimiento creativo o a un momento de plena presencia.", manifestoP3: "Esta herramienta no está en contra de la tecnología. Está a favor de la conciencia. Es una invitación a transformar el uso pasivo en uso intencional. Se trata de cambiar el 'tiempo gastado' por el 'tiempo bien invertido'.", manifestoP4: "Como estudiante de Terapia Ocupacional, veo la importancia de las actividades significativas para una vida sana y equilibrada. Nuestro objetivo es simple: darte los datos para que puedas tomar una decisión informada. Para que decidas si el coste del scroll merece la pena. Y para inspirarte a encontrar, en el mundo offline, la riqueza que ninguna pantalla puede ofrecer."
             }
@@ -448,11 +422,19 @@
         openHelpModalBtn.addEventListener('click', (e) => { e.preventDefault(); helpModalOverlay.classList.add('visible'); });
         closeHelpModalBtn.addEventListener('click', () => helpModalOverlay.classList.remove('visible'));
         helpModalOverlay.addEventListener('click', (event) => { if (event.target === helpModalOverlay) helpModalOverlay.classList.remove('visible'); });
+
+        const manifestoModalOverlay = document.getElementById('manifesto-modal-overlay');
+        const openManifestoModalBtn = document.getElementById('open-manifesto-modal');
+        const closeManifestoModalBtn = document.getElementById('close-manifesto-modal');
+        openManifestoModalBtn.addEventListener('click', (e) => { e.preventDefault(); manifestoModalOverlay.classList.add('visible'); });
+        closeManifestoModalBtn.addEventListener('click', () => manifestoModalOverlay.classList.remove('visible'));
+        manifestoModalOverlay.addEventListener('click', (event) => { if (event.target === manifestoModalOverlay) manifestoModalOverlay.classList.remove('visible'); });
         
         window.addEventListener('keydown', (event) => {
             if (event.key === 'Escape') {
                 qrModalOverlay.classList.remove('visible');
                 helpModalOverlay.classList.remove('visible');
+                manifestoModalOverlay.classList.remove('visible');
             }
         });
     </script>
