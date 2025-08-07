@@ -204,46 +204,17 @@
         .instruction-set h3 { display: flex; align-items: center; gap: 10px; font-size: 18px; margin-bottom: 12px; }
         .instruction-set-icon { width: 24px; height: 24px; }
         .instruction-set p { font-size: 14px; color: var(--text-secondary); margin-bottom: 12px; font-style: italic; }
-        .instruction-set ol { padding-left: 20px; font-size: 15px; }
+        .instruction-set ol { padding-left: 20px; font-size: 15px; list-style-position: inside; }
         .instruction-set li { margin-bottom: 8px; }
-
-        .manifesto-modal {
-            max-width: 650px;
-            text-align: left;
-            max-height: 80vh;
-            overflow-y: auto;
-            padding: 40px;
-        }
-        .manifesto-modal h2 {
-            text-align: center;
-            margin-bottom: 32px;
-            font-size: 24px;
-        }
-        .manifesto-modal h3 {
-            font-size: 18px;
-            font-weight: 600;
-            margin-top: 24px;
-            margin-bottom: 12px;
-        }
-        .manifesto-modal p {
-            margin-bottom: 16px;
-            font-size: 16px;
-            line-height: 1.7;
-            color: var(--text-secondary);
-        }
-        .manifesto-quote {
-            font-style: italic;
-            text-align: center;
-            margin-top: 32px;
-            color: var(--text-secondary);
-        }
+        
+        .manifesto-modal { max-width: 650px; text-align: left; max-height: 80vh; overflow-y: auto; padding: 40px; }
+        .manifesto-modal h2 { text-align: center; margin-bottom: 32px; font-size: 24px; }
+        .manifesto-modal h3 { font-size: 18px; font-weight: 600; margin-top: 24px; margin-bottom: 12px; }
+        .manifesto-modal p { margin-bottom: 16px; font-size: 16px; line-height: 1.7; color: var(--text-secondary); }
+        .manifesto-quote { font-style: italic; text-align: center; margin-top: 32px; color: var(--text-secondary); }
         
         @media (max-width: 992px) { 
-            .page-header { 
-                flex-direction: column; 
-                gap: 20px; 
-                justify-content: center;
-            }
+            .page-header { flex-direction: column; gap: 20px; justify-content: center; }
             main { flex-direction: column; gap: 40px; padding-top: 20px; padding-bottom: 20px; text-align: center; } 
             .hero-text h1 { font-size: 2.8rem; } 
             footer { flex-direction: column-reverse; justify-content: center; gap: 30px; } 
@@ -302,7 +273,7 @@
                     </div>
                     <div class="years-label" data-key="yearsLabel">da sua vida</div>
                 </div>
-                <div id="resultContent"></div>
+                <div class="result-content" id="resultContent"></div>
                 <button class="reset-btn" onclick="resetCalculator()">
                     <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="m15 18-6-6 6-6"/></svg>
                     <span data-key="resetButton">Fazer novo cálculo</span>
@@ -335,7 +306,26 @@
         <div class="modal-content help-modal">
             <span class="close-button" id="close-help-modal">&times;</span>
             <h2 data-key="helpTitle">Como encontrar seu tempo de tela</h2>
-            <div class="instructions"></div>
+            <div class="instructions">
+                <div class="instruction-set">
+                    <h3 data-key="iosTitle"><svg class="instruction-set-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 21.7c.9.9 2.5.4 3.4-1.1.9-1.4.4-3.1-1.1-4.1 -1.5-1-3.1-.4-4.1 1.1 -1 1.5-.4 3.1 1.1 4.1Z"/><path d="M16 12.5c2.3-2.3 2.3-6.1 0-8.5 -2.3-2.3-6.1-2.3-8.5 0 -2.3 2.3-2.3 6.1 0 8.5"/><path d="M12.5 16c2.3 2.3 6.1 2.3 8.5 0 2.3-2.3 2.3-6.1 0-8.5"/><path d="M18 6c-2.3 2.3-2.3 6.1 0 8.5"/><path d="M22 6c-2.3 2.3-2.3 6.1 0 8.5"/></svg>iPhone (iOS)</h3>
+                    <ol>
+                        <li data-key="iosStep1">Abra os <strong>Ajustes</strong>.</li>
+                        <li data-key="iosStep2">Toque em <strong>Tempo de Uso</strong>.</li>
+                        <li data-key="iosStep3">Toque em <strong>Ver Todas as Atividades</strong> para ver sua média diária.</li>
+                    </ol>
+                </div>
+                <hr style="border: none; border-top: 1px solid var(--border-color); margin: 0;">
+                <div class="instruction-set">
+                    <h3 data-key="androidTitle"><svg class="instruction-set-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 14.5c.3-1 .5-2.2.5-3.5a10.9 10.9 0 0 0-2.3-6.9"/><path d="M7 14.5c-.3-1-.5-2.2-.5-3.5A10.9 10.9 0 0 1 8.8 4.1"/><path d="M14.5 17c-1.2.4-2.6.6-4 .6-1.4 0-2.8-.2-4-.6"/><path d="M10 4.1c1.2-.3 2.5-.5 3.8-.5 1.3 0 2.5.2 3.8.5"/><circle cx="12" cy="12" r="10"/><path d="m8 10 1-2"/><path d="m15 8 1 2"/></svg>Android</h3>
+                    <p data-key="androidNote">A localização pode variar um pouco, mas geralmente o caminho é este:</p>
+                    <ol>
+                        <li data-key="androidStep1">Abra as <strong>Configurações</strong>.</li>
+                        <li data-key="androidStep2">Procure por <strong>Bem-estar digital e controles parentais</strong>.</li>
+                        <li data-key="androidStep3">O gráfico na tela principal mostrará seu tempo de uso diário.</li>
+                    </ol>
+                </div>
+            </div>
         </div>
     </div>
     <div class="modal-overlay" id="manifesto-modal-overlay">
@@ -361,38 +351,26 @@
 
         const translations = {
             pt: {
-                siteName: "Time Well Spent?", heroTitle: "Seu tempo de vida é finito. Seu tempo de tela também deveria ser.", cardTitle: "O scrolling é um custo. É hora de descobrir o seu.", ageLabel: "Qual sua idade atual?", agePlaceholder: "Digite sua idade", hoursLabel: "Quantas horas por dia você usa o celular?", hoursPlaceholder: "Ex: 5.5", calculateButton: "Calcular", expectancyNote: "(Cálculo baseado em uma expectativa de vida de 80 anos)", slotLabel: "Tempo de tela em anos", yearsLabel: "da sua vida", resetButton: "Fazer novo cálculo", contactEmail: "larissajordaoto@gmail.com", siteNameCopyright: "Time Well Spent?", rightsReserved: "Todos os direitos reservados.", qrCodeCta: "Aponte a câmera do seu celular!", siteNameModal: "Time Well Spent?", siteNameCopyrightModal: "Time Well Spent?", rightsReservedModal: "Todos os direitos reservados.",
-                totalHoursLabel: "Total de horas", totalDaysLabel: "Total de dias",
-                equivalencyTitle: "O que você poderia fazer com esse tempo?",
-                equivalencyBook: "Ler centenas de livros.",
-                equivalencySkill: "Dominar uma nova habilidade, como cozinhar ou desenhar.",
-                equivalencyFamily: "Criar memórias com amigos e família, sem interrupções.",
-                equivalencyHealth: "Cuidar do seu corpo e mente com exercícios e meditação.",
-                equivalencyTravel: "Fazer dezenas de viagens e explorar novos lugares.",
+                siteName: "Time Well Spent?", heroTitle: "Seu tempo de vida é finito. Seu tempo de tela também deveria ser.", cardTitle: "O scrolling é um custo. É hora de descobrir o seu.", ageLabel: "Qual sua idade atual?", agePlaceholder: "Digite sua idade", hoursLabel: "Quantas horas por dia você usa o celular?", hoursPlaceholder: "Ex: 5.5", calculateButton: "Calcular", expectancyNote: "(Cálculo baseado em uma expectativa de vida de 80 anos)", slotLabel: "Tempo de tela em anos", yearsLabel: "da sua vida", resetButton: "Fazer novo cálculo", contactEmail: "larissajordaoto@gmail.com", siteNameCopyright: "Time Well Spent?", rightsReserved: "Todos os direitos reservados.", qrCodeCta: "Aponte a câmera do seu celular!", siteNameModal: "Time Well Spent?", siteNameCopyrightModal: "Time Well Spent?", rightsReservedModal: "Todos os direitos reservados.", totalHoursLabel: "Total de horas", totalDaysLabel: "Total de dias", equivalencyTitle: "O que você poderia fazer com esse tempo?", equivalencyBook: "Ler centenas de livros.", equivalencySkill: "Dominar uma nova habilidade, como cozinhar ou desenhar.", equivalencyFamily: "Criar memórias com amigos e família, sem interrupções.", equivalencyHealth: "Cuidar do seu corpo e mente com exercícios e meditação.", equivalencyTravel: "Fazer dezenas de viagens e explorar novos lugares.",
                 helpLink: "Não sabe onde encontrar?", helpTitle: "Como encontrar seu tempo de tela", iosTitle: "iPhone (iOS)", iosStep1: "Abra os Ajustes.", iosStep2: "Toque em Tempo de Uso.", iosStep3: "Toque em Ver Todas as Atividades para ver sua média diária.", androidTitle: "Android", androidNote: "A localização pode variar um pouco, mas geralmente o caminho é este:", androidStep1: "Abra as Configurações.", androidStep2: "Procure por Bem-estar digital e controles parentais.", androidStep3: "O gráfico na tela principal mostrará seu tempo de uso diário.",
-                manifestoLink: "Leia o manifesto", 
-                manifestoTitle: "Manifesto: Por um uso consciente do tempo digital",
-                manifestoH1: "Sobre minha trajetória e motivações",
-                manifestoP1: "Durante minha graduação em Terapia Ocupacional, desenvolvi um interesse profundo em estudar e me capacitar em sono e descanso. Sou uma grande defensora das Práticas Integrativas e Complementares em Saúde (PICS), considerando notável que exista uma política pública dedicada a essas abordagens. Meu interesse se estende também ao mindfulness e à tecnologia voltada para saúde mental digital.",
-                manifestoH2: "O Propósito: Reflexão sobre o tempo",
-                manifestoP2: "O intuito deste site é provocar uma reflexão profunda sobre o tempo que dedicamos ao uso do celular para atividades sem propósito definido ou objetivo claro. Especificamente, questiono quanto tempo desperdiçamos fazendo doomscrolling - o ato de rolar infinitamente pelas redes sociais e pelo celular como um todo, sem direcionamento ou intenção.",
-                manifestoP3: "Esta é uma reflexão sobre como nosso tempo é um bem valioso e irrecuperável. Uma vez que passa, não retorna. A proposta é repensarmos nossa relação com o tempo, considerando formas diferentes e mais significativas de vivenciá-lo.",
-                manifestoH4: "Alertas acerca das compreensões sobre descanso",
-                manifestoP4: "Este projeto serve como alerta para questões fundamentais, incluindo a forma equivocada como nossa sociedade contemporânea compreende o descanso. Ver reels, TikToks e similares não constitui verdadeiro descanso - representa apenas mais hiperestimulação cerebral e liberação descontrolada de dopamina.",
-                manifestoH5: "O impacto no sono",
-                manifestoP5: "Sobre o sono, é provável que todos já tenham experimentado a situação de deitar, apoiar a cabeça no travesseiro, fechar os olhos e, subitamente, ter a mente invadida por um 'remix' de todo o conteúdo consumido nas horas anteriores ao repouso. Este fenômeno evidencia como o consumo digital desregulado interfere diretamente na qualidade do nosso descanso noturno.",
-                manifestoH6: "O convite à reflexão",
-                manifestoP6: "Convido você a acessar o Time Well Spent Calculator e permitir-se uma reflexão honesta sobre seus hábitos digitais. Que este seja o primeiro passo para uma relação mais consciente e intencional com seu tempo e com a tecnologia.",
-                manifestoQuote: "\"O tempo que passa não retorna. A escolha de como vivê-lo é nossa responsabilidade.\""
+                manifestoLink: "Leia o manifesto", manifestoTitle: "Manifesto: Por um uso consciente do tempo digital", manifestoH1: "Sobre minha trajetória e motivações", manifestoP1: "Durante minha graduação em Terapia Ocupacional, desenvolvi um interesse profundo em estudar e me capacitar em sono e descanso. Sou uma grande defensora das Práticas Integrativas e Complementares em Saúde (PICS), considerando notável que exista uma política pública dedicada a essas abordagens. Meu interesse se estende também ao mindfulness e à tecnologia voltada para saúde mental digital.", manifestoH2: "O Propósito: Reflexão sobre o tempo", manifestoP2: "O intuito deste site é provocar uma reflexão profunda sobre o tempo que dedicamos ao uso do celular para atividades sem propósito definido ou objetivo claro. Especificamente, questiono quanto tempo desperdiçamos fazendo doomscrolling - o ato de rolar infinitamente pelas redes sociais e pelo celular como um todo, sem direcionamento ou intenção.", manifestoP3: "Esta é uma reflexão sobre como nosso tempo é um bem valioso e irrecuperável. Uma vez que passa, não retorna. A proposta é repensarmos nossa relação com o tempo, considerando formas diferentes e mais significativas de vivenciá-lo.", manifestoH4: "Alertas acerca das compreensões sobre descanso", manifestoP4: "Este projeto serve como alerta para questões fundamentais, incluindo a forma equivocada como nossa sociedade contemporânea compreende o descanso. Ver reels, TikToks e similares não constitui verdadeiro descanso - representa apenas mais hiperestimulação cerebral e liberação descontrolada de dopamina.", manifestoH5: "O impacto no sono", manifestoP5: "Sobre o sono, é provável que todos já tenham experimentado a situação de deitar, apoiar a cabeça no travesseiro, fechar os olhos e, subitamente, ter a mente invadida por um 'remix' de todo o conteúdo consumido nas horas anteriores ao repouso. Este fenômeno evidencia como o consumo digital desregulado interfere diretamente na qualidade do nosso descanso noturno.", manifestoH6: "O convite à reflexão", manifestoP6: "Convido você a acessar o Time Well Spent Calculator e permitir-se uma reflexão honesta sobre seus hábitos digitais. Que este seja o primeiro passo para uma relação mais consciente e intencional com seu tempo e com a tecnologia.", manifestoQuote: "\"O tempo que passa não retorna. A escolha de como vivê-lo é nossa responsabilidade.\""
             },
-            en: { /* ... traduções ... */ },
-            es: { /* ... traduções ... */ }
+            en: {
+                siteName: "Time Well Spent?", heroTitle: "Your lifetime is finite. Your screen time should be too.", cardTitle: "Scrolling has a cost. It's time to find out yours.", ageLabel: "What is your current age?", agePlaceholder: "Enter your age", hoursLabel: "How many hours a day do you use your phone?", hoursPlaceholder: "E.g., 5.5", calculateButton: "Calculate", expectancyNote: "(Calculation based on an 80-year life expectancy)", slotLabel: "Screen time in years", yearsLabel: "of your life", resetButton: "New calculation", contactEmail: "larissajordaoto@gmail.com", siteNameCopyright: "Time Well Spent?", rightsReserved: "All rights reserved.", qrCodeCta: "Point your phone's camera!", siteNameModal: "Time Well Spent?", siteNameCopyrightModal: "Time Well Spent?", rightsReservedModal: "All rights reserved.", totalHoursLabel: "Total hours", totalDaysLabel: "Total days", equivalencyTitle: "What could you do with this time?", equivalencyBook: "Read hundreds of books.", equivalencySkill: "Master a new skill, like cooking or drawing.", equivalencyFamily: "Create memories with friends and family, without interruptions.", equivalencyHealth: "Take care of your body and mind with exercise and meditation.", equivalencyTravel: "Go on dozens of trips and explore new places.",
+                helpLink: "Not sure where to find it?", helpTitle: "How to find your screen time", iosTitle: "iPhone (iOS)", iosStep1: "Open Settings.", iosStep2: "Tap on Screen Time.", iosStep3: "Tap See All Activity to view your daily average.", androidTitle: "Android", androidNote: "The location may vary slightly, but this is the usual path:", androidStep1: "Open Settings.", androidStep2: "Look for Digital Wellbeing & parental controls.", androidStep3: "The main chart will show your daily usage time.",
+                manifestoLink: "Read the manifesto", manifestoTitle: "Manifesto: For a Conscious Use of Digital Time", manifestoH1: "About my journey and motivations", manifestoP1: "During my studies in Occupational Therapy, I developed a deep interest in sleep and rest. I am a strong advocate for Integrative and Complementary Health Practices (PICS), finding it remarkable that there is a public policy dedicated to these approaches. My interest also extends to mindfulness and technology focused on digital mental health.", manifestoH2: "The Purpose: A Reflection on Time", manifestoP2: "The intent of this site is to provoke a deep reflection on the time we dedicate to using our cell phones for activities without a defined purpose or clear objective. Specifically, I question how much time we waste doomscrolling—the act of endlessly scrolling through social media and the phone as a whole, without direction or intention.", manifestoP3: "This is a reflection on how our time is a valuable and irretrievable asset. Once it's gone, it does not return. The proposal is to rethink our relationship with time, considering different and more meaningful ways of experiencing it.", manifestoH4: "Alerts on Misconceptions About Rest", manifestoP4: "This project serves as an alert to fundamental issues, including the mistaken way our contemporary society understands rest. Watching Reels, TikToks, and the like does not constitute true rest—it represents only more brain hyperstimulation and uncontrolled dopamine release.", manifestoH5: "The Impact on Sleep", manifestoP5: "Regarding sleep, it is likely that everyone has experienced lying down, resting their head on the pillow, closing their eyes, and suddenly having their mind invaded by a 'remix' of all the content consumed in the hours before rest. This phenomenon shows how unregulated digital consumption directly interferes with the quality of our nightly rest.", manifestoH6: "The Invitation to Reflect", manifestoP6: "I invite you to access the Time Well Spent Calculator and allow yourself an honest reflection on your digital habits. May this be the first step towards a more conscious and intentional relationship with your time and with technology.", manifestoQuote: "\"The time that passes does not return. The choice of how to live it is our responsibility.\""
+            },
+            es: {
+                siteName: "Time Well Spent?", heroTitle: "Tu tiempo de vida es finito. Tu tiempo de pantalla también debería serlo.", cardTitle: "El scrolling tiene un coste. Es hora de descubrir el tuyo.", ageLabel: "¿Cuál es tu edad actual?", agePlaceholder: "Introduce tu edad", hoursLabel: "¿Cuántas horas al día usas el móvil?", hoursPlaceholder: "Ej: 5.5", calculateButton: "Calcular", expectancyNote: "(Cálculo basado en una esperanza de vida de 80 años)", slotLabel: "Tiempo de pantalla en años", yearsLabel: "de tu vida", resetButton: "Nuevo cálculo", contactEmail: "larissajordaoto@gmail.com", siteNameCopyright: "Time Well Spent?", rightsReserved: "Todos los derechos reservados.", qrCodeCta: "¡Apunta la cámara de tu móvil!", siteNameModal: "Time Well Spent?", siteNameCopyrightModal: "Time Well Spent?", rightsReservedModal: "Todos los derechos reservados.", totalHoursLabel: "Total de horas", totalDaysLabel: "Total de días", equivalencyTitle: "¿Qué podrías hacer con este tiempo?", equivalencyBook: "Leer cientos de libros.", equivalencySkill: "Dominar una nueva habilidad, como cocinar o dibujar.", equivalencyFamily: "Crear recuerdos con amigos y familia, sin interrupciones.", equivalencyHealth: "Cuidar tu cuerpo y mente con ejercicio y meditación.", equivalencyTravel: "Hacer docenas de viajes y explorar nuevos lugares.",
+                helpLink: "¿No sabes dónde encontrarlo?", helpTitle: "Cómo encontrar tu tiempo de pantalla", iosTitle: "iPhone (iOS)", iosStep1: "Abre Ajustes.", iosStep2: "Toca en Tiempo de uso.", iosStep3: "Toca Ver toda la actividad para ver tu promedio diario.", androidTitle: "Android", androidNote: "La ubicación puede variar un poco, pero generalmente la ruta es esta:", androidStep1: "Abre Configuración.", androidStep2: "Busca Bienestar digital y controles parentales.", androidStep3: "El gráfico principal mostrará tu tiempo de uso diario.",
+                manifestoLink: "Lee el manifiesto", manifestoTitle: "Manifiesto: Por un uso consciente del tiempo digital", manifestoH1: "Sobre mi trayectoria y motivaciones", manifestoP1: "Durante mis estudios en Terapia Ocupacional, desarrollé un profundo interés en el estudio y la capacitación en sueño y descanso. Soy una gran defensora de las Prácticas Integrativas y Complementarias en Salud (PICS), considerando notable que exista una política pública dedicada a estos enfoques. Mi interés también se extiende al mindfulness y a la tecnología orientada a la salud mental digital.", manifestoH2: "El Propósito: Reflexión sobre el tiempo", manifestoP2: "El propósito de este sitio es provocar una reflexión profunda sobre el tiempo que dedicamos al uso del teléfono móvil para actividades sin un propósito definido u objetivo claro. Específicamente, cuestiono cuánto tiempo desperdiciamos haciendo doomscrolling, el acto de desplazarse infinitamente por las redes sociales y el móvil en su conjunto, sin dirección ni intención.", manifestoP3: "Esta es una reflexión sobre cómo nuestro tiempo es un bien valioso e irrecuperable. Una vez que pasa, no regresa. La propuesta es que repensemos nuestra relación con el tiempo, considerando formas diferentes y más significativas de vivirlo.", manifestoH4: "Alertas sobre la comprensión del descanso", manifestoP4: "Este proyecto sirve como una alerta sobre cuestiones fundamentales, incluida la forma equivocada en que nuestra sociedad contemporánea entiende el descanso. Ver reels, TikToks y similares no constituye un verdadero descanso, solo representa más hiperestimulación cerebral y una liberación incontrolada de dopamina.", manifestoH5: "El Impacto en el Sueño", manifestoP5: "En cuanto al sueño, es probable que todos hayan experimentado la situación de acostarse, apoyar la cabeza en la almohada, cerrar los ojos y, de repente, tener la mente invadida por un 'remix' de todo el contenido consumido en las horas previas al descanso. Este fenómeno demuestra cómo el consumo digital no regulado interfiere directamente en la calidad de nuestro descanso nocturno.", manifestoH6: "La Invitación a la Reflexión", manifestoP6: "Te invito a acceder a la Calculadora Time Well Spent y permitirte una reflexión honesta sobre tus hábitos digitales. Que este sea el primer paso hacia una relación más consciente e intencional con tu tiempo y con la tecnología.", manifestoQuote: "\"El tiempo que pasa no vuelve. La elección de cómo vivirlo es nuestra responsabilidad.\""
+            }
         };
 
         const setLanguage = (lang) => {
             document.querySelectorAll('[data-key]').forEach(el => {
                 const key = el.dataset.key;
-                if (translations[lang]?.[key]) el.textContent = translations[lang][key];
+                if (translations[lang]?.[key]) el.innerHTML = translations[lang][key];
             });
             document.querySelectorAll('[data-key-placeholder]').forEach(el => {
                 const key = el.dataset.keyPlaceholder;
@@ -426,7 +404,6 @@
             document.getElementById('current-year').textContent = new Date().getFullYear();
             document.getElementById('modal-current-year').textContent = new Date().getFullYear();
 
-            // Lógica para todos os botões e modais
             const qrModalOverlay = document.getElementById('qr-modal-overlay');
             const openQrModalBtn = document.getElementById('open-qr-modal');
             const closeQrModalBtn = document.getElementById('close-qr-modal');
