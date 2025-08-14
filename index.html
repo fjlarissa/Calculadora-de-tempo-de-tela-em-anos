@@ -1,590 +1,648 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Time Well Spent?</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            [cite_start]--background-color: #f5f5f5; [cite: 1]
-            [cite_start]--card-background: #ffffff; [cite: 2]
-            [cite_start]--text-color: #1a1a1a; [cite: 2]
-            [cite_start]--text-secondary: #666666; [cite: 2]
-            [cite_start]--border-color: #e8e8e8; [cite: 2]
-            [cite_start]--transition-speed: 0.3s; [cite: 2]
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time Well Spent?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=s
+wap" rel="stylesheet">
+<style>
+:root {
+--background-color: #f5f5f5;
+--card-background: #ffffff;
+--text-color: #1a1a1a;
+--text-secondary: #666666;
+--border-color: #e8e8e8;
+--transition-speed: 0.3s;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+@keyframes fadeOut { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform:
+scale(0.98); } }
+@keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1;
+transform: scale(1); } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1;
+transform: translateY(0); } }
+.animating-out { animation: fadeOut 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+.animating-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+.result-content.visible { animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+@keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity:
+1; transform: translateX(0); } }
+@keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity:
+1; transform: translateX(0); } }
+@keyframes smoothSpin {
+0% { transform: translateY(0px) scale(1); opacity: 1; }
+30% { transform: translateY(-8px) scale(0.98); opacity: 0.8; }
+70% { transform: translateY(-16px) scale(0.96); opacity: 0.5; }
+100% { transform: translateY(-24px) scale(0.94); opacity: 0.2; }
+}
+body {
+font-family: 'Poppins', sans-serif;
+background-color: var(--background-color);
+color: var(--text-color);
+line-height: 1.6;
 
-        * [cite_start]{ margin: 0; padding: 0; box-sizing: border-box; [cite: 3]
-        }
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+overflow-x: hidden;
+}
+.page-header, main, footer { padding-left: 40px; padding-right: 40px; }
+.page-header {
+padding-top: 20px;
+padding-bottom: 20px;
+width: 100%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.header-logo-link {
+display: inline-flex;
+align-items: center;
+gap: 24px;
+text-decoration: none;
+color: var(--text-color);
+font-size: 1.2em;
+font-weight: 600;
+}
+.header-logo-image {
+height: 80px;
+}
+main { display: flex; flex: 1; align-items: center; justify-content: center; gap: 60px; width:
+100%; }
+.hero-text { max-width: 500px; animation: slideInLeft 1.2s cubic-bezier(0.25, 1, 0.5, 1)
+forwards; }
+.hero-text h1 {
+font-size: 3.2rem;
+font-weight: 700;
+line-height: 1.2;
+margin: 0;
+}
+.calculator-card { background-color: var(--card-background); padding: 48px;
+border-radius: 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); width: 100%; max-width:
+520px; border: 1px solid var(--border-color); animation: slideInRight 1.2s cubic-bezier(0.25,
+1, 0.5, 1) forwards; }
+.header { text-align: center; margin-bottom: 40px; }
+.card-logo-image {
+height: 120px;
 
-        [cite_start]@keyframes fadeOut { from { opacity: 1; transform: scale(1); [cite: 4]
-        } to { opacity: 0; transform: scale(0.98); [cite_start]} } [cite: 5]
-        [cite_start]@keyframes fadeIn { from { opacity: 0; [cite: 5]
-        transform: scale(0.98); } to { opacity: 1; transform: scale(1); [cite_start]} } [cite: 6]
-        [cite_start]@keyframes fadeInUp { from { opacity: 0; [cite: 6]
-        transform: translateY(20px); } to { opacity: 1; transform: translateY(0); [cite_start]} } [cite: 7]
-        [cite_start].animating-out { animation: fadeOut 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; [cite: 8]
-        }
-        [cite_start].animating-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; [cite: 9]
-        }
-        [cite_start].result-content.visible { animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards; [cite: 10]
-        }
-        [cite_start]@keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); [cite: 11]
-        } to { opacity: 1; transform: translateX(0); [cite_start]} } [cite: 11]
-        [cite_start]@keyframes slideInRight { from { opacity: 0; [cite: 12]
-        transform: translateX(50px); } to { opacity: 1; transform: translateX(0); [cite_start]} } [cite: 12]
-        @keyframes smoothSpin {
-            [cite_start]0% { transform: translateY(0px) scale(1); [cite: 13]
-            opacity: 1; [cite_start]} [cite: 13]
-            [cite_start]30% { transform: translateY(-8px) scale(0.98); [cite: 14]
-            opacity: 0.8; [cite_start]} [cite: 14]
-            [cite_start]70% { transform: translateY(-16px) scale(0.96); [cite: 15]
-            opacity: 0.5; [cite_start]} [cite: 15]
-            [cite_start]100% { transform: translateY(-24px) scale(0.94); [cite: 16]
-            opacity: 0.2; [cite_start]} [cite: 16]
-        }
+margin: 0 auto 28px;
+display: block;
+}
+.header h1 {
+font-size: 28px;
+font-weight: 600;
+margin-bottom: 0;
+line-height: 1.4;
+}
+.input-group { margin-bottom: 24px; }
+.input-group:first-of-type {
+margin-top: 40px;
+}
+label { display: block; font-size: 15px; font-weight: 500; margin-bottom: 10px; }
+.help-link-container {
+text-align: center;
+margin-top: -12px;
+margin-bottom: 24px;
+}
+.help-link {
+display: inline-flex;
+align-items: center;
+gap: 6px;
+font-size: 13px;
+font-weight: 500;
+color: var(--text-secondary);
+text-decoration: none;
+transition: color var(--transition-speed);
+}
+.help-link svg {
+width: 16px;
+height: 16px;
+}
+.help-link:hover {
+color: var(--text-color);
+}
+input { width: 100%; padding: 16px 20px; border: 1px solid var(--border-color);
+border-radius: 12px; font-size: 16px; font-family: 'Poppins', sans-serif; background:
+var(--card-background); transition: all var(--transition-speed) ease; }
+input:focus { outline: none; border-color: #999; box-shadow: 0 0 0 3px rgba(153, 153,
+153, 0.1); }
+.calculate-btn, .reset-btn { width: 100%; padding: 18px 24px; font-size: 16px;
+font-weight: 500; border-radius: 12px; cursor: pointer; transition: all var(--transition-speed)
+ease; font-family: 'Poppins', sans-serif; }
+.calculate-btn { background: var(--text-color); color: white; border: none; }
 
-        body {
-            [cite_start]font-family: 'Poppins', sans-serif; [cite: 17]
-            [cite_start]background-color: var(--background-color); [cite: 17]
-            [cite_start]color: var(--text-color); [cite: 17]
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            [cite_start]overflow-x: hidden; [cite: 18]
-        }
+.calculate-btn:hover { background: #333; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+transform: translateY(-2px); }
+.calculate-btn:active { transform: translateY(0px); box-shadow: none; }
+.result-container { display: none; }
+.slot-machine { background: var(--background-color); border: 1px solid
+var(--border-color); border-radius: 16px; padding: 32px; text-align: center; position: relative; }
+.slot-label { font-size: 13px; color: var(--text-secondary); margin-bottom: 20px;
+font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+.slot-display { background: var(--card-background); border: 2px solid var(--border-color);
+color: var(--text-color); font-family: 'Poppins', sans-serif; font-size: 56px; font-weight: 700;
+padding: 32px; border-radius: 12px; min-height: 120px; display: flex; align-items: center;
+justify-content: center; position: relative; overflow: hidden; letter-spacing: -2px; }
+.slot-number.spinning { animation: smoothSpin 0.15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+.years-label { font-size: 16px; color: var(--text-secondary); margin-top: 12px;
+font-weight: 500; }
+.expectancy-note { font-size: 12px; color: #999; margin-top: 24px; }
+.result-content { padding-top: 32px; opacity: 0; }
+.stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+margin-bottom: 32px; }
+.stat-item, .equivalency-item { text-align: center; background: var(--card-background);
+border-radius: 12px; border: 1px solid var(--border-color); transition: all
+var(--transition-speed) ease; }
+.stat-item:hover, .equivalency-item:hover { transform: translateY(-5px); box-shadow: 0
+8px 20px rgba(0,0,0,0.07); }
+.stat-item { padding: 24px 20px; }
+.stat-icon { width: 40px; height: 40px; background: var(--background-color);
+border-radius: 10px; margin: 0 auto 12px; display: flex; align-items: center; justify-content:
+center; border: 1px solid var(--border-color); }
+.stat-icon svg { width: 20px; height: 20px; stroke: var(--text-secondary); fill: none; }
+.stat-number { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+.stat-label { font-size: 13px; color: var(--text-secondary); font-weight: 500;
+text-transform: uppercase; letter-spacing: 0.5px; }
+.equivalency-section { margin-top: 32px; padding-top: 32px; border-top: 1px solid
+var(--border-color); }
+.equivalency-title { font-size: 16px; font-weight: 600; text-align: center; margin-bottom:
+24px; }
+.equivalency-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction:
+column; gap: 16px; }
+.equivalency-item { display: flex; align-items: center; padding: 16px; text-align: left;}
+.equivalency-icon { margin-right: 16px; flex-shrink: 0; }
+.equivalency-icon svg { width: 24px; height: 24px; stroke: var(--text-secondary); }
+.reset-btn { background: transparent; color: var(--text-secondary); border: 1px solid
+var(--border-color); margin-top: 32px; display: flex; align-items: center; justify-content: center;
+}
+.reset-btn:hover { background: var(--background-color); color: var(--text-color);
+box-shadow: 0 4px 15px rgba(0,0,0,0.05); transform: translateY(-2px); }
 
-        [cite_start].page-header, main, footer { padding-left: 40px; padding-right: 40px; [cite: 19]
-        }
-        
-        .page-header { 
-            [cite_start]padding-top: 20px; [cite: 20]
-            [cite_start]padding-bottom: 20px; [cite: 20]
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            [cite_start]align-items: center; [cite: 21]
-        }
-        
-        .header-logo-link {
-            [cite_start]display: inline-flex; [cite: 22]
-            [cite_start]align-items: center; [cite: 22]
-            gap: 24px;
-            text-decoration: none;
-            color: var(--text-color);
-            font-size: 1.2em;
-            [cite_start]font-weight: 600; [cite: 23]
-        }
-        .header-logo-image {
-            [cite_start]height: 80px; [cite: 24]
-        }
+.reset-btn svg { width: 16px; height: 16px; margin-right: 8px; stroke: currentColor; fill:
+none; }
+footer { width: 100%; display: flex; justify-content: space-between; align-items: center;
+flex-wrap: wrap; gap: 20px; padding: 30px 40px; margin-top: auto; }
+.footer-info { text-align: left; }
+.footer-contact { display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+margin-bottom: 16px; }
+.footer-credits { display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
+color: var(--text-secondary); font-size: 0.9em; font-weight: 500; transition: color
+var(--transition-speed) ease; }
+.footer-credits:hover { color: var(--text-color); }
+.footer-credits svg { width: 20px; height: 20px; stroke-width: 2px; stroke: currentColor; }
+.copyright { font-size: 0.8em; color: #aaa; }
+.language-switcher { display: flex; gap: 8px; }
+.lang-btn { background-color: transparent; border: 1px solid var(--border-color);
+padding: 6px 12px; border-radius: 6px; cursor: pointer; font-family: 'Poppins', sans-serif;
+font-weight: 600; font-size: 0.8em; color: var(--text-secondary); transition: all
+var(--transition-speed) ease; }
+.lang-btn:hover { background-color: var(--card-background); color: var(--text-color); }
+.lang-btn.active { background-color: var(--text-color); color: var(--card-background);
+border-color: var(--text-color); }
+.footer-qrcode { text-align: center; cursor: pointer; }
+.footer-qrcode img { width: 100px; height: 100px; border-radius: 8px; border: 1px solid
+var(--border-color); transition: all var(--transition-speed) ease; }
+.footer-qrcode:hover img { transform: scale(1.05); border-color: var(--text-color);
+box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+.footer-qrcode p { font-size: 0.8em; color: var(--text-secondary); margin-top: 8px;
+font-weight: 500; }
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+background-color: rgba(0, 0, 0, 0.7); display: flex; justify-content: center; align-items: center;
+z-index: 1000; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s ease;
+padding: 20px; }
+.modal-overlay.visible { opacity: 1; visibility: visible; }
+.modal-content { background-color: var(--card-background); padding: 30px;
+border-radius: 16px; text-align: center; position: relative; transform: scale(0.95); transition:
+transform 0.4s ease; }
+.modal-overlay.visible .modal-content { transform: scale(1); }
+.modal-content img { width: 250px; height: 250px; border-radius: 8px; border: 1px solid
+var(--border-color); }
+.modal-title { margin-top: 20px; font-weight: 600; font-size: 1.2em; color:
+var(--text-color); }
+.copyright-modal { font-size: 0.8em; color: #aaa; margin-top: 8px; }
+.close-button { position: absolute; top: 10px; right: 15px; font-size: 28px; font-weight:
+bold; color: #aaa; cursor: pointer; transition: color var(--transition-speed) ease; }
 
-        [cite_start]main { display: flex; flex: 1; align-items: center; justify-content: center; gap: 60px; [cite: 25]
-        width: 100%; [cite_start]} [cite: 25]
-        [cite_start].hero-text { max-width: 500px; [cite: 26]
-        animation: slideInLeft 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards; [cite_start]} [cite: 26]
-        .hero-text h1 {
-            [cite_start]font-size: 3.2rem; [cite: 27]
-            [cite_start]font-weight: 700; [cite: 27]
-            line-height: 1.2;
-            margin: 0;
-        }
-        [cite_start].calculator-card { background-color: var(--card-background); padding: 48px; [cite: 28]
-        [cite_start]border-radius: 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); width: 100%; max-width: 520px; border: 1px solid var(--border-color); [cite: 29]
-        animation: slideInRight 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards; [cite_start]} [cite: 29]
-        [cite_start].header { text-align: center; [cite: 30]
-        margin-bottom: 40px; [cite_start]} [cite: 30]
-
-        .card-logo-image {
-            [cite_start]height: 120px; [cite: 31]
-            [cite_start]margin: 0 auto 28px; [cite: 31]
-            display: block;
-        }
-        
-        .header h1 {
-            [cite_start]font-size: 28px; [cite: 32]
-            [cite_start]font-weight: 600; [cite: 32]
-            margin-bottom: 0;
-            line-height: 1.4;
-        }
-        [cite_start].input-group { margin-bottom: 24px; [cite: 33]
-        }
-        .input-group:first-of-type {
-            [cite_start]margin-top: 40px; [cite: 34]
-        }
-        [cite_start]label { display: block; font-size: 15px; font-weight: 500; margin-bottom: 10px; [cite: 35]
-        }
-        
-        .help-link-container {
-             [cite_start]text-align: center; [cite: 36]
-             [cite_start]margin-top: -12px; [cite: 36]
-             margin-bottom: 24px;
-        }
-        .help-link {
-            [cite_start]display: inline-flex; [cite: 37]
-            [cite_start]align-items: center; [cite: 37]
-            gap: 6px;
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            text-decoration: none;
-            [cite_start]transition: color var(--transition-speed); [cite: 38]
-        }
-        .help-link svg {
-            [cite_start]width: 16px; [cite: 39]
-            [cite_start]height: 16px; [cite: 39]
-        }
-        .help-link:hover {
-            [cite_start]color: var(--text-color); [cite: 40]
-        }
-
-        [cite_start]input { width: 100%; padding: 16px 20px; border: 1px solid var(--border-color); [cite: 41]
-        [cite_start]border-radius: 12px; font-size: 16px; font-family: 'Poppins', sans-serif; background: var(--card-background); transition: all var(--transition-speed) ease; [cite: 42]
-        }
-        [cite_start]input:focus { outline: none; border-color: #999; [cite: 43]
-        box-shadow: 0 0 0 3px rgba(153, 153, 153, 0.1); [cite_start]} [cite: 43]
-        [cite_start].calculate-btn, .reset-btn { width: 100%; [cite: 44]
-        [cite_start]padding: 18px 24px; font-size: 16px; font-weight: 500; border-radius: 12px; cursor: pointer; transition: all var(--transition-speed) ease; font-family: 'Poppins', sans-serif; [cite: 45]
-        }
-        [cite_start].calculate-btn { background: var(--text-color); color: white; border: none; [cite: 46]
-        }
-        [cite_start].calculate-btn:hover { background: #333; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transform: translateY(-2px); [cite: 47]
-        }
-        [cite_start].calculate-btn:active { transform: translateY(0px); box-shadow: none; [cite: 48]
-        }
-        [cite_start].result-container { display: none; [cite: 49]
-        }
-        [cite_start].slot-machine { background: var(--background-color); border: 1px solid var(--border-color); border-radius: 16px; padding: 32px; [cite: 50]
-        text-align: center; position: relative; [cite_start]} [cite: 50]
-        [cite_start].slot-label { font-size: 13px; color: var(--text-secondary); margin-bottom: 20px; [cite: 51]
-        font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; [cite_start]} [cite: 51]
-        [cite_start].slot-display { background: var(--card-background); [cite: 52]
-        [cite_start]border: 2px solid var(--border-color); color: var(--text-color); font-family: 'Poppins', sans-serif; font-size: 56px; font-weight: 700; padding: 32px; border-radius: 12px; min-height: 120px; [cite: 53]
-        [cite_start]display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; letter-spacing: -2px; [cite: 54]
-        }
-        [cite_start].slot-number.spinning { animation: smoothSpin 0.15s cubic-bezier(0.4, 0, 0.2, 1) infinite; [cite: 55]
-        }
-        [cite_start].years-label { font-size: 16px; color: var(--text-secondary); margin-top: 12px; font-weight: 500; [cite: 56]
-        }
-        [cite_start].expectancy-note { font-size: 12px; color: #999; margin-top: 24px; [cite: 57]
-        }
-        [cite_start].result-content { padding-top: 32px; opacity: 0; [cite: 58]
-        }
-        [cite_start].stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 32px; [cite: 59]
-        }
-        [cite_start].stat-item, .equivalency-item { text-align: center; background: var(--card-background); border-radius: 12px; [cite: 60]
-        border: 1px solid var(--border-color); transition: all var(--transition-speed) ease; [cite_start]} [cite: 60]
-        [cite_start].stat-item:hover, .equivalency-item:hover { transform: translateY(-5px); [cite: 61]
-        box-shadow: 0 8px 20px rgba(0,0,0,0.07); [cite_start]} [cite: 61]
-        [cite_start].stat-item { padding: 24px 20px; [cite: 62]
-        }
-        [cite_start].stat-icon { width: 40px; height: 40px; background: var(--background-color); border-radius: 10px; [cite: 63]
-        [cite_start]margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color); [cite: 64]
-        }
-        [cite_start].stat-icon svg { width: 20px; height: 20px; stroke: var(--text-secondary); fill: none; [cite: 65]
-        }
-        [cite_start].stat-number { font-size: 20px; font-weight: 600; margin-bottom: 4px; [cite: 66]
-        }
-        [cite_start].stat-label { font-size: 13px; color: var(--text-secondary); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; [cite: 67]
-        }
-        [cite_start].equivalency-section { margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--border-color); [cite: 68]
-        }
-        [cite_start].equivalency-title { font-size: 16px; font-weight: 600; text-align: center; margin-bottom: 24px; [cite: 69]
-        }
-        [cite_start].equivalency-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; [cite: 70]
-        gap: 16px; [cite_start]} [cite: 70]
-        [cite_start].equivalency-item { display: flex; align-items: center; padding: 16px; [cite: 71]
-        text-align: left;}
-        [cite_start].equivalency-icon { margin-right: 16px; flex-shrink: 0; [cite: 72]
-        }
-        [cite_start].equivalency-icon svg { width: 24px; height: 24px; stroke: var(--text-secondary); [cite: 73]
-        }
-        [cite_start].reset-btn { background: transparent; color: var(--text-secondary); border: 1px solid var(--border-color); margin-top: 32px; [cite: 74]
-        display: flex; align-items: center; justify-content: center; [cite_start]} [cite: 74]
-        [cite_start].reset-btn:hover { background: var(--background-color); color: var(--text-color); [cite: 75]
-        box-shadow: 0 4px 15px rgba(0,0,0,0.05); transform: translateY(-2px); [cite_start]} [cite: 75]
-        [cite_start].reset-btn svg { width: 16px; [cite: 76]
-        height: 16px; margin-right: 8px; stroke: currentColor; fill: none; [cite_start]} [cite: 76]
-        
-        [cite_start]footer { width: 100%; [cite: 77]
-        [cite_start]display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; padding: 30px 40px; margin-top: auto; [cite: 78]
-        }
-        [cite_start].footer-info { text-align: left; [cite: 79]
-        }
-        [cite_start].footer-contact { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; margin-bottom: 16px; [cite: 80]
-        }
-        [cite_start].footer-credits { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-secondary); [cite: 81]
-        font-size: 0.9em; font-weight: 500; transition: color var(--transition-speed) ease; [cite_start]} [cite: 81]
-        [cite_start].footer-credits:hover { color: var(--text-color); [cite: 82]
-        }
-        [cite_start].footer-credits svg { width: 20px; height: 20px; stroke-width: 2px; stroke: currentColor; [cite: 83]
-        }
-        [cite_start].copyright { font-size: 0.8em; color: #aaa; [cite: 84]
-        }
-        
-        [cite_start].language-switcher { display: flex; [cite: 85]
-        gap: 8px; [cite_start]} [cite: 85]
-        [cite_start].lang-btn { background-color: transparent; border: 1px solid var(--border-color); [cite: 86]
-        [cite_start]padding: 6px 12px; border-radius: 6px; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.8em; color: var(--text-secondary); transition: all var(--transition-speed) ease; [cite: 87]
-        }
-        [cite_start].lang-btn:hover { background-color: var(--card-background); color: var(--text-color); [cite: 88]
-        }
-        [cite_start].lang-btn.active { background-color: var(--text-color); color: var(--card-background); border-color: var(--text-color); [cite: 89]
-        }
-
-        [cite_start].footer-qrcode { text-align: center; cursor: pointer; [cite: 90]
-        }
-        [cite_start].footer-qrcode img { width: 100px; height: 100px; border-radius: 8px; [cite: 91]
-        border: 1px solid var(--border-color); transition: all var(--transition-speed) ease; [cite_start]} [cite: 91]
-        [cite_start].footer-qrcode:hover img { transform: scale(1.05); [cite: 92]
-        border-color: var(--text-color); box-shadow: 0 5px 20px rgba(0,0,0,0.1); [cite_start]} [cite: 92]
-        [cite_start].footer-qrcode p { font-size: 0.8em; [cite: 93]
-        color: var(--text-secondary); margin-top: 8px; font-weight: 500; [cite_start]} [cite: 93]
-        
-        [cite_start].modal-overlay { position: fixed; [cite: 94]
-        [cite_start]top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); display: flex; justify-content: center; align-items: center; [cite: 95]
-        [cite_start]z-index: 1000; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s ease; padding: 20px; [cite: 96]
-        }
-        [cite_start].modal-overlay.visible { opacity: 1; visibility: visible; [cite: 97]
-        }
-        [cite_start].modal-content { background-color: var(--card-background); padding: 30px; border-radius: 16px; text-align: center; position: relative; [cite: 98]
-        transform: scale(0.95); transition: transform 0.4s ease; [cite_start]} [cite: 98]
-        [cite_start].modal-overlay.visible .modal-content { transform: scale(1); [cite: 99]
-        }
-        [cite_start].modal-content img { width: 250px; height: 250px; border-radius: 8px; [cite: 100]
-        border: 1px solid var(--border-color); [cite_start]} [cite: 100]
-        [cite_start].modal-title { margin-top: 20px; font-weight: 600; font-size: 1.2em; [cite: 101]
-        color: var(--text-color); [cite_start]} [cite: 101]
-        [cite_start].copyright-modal { font-size: 0.8em; color: #aaa; margin-top: 8px; [cite: 102]
-        }
-        [cite_start].close-button { position: absolute; top: 10px; right: 15px; font-size: 28px; font-weight: bold; [cite: 103]
-        color: #aaa; cursor: pointer; transition: color var(--transition-speed) ease; [cite_start]} [cite: 103]
-        [cite_start].close-button:hover { color: var(--text-color); [cite: 104]
-        }
-
-        [cite_start].help-modal { max-width: 600px; text-align: left; [cite: 105]
-        }
-        [cite_start].help-modal h2 { text-align: center; margin-bottom: 24px; font-size: 22px; [cite: 106]
-        }
-        [cite_start].instructions { display: flex; flex-direction: column; gap: 20px; [cite: 107]
-        }
-        [cite_start].instruction-set h3 { display: flex; align-items: center; gap: 10px; font-size: 18px; [cite: 108]
-        margin-bottom: 12px; [cite_start]} [cite: 108]
-        [cite_start].instruction-set-icon { width: 24px; height: 24px; [cite: 109]
-        }
-        [cite_start].instruction-set p { font-size: 14px; color: var(--text-secondary); margin-bottom: 12px; font-style: italic; [cite: 110]
-        }
-        [cite_start].instruction-set ol { padding-left: 20px; font-size: 15px; [cite: 111]
-        }
-        [cite_start].instruction-set li { margin-bottom: 8px; [cite: 112]
-        }
-        
-        @media (max-width: 992px) { 
-            .page-header { 
-                [cite_start]flex-direction: column; [cite: 113]
-                [cite_start]gap: 20px; [cite: 113]
-                justify-content: center;
-            }
-            [cite_start]main { flex-direction: column; [cite: 114]
-            gap: 40px; padding-top: 20px; padding-bottom: 20px; text-align: center; [cite_start]} [cite: 114]
-            [cite_start].hero-text h1 { font-size: 2.8rem; [cite: 115]
-            } 
-            [cite_start]footer { flex-direction: column-reverse; justify-content: center; [cite: 116]
-            gap: 30px; [cite_start]} [cite: 116]
-            [cite_start].footer-info, .copyright { text-align: center; [cite: 117]
-            } 
-            [cite_start].footer-contact { justify-content: center; [cite: 118]
-            } 
-        }
-        [cite_start]@media (max-width: 480px) { .calculator-card { padding: 32px 24px; [cite: 119]
-        } .stats-grid { grid-template-columns: 1fr; [cite_start]} .page-header, main, footer { padding-left: 20px; padding-right: 20px; [cite: 120]
-        } }
-    </style>
+.close-button:hover { color: var(--text-color); }
+.help-modal { max-width: 600px; text-align: left; }
+.help-modal h2 { text-align: center; margin-bottom: 24px; font-size: 22px; }
+.instructions { display: flex; flex-direction: column; gap: 20px; }
+.instruction-set h3 { display: flex; align-items: center; gap: 10px; font-size: 18px;
+margin-bottom: 12px; }
+.instruction-set-icon { width: 24px; height: 24px; }
+.instruction-set p { font-size: 14px; color: var(--text-secondary); margin-bottom: 12px;
+font-style: italic; }
+.instruction-set ol { padding-left: 20px; font-size: 15px; }
+.instruction-set li { margin-bottom: 8px; }
+@media (max-width: 992px) {
+.page-header {
+flex-direction: column;
+gap: 20px;
+justify-content: center;
+}
+main { flex-direction: column; gap: 40px; padding-top: 20px; padding-bottom: 20px;
+text-align: center; }
+.hero-text h1 { font-size: 2.8rem; }
+footer { flex-direction: column-reverse; justify-content: center; gap: 30px; }
+.footer-info, .copyright { text-align: center; }
+.footer-contact { justify-content: center; }
+}
+@media (max-width: 480px) { .calculator-card { padding: 32px 24px; } .stats-grid {
+grid-template-columns: 1fr; } .page-header, main, footer { padding-left: 20px; padding-right:
+20px; } }
+</style>
 </head>
 <body>
-    <header class="page-header">
-        <a href="#" class="header-logo-link">
-            [cite_start]<img src="tws-logo-at-transparent.png" alt="Logo Time Well Spent?" [cite: 121]
-            class="header-logo-image">
-            <span data-key="siteName">Time Well Spent?</span>
-        </a>
-        <div class="language-switcher">
-            <button class="lang-btn" data-lang="pt">PT</button>
-            <button class="lang-btn" data-lang="en">EN</button>
-            <button class="lang-btn" data-lang="es">ES</button>
-            <button id="open-manifesto-modal" class="lang-btn">Manifesto</button>
-        </div>
-    </header>
+<header class="page-header">
+<a href="#" class="header-logo-link">
+<img src="tws-logo-at-transparent.png" alt="Logo Time Well Spent?"
+class="header-logo-image">
+<span data-key="siteName">Time Well Spent?</span>
+</a>
+<div class="language-switcher">
+<button class="lang-btn" data-lang="pt">PT</button>
+<button class="lang-btn" data-lang="en">EN</button>
+<button class="lang-btn" data-lang="es">ES</button>
+</div>
+</header>
+<main>
+<div class="hero-text">
 
-    <main>
-        <div class="hero-text">
- 
-           [cite_start]<h1 data-key="heroTitle">Seu tempo de vida é finito. [cite: 122]
-[cite_start]Seu tempo de tela também deveria ser.</h1> [cite: 123]
-        </div>
-        <div class="calculator-card">
-            <div id="inputForm">
-                <div class="header">
-                    <img src="tws-logo-at-transparent.png" alt="Logo" class="card-logo-image">
-                    <h1 data-key="cardTitle">O scrolling é 
- um custo. [cite_start]É hora de descobrir o seu.</h1> [cite: 124]
-                </div>
-                <div class="input-group">
-                    <label for="age" data-key="ageLabel">Qual sua idade atual?</label>
-                    <input type="number" id="age" min="1" max="79" data-key-placeholder="agePlaceholder" placeholder="Digite sua idade">
-       
-                 [cite_start]</div> [cite: 125]
-                <div class="input-group">
-                    <label for="dailyHours" data-key="hoursLabel">Quantas horas por dia você usa o celular?</label>
-                    <input type="number" id="dailyHours" min="0.1" max="24" step="0.1" data-key-placeholder="hoursPlaceholder" placeholder="Ex: 5.5">
-                </div>
- 
-               [cite_start]<div class="help-link-container"> [cite: 126]
-                    <a href="#" id="open-help-modal" class="help-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-         
-                       [cite_start]<span data-key="helpLink">Não sabe onde encontrar?</span> [cite: 127]
-                    </a>
-                </div>
-                <button class="calculate-btn" onclick="calculateWastedTime()" data-key="calculateButton">Calcular</button>
-                <div class="expectancy-note" data-key="expectancyNote">(Cálculo baseado em uma expectativa de vida de 
- [cite_start]80 anos)</div> [cite: 128]
-            </div>
-            <div class="result-container" id="resultContainer">
-                <div class="slot-machine">
-                    <div class="slot-label" data-key="slotLabel">Tempo de tela em anos</div>
-                    <div class="slot-display">
-         
-                       [cite_start]<span class="slot-number" id="slotNumber">0.0</span> [cite: 129]
-                    </div>
-                    <div class="years-label" data-key="yearsLabel">da sua vida</div>
-                </div>
-                <div class="result-content" id="resultContent"></div>
-     
-                   [cite_start]<button class="reset-btn" onclick="resetCalculator()"> [cite: 130]
-                    <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="m15 18-6-6 6-6"/></svg>
-                    <span data-key="resetButton">Fazer novo cálculo</span>
-                </button>
-            </div>
-        
-        [cite_start]</div> [cite: 131]
-    </main>
-    <footer>
-        <div class="footer-info">
-            <div class="footer-contact">
-                <a href="https://instagram.com/larissajordaoto" target="_blank" rel="noopener noreferrer" class="footer-credits"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg><span>@larissajordaoto</span></a>
-                
-                [cite_start]<a href="mailto:larissajordaoto@gmail.com" class="footer-credits"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg><span data-key="contactEmail">larissajordaoto@gmail.com</span></a> [cite: 132]
-            </div>
-            <div class="copyright">© <span id="current-year"></span> <span data-key="siteNameCopyright">Time Well Spent?</span>.
- [cite_start]<span data-key="rightsReserved">Todos os direitos reservados.</span></div> [cite: 133]
-        </div>
-        <div class="footer-qrcode" id="open-qr-modal">
-            <img src="qrcode-timewellspent.png" alt="QR Code para acessar o site">
-            <p data-key="qrCodeCta">Aponte a câmera do seu celular!</p>
-        </div>
-    </footer>
-    <div class="modal-overlay" id="qr-modal-overlay">
-        <div class="modal-content">
-            <span class="close-button" 
- [cite_start]id="close-qr-modal">&times;</span> [cite: 134]
-            <img src="qrcode-timewellspent.png" alt="QR Code para o site Time Well Spent?">
-            <p class="modal-title" data-key="siteNameModal">Time Well Spent?</p>
-            <p class="copyright-modal">© <span id="modal-current-year"></span> <span data-key="siteNameCopyrightModal">Time Well Spent?</span>.
- [cite_start]<span data-key="rightsReservedModal">Todos os direitos reservados.</span></p> [cite: 135]
-        </div>
-    </div>
-    <div class="modal-overlay" id="help-modal-overlay">
-        <div class="modal-content help-modal">
-            <span class="close-button" id="close-help-modal">&times;</span>
-            <h2 data-key="helpTitle">Como encontrar seu tempo de tela</h2>
-            <div class="instructions">
-                <div class="instruction-set">
-      
-                      [cite_start]<h3 data-key="iosTitle"><svg class="instruction-set-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 21.7c.9.9 2.5.4 3.4-1.1.9-1.4.4-3.1-1.1-4.1 -1.5-1-3.1-.4-4.1 1.1 -1 1.5-.4 3.1 1.1 4.1Z"/><path d="M16 12.5c2.3-2.3 2.3-6.1 0-8.5 -2.3-2.3-6.1-2.3-8.5 0 -2.3 2.3-2.3 6.1 0 8.5"/><path d="M12.5 16c2.3 2.3 6.1 2.3 8.5 0 2.3-2.3 2.3-6.1 0-8.5"/><path d="M18 6c-2.3 2.3-2.3 6.1 0 8.5"/><path d="M22 6c-2.3 2.3-2.3 6.1 0 8.5"/></svg>iPhone (iOS)</h3> [cite: 136]
-                    <ol>
-         
-                       [cite_start]<li data-key="iosStep1">Abra os <strong>Ajustes</strong>.</li> [cite: 137]
-                        <li data-key="iosStep2">Toque em <strong>Tempo de Uso</strong>.</li>
-                        <li data-key="iosStep3">Toque em <strong>Ver Todas as Atividades</strong> para ver sua média diária.</li>
-                  
-                  [cite_start]</ol> [cite: 138]
-                </div>
-                [cite_start]<hr style="border: none; [cite: 139]
- [cite_start]border-top: 1px solid var(--border-color); margin: 0;"> [cite: 139]
-                <div class="instruction-set">
-                    <h3 data-key="androidTitle"><svg class="instruction-set-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 14.5c.3-1 .5-2.2.5-3.5a10.9 10.9 0 0 0-2.3-6.9"/><path d="M7 14.5c-.3-1-.5-2.2-.5-3.5A10.9 10.9 0 0 1 8.8 4.1"/><path d="M14.5 17c-1.2.4-2.6.6-4 .6-1.4 0-2.8-.2-4-.6"/><path d="M10 4.1c1.2-.3 2.5-.5 3.8-.5 1.3 0 2.5.2 3.8.5"/><circle cx="12" cy="12" r="10"/><path d="m8 10 1-2"/><path d="m15 8 1 2"/></svg>Android</h3>
-         
-                   [cite_start]<p data-key="androidNote">A localização pode variar um pouco, mas geralmente o caminho é este:</p> [cite: 140]
-                    <ol>
-                        <li data-key="androidStep1">Abra as <strong>Configurações</strong>.</li>
-                        <li data-key="androidStep2">Procure por <strong>Bem-estar digital e 
- [cite_start]controles parentais</strong>.</li> [cite: 141]
-                        <li data-key="androidStep3">O gráfico na tela principal mostrará seu tempo de uso diário.</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal-overlay" id="manifesto-modal-overlay">
-        <div class="modal-content help-modal">
-            <span class="close-button" id="close-manifesto-modal">&times;</span>
-            <h2 data-key="manifestoTitle">Nosso Manifesto</h2>
-            <div class="instructions">
-                <p data-key="manifestoP1" style="font-style: normal; font-size: 15px;">A tecnologia deveria nos conectar, não nos isolar. No entanto, o design viciante de muitas plataformas digitais nos prende em um ciclo interminável de rolagem, nos roubando do nosso bem mais precioso: o tempo.</p>
-                <p data-key="manifestoP2" style="font-style: normal; font-size: 15px;">"Time Well Spent?" não é apenas uma calculadora; é um chamado à consciência. Um convite para que você questione o papel da tecnologia em sua vida e o impacto dela em seu bem-estar.</p>
-                <p data-key="manifestoP3" style="font-style: normal; font-size: 15px;">Nós acreditamos em um futuro onde a tecnologia serve à humanidade, e não o contrário. Onde as conexões são mais profundas que a tela e o tempo é medido em momentos vividos, não em horas "scrolladas".</p>
-                <p data-key="manifestoP4" style="font-style: normal; font-size: 15px;">Junte-se a nós neste movimento. Recupere seu tempo. Redefina sua relação com a tecnologia. Viva uma vida com intenção.</p>
-            </div>
-        </div>
-    </div>
-    
- [cite_start][cite: 142]
-    <script>
-        let finalResult = 0;
-        [cite_start]let isAnimating = false; [cite: 142]
-        [cite_start]const inputForm = document.getElementById('inputForm'); [cite: 143]
-        [cite_start]const resultContainer = document.getElementById('resultContainer'); [cite: 143]
-        [cite_start]const resultContent = document.getElementById('resultContent'); [cite: 143]
-        [cite_start]const translations = { [cite: 144]
-            pt: {
-                siteName: "Time Well Spent?", heroTitle: "Seu tempo de vida é finito. Seu tempo de tela também deveria ser.", cardTitle: "O scrolling é um custo. É hora de descobrir o seu.", ageLabel: "Qual sua idade atual?", agePlaceholder: "Digite sua idade", hoursLabel: "Quantas horas por dia você usa o celular?", hoursPlaceholder: "Ex: 5.5", calculateButton: "Calcular", expectancyNote: "(Cálculo baseado em uma expectativa de vida de 80 anos)", slotLabel: "Tempo de tela 
- [cite_start]em anos", yearsLabel: "da sua vida", resetButton: "Fazer novo cálculo", contactEmail: "larissajordaoto@gmail.com", siteNameCopyright: "Time Well Spent?", rightsReserved: "Todos os direitos reservados.", qrCodeCta: "Aponte a câmera do seu celular!", siteNameModal: "Time Well Spent?", siteNameCopyrightModal: "Time Well Spent?", rightsReservedModal: "Todos os direitos reservados.", [cite: 145]
-                totalHoursLabel: "Total de horas", totalDaysLabel: "Total de dias",
-                equivalencyTitle: "O que você poderia fazer com esse tempo?",
-             
-                   [cite_start]equivalencyBook: "Ler centenas de livros.", [cite: 146]
-                equivalencySkill: "Dominar uma nova habilidade, como cozinhar ou desenhar.",
-                equivalencyFamily: "Criar memórias com amigos e família, sem interrupções.",
-                equivalencyHealth: "Cuidar do seu corpo e mente com exercícios e meditação.",
-                equivalencyTravel: "Fazer dezenas 
- [cite_start]de viagens e explorar novos lugares.", [cite: 147]
-                [cite_start]helpLink: "Não sabe onde encontrar?", helpTitle: "Como encontrar seu tempo de tela", iosTitle: "iPhone (iOS)", iosStep1: "Abra os Ajustes.", iosStep2: "Toque em Tempo de Uso.", iosStep3: "Toque em Ver Todas as Atividades para ver sua média diária.", androidTitle: "Android", androidNote: "A localização pode variar um pouco, mas geralmente o caminho é este:", androidStep1: "Abra as Configurações.", androidStep2: "Procure por Bem-estar digital e controles parentais.", androidStep3: "O gráfico na tela principal mostrará seu tempo de uso diário." [cite: 148]
-            },
-            en: {
-                siteName: "Time Well Spent?", heroTitle: "Your lifetime is finite. Your screen time should be too.", cardTitle: "Scrolling has a cost. It's time to find out yours.", ageLabel: "What is your current age?", agePlaceholder: "Enter your age", hoursLabel: "How many hours a day do you use your phone?", hoursPlaceholder: "E.g., 5.5", calculateButton: "Calculate", expectancyNote: "(Calculation based on an 80-year life expectancy)", slotLabel: "Screen time in years", yearsLabel: "of your life", resetButton: "New 
- [cite_start]calculation", contactEmail: "larissajordaoto@gmail.com", siteNameCopyright: "Time Well Spent?", rightsReserved: "All rights reserved.", qrCodeCta: "Point your phone's camera!", siteNameModal: "Time Well Spent?", siteNameCopyrightModal: "Time Well Spent?", rightsReservedModal: "All rights reserved.", [cite: 149]
-                totalHoursLabel: "Total hours", totalDaysLabel: "Total days",
-                equivalencyTitle: "What could you do with this time?",
-                equivalencyBook: "Read hundreds of books.",
-         
-                       [cite_start]equivalencySkill: "Master a new skill, like cooking or drawing.", [cite: 150]
-                equivalencyFamily: "Create memories with friends and family, without interruptions.",
-                equivalencyHealth: "Take care of your body and mind with exercise and meditation.",
-                equivalencyTravel: "Go on dozens of trips and explore new places.",
-         
-                       [cite_start]helpLink: "Not sure where to find it?", helpTitle: "How to find your screen time", iosTitle: "iPhone (iOS)", iosStep1: "Open Settings.", iosStep2: "Tap on Screen Time.", iosStep3: "Tap See All Activity to view your daily average.", androidTitle: "Android", androidNote: "The location may vary slightly, but this is the usual path:", androidStep1: "Open Settings.", androidStep2: "Look for Digital Wellbeing & parental controls.", androidStep3: "The main chart will show your daily usage time." [cite: 151]
-            [cite_start]}, [cite: 152]
-            es: {
-                siteName: "Time Well Spent?", heroTitle: "Tu tiempo de vida es finito. Tu tiempo de pantalla también debería serlo.", cardTitle: "El scrolling tiene un coste. Es hora de descubrir el tuyo.", ageLabel: "¿Cuál es tu edad actual?", agePlaceholder: "Introduce tu edad", hoursLabel: "¿Cuántas horas al día usas el móvil?", hoursPlaceholder: "Ej: 5.5", calculateButton: "Calcular", expectancyNote: "(Cálculo basado en una esperanza de vida de 80 años)", slotLabel: "Tiempo de pantalla en años", yearsLabel: 
- [cite_start]"de tu vida", resetButton: "Nuevo cálculo", contactEmail: "larissajordaoto@gmail.com", siteNameCopyright: "Time Well Spent?", rightsReserved: "Todos los derechos reservados.", qrCodeCta: "¡Apunta la cámara de tu móvil!", siteNameModal: "Time Well Spent?", siteNameCopyrightModal: "Time Well Spent?", rightsReservedModal: "Todos los derechos reservados.", [cite: 153]
-                totalHoursLabel: "Total de horas", totalDaysLabel: "Total de días",
-                equivalencyTitle: "¿Qué podrías hacer con este tiempo?",
-                equivalencyBook: "Leer cientos 
- [cite_start]de libros.", [cite: 154]
-                equivalencySkill: "Dominar una nueva habilidad, como cocinar o dibujar.",
-                equivalencyFamily: "Crear recuerdos con amigos y familia, sin interrupciones.",
-                equivalencyHealth: "Cuidar tu cuerpo y mente con ejercicio y meditación.",
-                equivalencyTravel: "Hacer docenas de viajes y explorar nuevos lugares.",
-  
-                      [cite_start]helpLink: "¿No sabes dónde encontrarlo?", helpTitle: "Cómo encontrar tu tiempo de pantalla", iosTitle: "iPhone (iOS)", iosStep1: "Abre Ajustes.", iosStep2: "Toca en Tiempo de uso.", iosStep3: "Toca Ver toda la actividad para ver tu promedio diario.", androidTitle: "Android", androidNote: "La ubicación puede variar un poco, pero generalmente la ruta es esta:", androidStep1: "Abre Configuración.", androidStep2: "Busca Bienestar digital y controles parentales.", androidStep3: "El gráfico principal mostrará tu tiempo de uso diario." [cite: 155]
-            [cite_start]} [cite: 156]
-        };
+<h1 data-key="heroTitle">Seu tempo de vida é finito. Seu tempo de tela também
+deveria ser.</h1>
+</div>
+<div class="calculator-card">
+<div id="inputForm">
+<div class="header">
+<img src="tws-logo-at-transparent.png" alt="Logo" class="card-logo-image">
+<h1 data-key="cardTitle">O scrolling é um custo. É hora de descobrir o
 
-        const setLanguage = (lang) => {
-            document.querySelectorAll('[data-key]').forEach(el => {
-                const key = el.dataset.key;
-                if (translations[lang]?.[key]) el.textContent = translations[lang][key];
-            });
-            [cite_start]document.querySelectorAll('[data-key-placeholder]').forEach(el => { [cite: 157]
-                const key = el.dataset.keyPlaceholder;
-                if (translations[lang]?.[key]) el.placeholder = translations[lang][key];
-            });
-            document.documentElement.lang = lang === 'pt' ? [cite_start]'pt-BR' : lang; [cite: 158]
-            [cite_start]localStorage.setItem('userLanguage', lang); [cite: 158]
-            [cite_start]document.querySelectorAll('.lang-btn').forEach(btn => { [cite: 159]
-                btn.classList.toggle('active', btn.dataset.lang === lang);
-            [cite_start]}); [cite: 159]
-        [cite_start]}; [cite: 160]
+seu.</h1>
+</div>
+<div class="input-group">
+<label for="age" data-key="ageLabel">Qual sua idade atual?</label>
+<input type="number" id="age" min="1" max="79"
 
-        document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
-        
-        [cite_start]function calculateWastedTime() { if (isAnimating) return; const age = parseInt(document.getElementById('age').value); [cite: 160]
-        [cite_start]const dailyHours = parseFloat(document.getElementById('dailyHours').value); if (!age || !dailyHours || age < 1 || age > 79 || dailyHours < 0.1) { alert('Por favor, insira valores válidos!'); [cite: 161]
-        return; [cite_start]} finalResult = (80 - age) * 365 * dailyHours / 8760; isAnimating = true; inputForm.classList.add('animating-out'); [cite: 162]
-        [cite_start]inputForm.addEventListener('animationend', () => { inputForm.style.display = 'none'; inputForm.classList.remove('animating-out'); resultContainer.style.display = 'block'; resultContainer.classList.add('animating-in'); startAnimation(); resultContainer.addEventListener('animationend', () => { resultContainer.classList.remove('animating-in'); isAnimating = false; }, { once: true }); }, { once: true }); [cite: 163]
-        [cite_start]} [cite: 164]
-        [cite_start]function startAnimation() { const slotNumber = document.getElementById('slotNumber'); resultContent.innerHTML = ''; resultContent.classList.remove('visible'); slotNumber.classList.add('spinning'); [cite: 164]
-        [cite_start]let cycles = 0; const maxCycles = 120; const interval = setInterval(() => { slotNumber.textContent = (Math.random() * 20).toFixed(1); cycles++; if (cycles > maxCycles) { clearInterval(interval); slotNumber.classList.remove('spinning'); let currentVal = parseFloat(slotNumber.textContent); const targetVal = finalResult; const diff = targetVal - currentVal; const steps = 30; const increment = diff / steps; let step = 0; const finalInterval = setInterval(() => { step++; currentVal += increment; slotNumber.textContent = currentVal.toFixed(1); if (step >= steps) { clearInterval(finalInterval); slotNumber.textContent = targetVal.toFixed(1); setTimeout(showResult, 500); } }, 20); } }, 50); [cite: 165]
-        [cite_start]} [cite: 166]
-        function showResult() {
-            [cite_start]const lang = localStorage.getItem('userLanguage') || [cite: 166]
- [cite_start]'pt'; [cite: 167]
-            const age = parseInt(document.getElementById('age').value);
-            const dailyHours = parseFloat(document.getElementById('dailyHours').value);
-            [cite_start]const totalHours = Math.round((80 - age) * 365 * dailyHours); [cite: 167]
-            [cite_start]const totalDays = Math.round(totalHours / 24); [cite: 168]
-            
-            resultContent.innerHTML = `<div class="stats-grid"><div class="stat-item"><div class="stat-icon"><svg viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div class="stat-number">${totalHours.toLocaleString(lang === 'pt' ? 'pt-BR' : lang)}</div><div class="stat-label">${translations[lang].totalHoursLabel}</div></div><div class="stat-item"><div class="stat-icon"><svg viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><div class="stat-number">${totalDays.toLocaleString(lang === 'pt' ? 'pt-BR' : lang)}</div><div class="stat-label">${translations[lang].totalDaysLabel}</div></div></div><div class="equivalency-section"><h3 class="equivalency-title">${translations[lang].equivalencyTitle}</h3><ul class="equivalency-list"><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div><span class="equivalency-text">${translations[lang].equivalencyBook}</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg 
- xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3m0 12l-4-4m4 4l4-4"></path><path d="M10 9h4"></path><path d="M15 21H9a2 2 0 0 1-2-2V7h10v12a2 2 0 0 1-2 2z"></path></svg></div><span class="equivalency-text">${translations[lang].equivalencySkill}</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg></div><span class="equivalency-text">${translations[lang].equivalencyFamily}</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 0 0 9-9c0-4.97-4.03-9-9-9s-9 4.03-9-9a9 9 0 0 0 9 9z"></path><path d="M12 21V12"></path><path d="m5 12 2.5 3"></path><path d="m16.5 
- [cite_start]15-2.5-3"></path></svg></div><span class="equivalency-text">${translations[lang].equivalencyHealth}</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div><span class="equivalency-text">${translations[lang].equivalencyTravel}</span></li></ul></div>`; [cite: 169, 170]
-            [cite_start]resultContent.classList.add('visible'); [cite: 171]
-            isAnimating = false;
-        }
-        [cite_start]function resetCalculator() { if(isAnimating) return; isAnimating = true; [cite: 171]
-        [cite_start]resultContainer.classList.add('animating-out'); resultContainer.addEventListener('animationend', () => { resultContainer.style.display = 'none'; resultContainer.classList.remove('animating-out'); document.getElementById('age').value = ''; document.getElementById('dailyHours').value = ''; inputForm.style.display = 'block'; inputForm.classList.add('animating-in'); inputForm.addEventListener('animationend', () => { inputForm.classList.remove('animating-in'); isAnimating = false; }, { once: true }); }, { once: true }); [cite: 172]
-        [cite_start]} [cite: 173]
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedLang = localStorage.getItem('userLanguage') || 'pt';
-            setLanguage(savedLang);
-            document.getElementById('current-year').textContent = new Date().getFullYear();
-            document.getElementById('modal-current-year').textContent = new Date().getFullYear();
-        });
-        [cite_start]const qrModalOverlay = document.getElementById('qr-modal-overlay'); [cite: 173]
-        [cite_start]const openQrModalBtn = document.getElementById('open-qr-modal'); [cite: 174]
-        [cite_start]const closeQrModalBtn = document.getElementById('close-qr-modal'); [cite: 174]
-        [cite_start]openQrModalBtn.addEventListener('click', (e) => { e.preventDefault(); qrModalOverlay.classList.add('visible'); }); [cite: 174]
-        [cite_start]closeQrModalBtn.addEventListener('click', () => qrModalOverlay.classList.remove('visible')); [cite: 175]
-        [cite_start]qrModalOverlay.addEventListener('click', (event) => { if (event.target === qrModalOverlay) qrModalOverlay.classList.remove('visible'); }); [cite: 175]
-        
-        [cite_start]const helpModalOverlay = document.getElementById('help-modal-overlay'); [cite: 175]
-        [cite_start]const openHelpModalBtn = document.getElementById('open-help-modal'); [cite: 176]
-        [cite_start]const closeHelpModalBtn = document.getElementById('close-help-modal'); [cite: 176]
-        [cite_start]openHelpModalBtn.addEventListener('click', (e) => { e.preventDefault(); helpModalOverlay.classList.add('visible'); }); [cite: 176]
-        [cite_start]closeHelpModalBtn.addEventListener('click', () => helpModalOverlay.classList.remove('visible')); [cite: 176]
-        [cite_start]helpModalOverlay.addEventListener('click', (event) => { if (event.target === helpModalOverlay) helpModalOverlay.classList.remove('visible'); }); [cite: 177]
+data-key-placeholder="agePlaceholder" placeholder="Digite sua idade">
+</div>
+<div class="input-group">
+<label for="dailyHours" data-key="hoursLabel">Quantas horas por dia você usa
 
-        const manifestoModalOverlay = document.getElementById('manifesto-modal-overlay');
-        const openManifestoModalBtn = document.getElementById('open-manifesto-modal');
-        const closeManifestoModalBtn = document.getElementById('close-manifesto-modal');
+o celular?</label>
 
-        openManifestoModalBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            manifestoModalOverlay.classList.add('visible');
-        });
+<input type="number" id="dailyHours" min="0.1" max="24" step="0.1"
 
-        closeManifestoModalBtn.addEventListener('click', () => {
-            manifestoModalOverlay.classList.remove('visible');
-        });
+data-key-placeholder="hoursPlaceholder" placeholder="Ex: 5.5">
+</div>
+<div class="help-link-container">
+<a href="#" id="open-help-modal" class="help-link">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
 
-        manifestoModalOverlay.addEventListener('click', (event) => {
-            if (event.target === manifestoModalOverlay) {
-                manifestoModalOverlay.classList.remove('visible');
-            }
-        });
-        
-        [cite_start]window.addEventListener('keydown', (event) => { [cite: 178]
-            if (event.key === 'Escape') {
-                qrModalOverlay.classList.remove('visible');
-                helpModalOverlay.classList.remove('visible');
-                manifestoModalOverlay.classList.remove('visible');
-            }
-        });
-    [cite_start]</script> [cite: 179]
+stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1
+5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+<span data-key="helpLink">Não sabe onde encontrar?</span>
+</a>
+</div>
+<button class="calculate-btn" onclick="calculateWastedTime()"
+data-key="calculateButton">Calcular</button>
+<div class="expectancy-note" data-key="expectancyNote">(Cálculo baseado em
+uma expectativa de vida de 80 anos)</div>
+</div>
+<div class="result-container" id="resultContainer">
+<div class="slot-machine">
+<div class="slot-label" data-key="slotLabel">Tempo de tela em anos</div>
+<div class="slot-display">
+<span class="slot-number" id="slotNumber">0.0</span>
+</div>
+<div class="years-label" data-key="yearsLabel">da sua vida</div>
+</div>
+<div class="result-content" id="resultContent"></div>
+<button class="reset-btn" onclick="resetCalculator()">
+<svg viewBox="0 0 24 24" stroke-width="1.5"><path d="m15 18-6-6
+
+6-6"/></svg>
+
+<span data-key="resetButton">Fazer novo cálculo</span>
+
+</button>
+</div>
+</div>
+</main>
+<footer>
+<div class="footer-info">
+<div class="footer-contact">
+<a href="https://instagram.com/larissajordaoto" target="_blank" rel="noopener
+noreferrer" class="footer-credits"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0
+24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2"
+width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0
+1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51"
+y2="6.5"></line></svg><span>@larissajordaoto</span></a>
+<a href="mailto:larissajordaoto@gmail.com" class="footer-credits"><svg
+xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round"
+stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1
+0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13
+2,6"></polyline></svg><span
+data-key="contactEmail">larissajordaoto@gmail.com</span></a>
+</div>
+<div class="copyright">© <span id="current-year"></span> <span
+data-key="siteNameCopyright">Time Well Spent?</span>. <span
+data-key="rightsReserved">Todos os direitos reservados.</span></div>
+</div>
+<div class="footer-qrcode" id="open-qr-modal">
+<img src="qrcode-timewellspent.png" alt="QR Code para acessar o site">
+<p data-key="qrCodeCta">Aponte a câmera do seu celular!</p>
+</div>
+</footer>
+<div class="modal-overlay" id="qr-modal-overlay">
+<div class="modal-content">
+<span class="close-button" id="close-qr-modal">&times;</span>
+<img src="qrcode-timewellspent.png" alt="QR Code para o site Time Well Spent?">
+<p class="modal-title" data-key="siteNameModal">Time Well Spent?</p>
+<p class="copyright-modal">© <span id="modal-current-year"></span> <span
+data-key="siteNameCopyrightModal">Time Well Spent?</span>. <span
+data-key="rightsReservedModal">Todos os direitos reservados.</span></p>
+</div>
+</div>
+<div class="modal-overlay" id="help-modal-overlay">
+<div class="modal-content help-modal">
+<span class="close-button" id="close-help-modal">&times;</span>
+<h2 data-key="helpTitle">Como encontrar seu tempo de tela</h2>
+<div class="instructions">
+<div class="instruction-set">
+<h3 data-key="iosTitle"><svg class="instruction-set-icon"
+
+xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 21.7c.9.9
+
+2.5.4 3.4-1.1.9-1.4.4-3.1-1.1-4.1 -1.5-1-3.1-.4-4.1 1.1 -1 1.5-.4 3.1 1.1 4.1Z"/><path d="M16
+12.5c2.3-2.3 2.3-6.1 0-8.5 -2.3-2.3-6.1-2.3-8.5 0 -2.3 2.3-2.3 6.1 0 8.5"/><path d="M12.5
+16c2.3 2.3 6.1 2.3 8.5 0 2.3-2.3 2.3-6.1 0-8.5"/><path d="M18 6c-2.3 2.3-2.3 6.1 0
+8.5"/><path d="M22 6c-2.3 2.3-2.3 6.1 0 8.5"/></svg>iPhone (iOS)</h3>
+
+<ol>
+<li data-key="iosStep1">Abra os <strong>Ajustes</strong>.</li>
+<li data-key="iosStep2">Toque em <strong>Tempo de Uso</strong>.</li>
+<li data-key="iosStep3">Toque em <strong>Ver Todas as
+
+Atividades</strong> para ver sua média diária.</li>
+
+</ol>
+</div>
+<hr style="border: none; border-top: 1px solid var(--border-color); margin: 0;">
+<div class="instruction-set">
+<h3 data-key="androidTitle"><svg class="instruction-set-icon"
+
+xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 14.5c.3-1
+.5-2.2.5-3.5a10.9 10.9 0 0 0-2.3-6.9"/><path d="M7 14.5c-.3-1-.5-2.2-.5-3.5A10.9 10.9 0 0 1
+8.8 4.1"/><path d="M14.5 17c-1.2.4-2.6.6-4 .6-1.4 0-2.8-.2-4-.6"/><path d="M10 4.1c1.2-.3
+2.5-.5 3.8-.5 1.3 0 2.5.2 3.8.5"/><circle cx="12" cy="12" r="10"/><path d="m8 10 1-2"/><path
+d="m15 8 1 2"/></svg>Android</h3>
+
+<p data-key="androidNote">A localização pode variar um pouco, mas
+
+geralmente o caminho é este:</p>
+
+<ol>
+<li data-key="androidStep1">Abra as <strong>Configurações</strong>.</li>
+<li data-key="androidStep2">Procure por <strong>Bem-estar digital e
+
+controles parentais</strong>.</li>
+
+<li data-key="androidStep3">O gráfico na tela principal mostrará seu tempo
+
+de uso diário.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<script>
+let finalResult = 0;
+let isAnimating = false;
+const inputForm = document.getElementById('inputForm');
+const resultContainer = document.getElementById('resultContainer');
+const resultContent = document.getElementById('resultContent');
+const translations = {
+pt: {
+siteName: "Time Well Spent?", heroTitle: "Seu tempo de vida é finito. Seu tempo
+de tela também deveria ser.", cardTitle: "O scrolling é um custo. É hora de descobrir o seu.",
+ageLabel: "Qual sua idade atual?", agePlaceholder: "Digite sua idade", hoursLabel:
+"Quantas horas por dia você usa o celular?", hoursPlaceholder: "Ex: 5.5", calculateButton:
+"Calcular", expectancyNote: "(Cálculo baseado em uma expectativa de vida de 80 anos)",
+
+slotLabel: "Tempo de tela em anos", yearsLabel: "da sua vida", resetButton: "Fazer novo
+cálculo", contactEmail: "larissajordaoto@gmail.com", siteNameCopyright: "Time Well
+Spent?", rightsReserved: "Todos os direitos reservados.", qrCodeCta: "Aponte a câmera do
+seu celular!", siteNameModal: "Time Well Spent?", siteNameCopyrightModal: "Time Well
+Spent?", rightsReservedModal: "Todos os direitos reservados.",
+totalHoursLabel: "Total de horas", totalDaysLabel: "Total de dias",
+equivalencyTitle: "O que você poderia fazer com esse tempo?",
+equivalencyBook: "Ler centenas de livros.",
+equivalencySkill: "Dominar uma nova habilidade, como cozinhar ou desenhar.",
+equivalencyFamily: "Criar memórias com amigos e família, sem interrupções.",
+equivalencyHealth: "Cuidar do seu corpo e mente com exercícios e meditação.",
+equivalencyTravel: "Fazer dezenas de viagens e explorar novos lugares.",
+helpLink: "Não sabe onde encontrar?", helpTitle: "Como encontrar seu tempo de
+tela", iosTitle: "iPhone (iOS)", iosStep1: "Abra os Ajustes.", iosStep2: "Toque em Tempo de
+Uso.", iosStep3: "Toque em Ver Todas as Atividades para ver sua média diária.",
+androidTitle: "Android", androidNote: "A localização pode variar um pouco, mas geralmente
+o caminho é este:", androidStep1: "Abra as Configurações.", androidStep2: "Procure por
+Bem-estar digital e controles parentais.", androidStep3: "O gráfico na tela principal mostrará
+seu tempo de uso diário."
+},
+en: {
+siteName: "Time Well Spent?", heroTitle: "Your lifetime is finite. Your screen time
+should be too.", cardTitle: "Scrolling has a cost. It's time to find out yours.", ageLabel: "What
+is your current age?", agePlaceholder: "Enter your age", hoursLabel: "How many hours a
+day do you use your phone?", hoursPlaceholder: "E.g., 5.5", calculateButton: "Calculate",
+expectancyNote: "(Calculation based on an 80-year life expectancy)", slotLabel: "Screen
+time in years", yearsLabel: "of your life", resetButton: "New calculation", contactEmail:
+"larissajordaoto@gmail.com", siteNameCopyright: "Time Well Spent?", rightsReserved: "All
+rights reserved.", qrCodeCta: "Point your phone's camera!", siteNameModal: "Time Well
+Spent?", siteNameCopyrightModal: "Time Well Spent?", rightsReservedModal: "All rights
+reserved.",
+totalHoursLabel: "Total hours", totalDaysLabel: "Total days",
+equivalencyTitle: "What could you do with this time?",
+equivalencyBook: "Read hundreds of books.",
+equivalencySkill: "Master a new skill, like cooking or drawing.",
+equivalencyFamily: "Create memories with friends and family, without
+interruptions.",
+equivalencyHealth: "Take care of your body and mind with exercise and
+meditation.",
+equivalencyTravel: "Go on dozens of trips and explore new places.",
+helpLink: "Not sure where to find it?", helpTitle: "How to find your screen time",
+iosTitle: "iPhone (iOS)", iosStep1: "Open Settings.", iosStep2: "Tap on Screen Time.",
+iosStep3: "Tap See All Activity to view your daily average.", androidTitle: "Android",
+androidNote: "The location may vary slightly, but this is the usual path:", androidStep1:
+"Open Settings.", androidStep2: "Look for Digital Wellbeing & parental controls.",
+androidStep3: "The main chart will show your daily usage time."
+},
+es: {
+
+siteName: "Time Well Spent?", heroTitle: "Tu tiempo de vida es finito. Tu tiempo
+de pantalla también debería serlo.", cardTitle: "El scrolling tiene un coste. Es hora de
+descubrir el tuyo.", ageLabel: "¿Cuál es tu edad actual?", agePlaceholder: "Introduce tu
+edad", hoursLabel: "¿Cuántas horas al día usas el móvil?", hoursPlaceholder: "Ej: 5.5",
+calculateButton: "Calcular", expectancyNote: "(Cálculo basado en una esperanza de vida de
+80 años)", slotLabel: "Tiempo de pantalla en años", yearsLabel: "de tu vida", resetButton:
+"Nuevo cálculo", contactEmail: "larissajordaoto@gmail.com", siteNameCopyright: "Time Well
+Spent?", rightsReserved: "Todos los derechos reservados.", qrCodeCta: "¡Apunta la cámara
+de tu móvil!", siteNameModal: "Time Well Spent?", siteNameCopyrightModal: "Time Well
+Spent?", rightsReservedModal: "Todos los derechos reservados.",
+totalHoursLabel: "Total de horas", totalDaysLabel: "Total de días",
+equivalencyTitle: "¿Qué podrías hacer con este tiempo?",
+equivalencyBook: "Leer cientos de libros.",
+equivalencySkill: "Dominar una nueva habilidad, como cocinar o dibujar.",
+equivalencyFamily: "Crear recuerdos con amigos y familia, sin interrupciones.",
+equivalencyHealth: "Cuidar tu cuerpo y mente con ejercicio y meditación.",
+equivalencyTravel: "Hacer docenas de viajes y explorar nuevos lugares.",
+helpLink: "¿No sabes dónde encontrarlo?", helpTitle: "Cómo encontrar tu tiempo
+de pantalla", iosTitle: "iPhone (iOS)", iosStep1: "Abre Ajustes.", iosStep2: "Toca en Tiempo
+de uso.", iosStep3: "Toca Ver toda la actividad para ver tu promedio diario.", androidTitle:
+"Android", androidNote: "La ubicación puede variar un poco, pero generalmente la ruta es
+esta:", androidStep1: "Abre Configuración.", androidStep2: "Busca Bienestar digital y
+controles parentales.", androidStep3: "El gráfico principal mostrará tu tiempo de uso diario."
+}
+};
+const setLanguage = (lang) => {
+document.querySelectorAll('[data-key]').forEach(el => {
+const key = el.dataset.key;
+if (translations[lang]?.[key]) el.textContent = translations[lang][key];
+});
+document.querySelectorAll('[data-key-placeholder]').forEach(el => {
+const key = el.dataset.keyPlaceholder;
+if (translations[lang]?.[key]) el.placeholder = translations[lang][key];
+});
+document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
+localStorage.setItem('userLanguage', lang);
+document.querySelectorAll('.lang-btn').forEach(btn => {
+btn.classList.toggle('active', btn.dataset.lang === lang);
+});
+};
+document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', ()
+=> setLanguage(btn.dataset.lang)));
+function calculateWastedTime() { if (isAnimating) return; const age =
+parseInt(document.getElementById('age').value); const dailyHours =
+parseFloat(document.getElementById('dailyHours').value); if (!age || !dailyHours || age < 1 ||
+
+age > 79 || dailyHours < 0.1) { alert('Por favor, insira valores válidos!'); return; } finalResult =
+(80 - age) * 365 * dailyHours / 8760; isAnimating = true;
+inputForm.classList.add('animating-out'); inputForm.addEventListener('animationend', () => {
+inputForm.style.display = 'none'; inputForm.classList.remove('animating-out');
+resultContainer.style.display = 'block'; resultContainer.classList.add('animating-in');
+startAnimation(); resultContainer.addEventListener('animationend', () => {
+resultContainer.classList.remove('animating-in'); isAnimating = false; }, { once: true }); }, {
+once: true }); }
+function startAnimation() { const slotNumber = document.getElementById('slotNumber');
+resultContent.innerHTML = ''; resultContent.classList.remove('visible');
+slotNumber.classList.add('spinning'); let cycles = 0; const maxCycles = 120; const interval =
+setInterval(() => { slotNumber.textContent = (Math.random() * 20).toFixed(1); cycles++; if
+(cycles > maxCycles) { clearInterval(interval); slotNumber.classList.remove('spinning'); let
+currentVal = parseFloat(slotNumber.textContent); const targetVal = finalResult; const diff =
+targetVal - currentVal; const steps = 30; const increment = diff / steps; let step = 0; const
+finalInterval = setInterval(() => { step++; currentVal += increment; slotNumber.textContent =
+currentVal.toFixed(1); if (step >= steps) { clearInterval(finalInterval); slotNumber.textContent
+= targetVal.toFixed(1); setTimeout(showResult, 500); } }, 20); } }, 50); }
+function showResult() {
+const lang = localStorage.getItem('userLanguage') || 'pt';
+const age = parseInt(document.getElementById('age').value);
+const dailyHours = parseFloat(document.getElementById('dailyHours').value);
+const totalHours = Math.round((80 - age) * 365 * dailyHours);
+const totalDays = Math.round(totalHours / 24);
+resultContent.innerHTML = `<div class="stats-grid"><div class="stat-item"><div
+class="stat-icon"><svg viewBox="0 0 24 24" stroke-width="1.5" fill="none"
+stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4
+2"/></svg></div><div class="stat-number">${totalHours.toLocaleString(lang === 'pt' ? 'pt-BR'
+: lang)}</div><div class="stat-label">${translations[lang].totalHoursLabel}</div></div><div
+class="stat-item"><div class="stat-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"
+fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2"
+ry="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><div
+class="stat-number">${totalDays.toLocaleString(lang === 'pt' ? 'pt-BR' : lang)}</div><div
+class="stat-label">${translations[lang].totalDaysLabel}</div></div></div><div
+class="equivalency-section"><h3
+class="equivalency-title">${translations[lang].equivalencyTitle}</h3><ul
+class="equivalency-list"><li class="equivalency-item"><div class="equivalency-icon"><svg
+xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0
+0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1
+6.5 2z"></path></svg></div><span
+class="equivalency-text">${translations[lang].equivalencyBook}</span></li><li
+class="equivalency-item"><div class="equivalency-icon"><svg
+xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3m0
+12l-4-4m4 4l4-4"></path><path d="M10 9h4"></path><path d="M15 21H9a2 2 0 0
+1-2-2V7h10v12a2 2 0 0 1-2 2z"></path></svg></div><span
+
+class="equivalency-text">${translations[lang].equivalencySkill}</span></li><li
+class="equivalency-item"><div class="equivalency-icon"><svg
+xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46
+3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2
+8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg></div><span
+class="equivalency-text">${translations[lang].equivalencyFamily}</span></li><li
+class="equivalency-item"><div class="equivalency-icon"><svg
+xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 0 0
+9-9c0-4.97-4.03-9-9-9s-9 4.03-9 9a9 9 0 0 0 9 9z"></path><path d="M12
+21V12"></path><path d="m5 12 2.5 3"></path><path d="m16.5
+15-2.5-3"></path></svg></div><span
+class="equivalency-text">${translations[lang].equivalencyHealth}</span></li><li
+class="equivalency-item"><div class="equivalency-icon"><svg
+xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2
+12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0
+1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div><span
+class="equivalency-text">${translations[lang].equivalencyTravel}</span></li></ul></div>`;
+resultContent.classList.add('visible');
+isAnimating = false;
+}
+function resetCalculator() { if(isAnimating) return; isAnimating = true;
+resultContainer.classList.add('animating-out');
+resultContainer.addEventListener('animationend', () => { resultContainer.style.display =
+'none'; resultContainer.classList.remove('animating-out');
+document.getElementById('age').value = ''; document.getElementById('dailyHours').value =
+''; inputForm.style.display = 'block'; inputForm.classList.add('animating-in');
+inputForm.addEventListener('animationend', () => {
+inputForm.classList.remove('animating-in'); isAnimating = false; }, { once: true }); }, { once:
+true }); }
+document.addEventListener('DOMContentLoaded', () => {
+const savedLang = localStorage.getItem('userLanguage') || 'pt';
+setLanguage(savedLang);
+document.getElementById('current-year').textContent = new Date().getFullYear();
+document.getElementById('modal-current-year').textContent = new
+Date().getFullYear();
+});
+const qrModalOverlay = document.getElementById('qr-modal-overlay');
+const openQrModalBtn = document.getElementById('open-qr-modal');
+const closeQrModalBtn = document.getElementById('close-qr-modal');
+openQrModalBtn.addEventListener('click', (e) => { e.preventDefault();
+qrModalOverlay.classList.add('visible'); });
+closeQrModalBtn.addEventListener('click', () =>
+qrModalOverlay.classList.remove('visible'));
+
+qrModalOverlay.addEventListener('click', (event) => { if (event.target ===
+qrModalOverlay) qrModalOverlay.classList.remove('visible'); });
+const helpModalOverlay = document.getElementById('help-modal-overlay');
+const openHelpModalBtn = document.getElementById('open-help-modal');
+const closeHelpModalBtn = document.getElementById('close-help-modal');
+openHelpModalBtn.addEventListener('click', (e) => { e.preventDefault();
+helpModalOverlay.classList.add('visible'); });
+closeHelpModalBtn.addEventListener('click', () =>
+helpModalOverlay.classList.remove('visible'));
+helpModalOverlay.addEventListener('click', (event) => { if (event.target ===
+helpModalOverlay) helpModalOverlay.classList.remove('visible'); });
+window.addEventListener('keydown', (event) => {
+if (event.key === 'Escape') {
+qrModalOverlay.classList.remove('visible');
+helpModalOverlay.classList.remove('visible');
+}
+});
+</script>
 </body>
 </html>
