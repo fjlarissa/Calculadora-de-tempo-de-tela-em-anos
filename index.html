@@ -1,11 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Time Well Spent?</title>
-    <link rel="icon" type="image/png" href="tws-logo-at-transparent.png">
-    <link rel="apple-touch-icon" href="tws-logo-at-transparent.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -19,7 +17,9 @@
             --transition-speed: 0.3s;
         }
 
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
 
         @keyframes fadeOut { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(0.98); } }
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
@@ -36,6 +36,7 @@
             100% { transform: translateY(-24px) scale(0.94); opacity: 0.2; }
         }
 
+
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--background-color); 
@@ -46,6 +47,7 @@
             flex-direction: column;
             overflow-x: hidden;
         }
+
 
         .page-header, main, footer { padding-left: 40px; padding-right: 40px; }
         
@@ -71,31 +73,18 @@
             height: 80px;
         }
 
+
         main { display: flex; flex: 1; align-items: center; justify-content: center; gap: 60px; width: 100%; }
         .hero-text { max-width: 500px; animation: slideInLeft 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
         .hero-text h1 {
             font-size: 3.2rem;
             font-weight: 700;
             line-height: 1.2;
-            margin: 0 0 24px 0;
+            margin: 0;
         }
-        
-        .manifesto-link {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text-color);
-            text-decoration: none;
-            border-bottom: 2px solid var(--text-color);
-            padding-bottom: 4px;
-            transition: color var(--transition-speed), border-color var(--transition-speed);
-        }
-        .manifesto-link:hover {
-            color: var(--text-secondary);
-            border-color: var(--text-secondary);
-        }
-        
         .calculator-card { background-color: var(--card-background); padding: 48px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); width: 100%; max-width: 520px; border: 1px solid var(--border-color); animation: slideInRight 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
         .header { text-align: center; margin-bottom: 40px; }
+
 
         .card-logo-image {
             height: 120px;
@@ -137,6 +126,7 @@
         .help-link:hover {
             color: var(--text-color);
         }
+
 
         input { width: 100%; padding: 16px 20px; border: 1px solid var(--border-color); border-radius: 12px; font-size: 16px; font-family: 'Poppins', sans-serif; background: var(--card-background); transition: all var(--transition-speed) ease; }
         input:focus { outline: none; border-color: #999; box-shadow: 0 0 0 3px rgba(153, 153, 153, 0.1); }
@@ -183,6 +173,7 @@
         .lang-btn:hover { background-color: var(--card-background); color: var(--text-color); }
         .lang-btn.active { background-color: var(--text-color); color: var(--card-background); border-color: var(--text-color); }
 
+
         .footer-qrcode { text-align: center; cursor: pointer; }
         .footer-qrcode img { width: 100px; height: 100px; border-radius: 8px; border: 1px solid var(--border-color); transition: all var(--transition-speed) ease; }
         .footer-qrcode:hover img { transform: scale(1.05); border-color: var(--text-color); box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
@@ -198,20 +189,15 @@
         .close-button { position: absolute; top: 10px; right: 15px; font-size: 28px; font-weight: bold; color: #aaa; cursor: pointer; transition: color var(--transition-speed) ease; }
         .close-button:hover { color: var(--text-color); }
 
+
         .help-modal { max-width: 600px; text-align: left; }
         .help-modal h2 { text-align: center; margin-bottom: 24px; font-size: 22px; }
         .instructions { display: flex; flex-direction: column; gap: 20px; }
         .instruction-set h3 { display: flex; align-items: center; gap: 10px; font-size: 18px; margin-bottom: 12px; }
         .instruction-set-icon { width: 24px; height: 24px; }
         .instruction-set p { font-size: 14px; color: var(--text-secondary); margin-bottom: 12px; font-style: italic; }
-        .instruction-set ol { padding-left: 20px; font-size: 15px; list-style-position: inside; }
+        .instruction-set ol { padding-left: 20px; font-size: 15px; }
         .instruction-set li { margin-bottom: 8px; }
-        
-        .manifesto-modal { max-width: 650px; text-align: left; max-height: 80vh; overflow-y: auto; padding: 40px; }
-        .manifesto-modal h2 { text-align: center; margin-bottom: 32px; font-size: 24px; }
-        .manifesto-modal h3 { font-size: 18px; font-weight: 600; margin-top: 24px; margin-bottom: 12px; }
-        .manifesto-modal p { margin-bottom: 16px; font-size: 16px; line-height: 1.7; color: var(--text-secondary); }
-        .manifesto-quote { font-style: italic; text-align: center; margin-top: 32px; color: var(--text-secondary); }
         
         @media (max-width: 992px) { 
             .page-header { 
@@ -241,10 +227,10 @@
         </div>
     </header>
 
+
     <main>
         <div class="hero-text">
             <h1 data-key="heroTitle">Seu tempo de vida é finito. Seu tempo de tela também deveria ser.</h1>
-            <a href="#" id="open-manifesto-modal" class="manifesto-link" data-key="manifestoLink">Leia o manifesto</a>
         </div>
         <div class="calculator-card">
             <div id="inputForm">
@@ -266,7 +252,7 @@
                         <span data-key="helpLink">Não sabe onde encontrar?</span>
                     </a>
                 </div>
-                <button class="calculate-btn" data-key="calculateButton">Calcular</button>
+                <button class="calculate-btn" onclick="calculateWastedTime()" data-key="calculateButton">Calcular</button>
                 <div class="expectancy-note" data-key="expectancyNote">(Cálculo baseado em uma expectativa de vida de 80 anos)</div>
             </div>
             <div class="result-container" id="resultContainer">
@@ -278,7 +264,7 @@
                     <div class="years-label" data-key="yearsLabel">da sua vida</div>
                 </div>
                 <div class="result-content" id="resultContent"></div>
-                <button class="reset-btn">
+                <button class="reset-btn" onclick="resetCalculator()">
                     <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="m15 18-6-6 6-6"/></svg>
                     <span data-key="resetButton">Fazer novo cálculo</span>
                 </button>
@@ -311,137 +297,134 @@
             <span class="close-button" id="close-help-modal">&times;</span>
             <h2 data-key="helpTitle">Como encontrar seu tempo de tela</h2>
             <div class="instructions">
+                <div class="instruction-set">
+                    <h3 data-key="iosTitle"><svg class="instruction-set-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 21.7c.9.9 2.5.4 3.4-1.1.9-1.4.4-3.1-1.1-4.1 -1.5-1-3.1-.4-4.1 1.1 -1 1.5-.4 3.1 1.1 4.1Z"/><path d="M16 12.5c2.3-2.3 2.3-6.1 0-8.5 -2.3-2.3-6.1-2.3-8.5 0 -2.3 2.3-2.3 6.1 0 8.5"/><path d="M12.5 16c2.3 2.3 6.1 2.3 8.5 0 2.3-2.3 2.3-6.1 0-8.5"/><path d="M18 6c-2.3 2.3-2.3 6.1 0 8.5"/><path d="M22 6c-2.3 2.3-2.3 6.1 0 8.5"/></svg>iPhone (iOS)</h3>
+                    <ol>
+                        <li data-key="iosStep1">Abra os <strong>Ajustes</strong>.</li>
+                        <li data-key="iosStep2">Toque em <strong>Tempo de Uso</strong>.</li>
+                        <li data-key="iosStep3">Toque em <strong>Ver Todas as Atividades</strong> para ver sua média diária.</li>
+                    </ol>
                 </div>
-        </div>
-    </div>
-    <div class="modal-overlay" id="manifesto-modal-overlay">
-        <div class="modal-content manifesto-modal">
-            <span class="close-button" id="close-manifesto-modal">&times;</span>
-            <h2 data-key="manifestoTitle"></h2>
-            <h3 data-key="manifestoH1"></h3><p data-key="manifestoP1"></p>
-            <h3 data-key="manifestoH2"></h3><p data-key="manifestoP2"></p><p data-key="manifestoP3"></p>
-            <h3 data-key="manifestoH4"></h3><p data-key="manifestoP4"></p>
-            <h3 data-key="manifestoH5"></h3><p data-key="manifestoP5"></p>
-            <h3 data-key="manifestoH6"></h3><p data-key="manifestoP6"></p>
-            <p class="manifesto-quote" data-key="manifestoQuote"></p>
+                <hr style="border: none; border-top: 1px solid var(--border-color); margin: 0;">
+                <div class="instruction-set">
+                    <h3 data-key="androidTitle"><svg class="instruction-set-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 14.5c.3-1 .5-2.2.5-3.5a10.9 10.9 0 0 0-2.3-6.9"/><path d="M7 14.5c-.3-1-.5-2.2-.5-3.5A10.9 10.9 0 0 1 8.8 4.1"/><path d="M14.5 17c-1.2.4-2.6.6-4 .6-1.4 0-2.8-.2-4-.6"/><path d="M10 4.1c1.2-.3 2.5-.5 3.8-.5 1.3 0 2.5.2 3.8.5"/><circle cx="12" cy="12" r="10"/><path d="m8 10 1-2"/><path d="m15 8 1 2"/></svg>Android</h3>
+                    <p data-key="androidNote">A localização pode variar um pouco, mas geralmente o caminho é este:</p>
+                    <ol>
+                        <li data-key="androidStep1">Abra as <strong>Configurações</strong>.</li>
+                        <li data-key="androidStep2">Procure por <strong>Bem-estar digital e controles parentais</strong>.</li>
+                        <li data-key="androidStep3">O gráfico na tela principal mostrará seu tempo de uso diário.</li>
+                    </ol>
+                </div>
+            </div>
         </div>
     </div>
     
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- VARIÁVEIS GLOBAIS ---
-            let finalResult = 0;
-            let isAnimating = false;
+        let finalResult = 0;
+        let isAnimating = false;
+        const inputForm = document.getElementById('inputForm');
+        const resultContainer = document.getElementById('resultContainer');
+        const resultContent = document.getElementById('resultContent');
 
-            // --- ELEMENTOS DO DOM ---
-            const inputForm = document.getElementById('inputForm');
-            const resultContainer = document.getElementById('resultContainer');
-            const resultContent = document.getElementById('resultContent');
-            const calculateBtn = document.querySelector('.calculate-btn');
-            const resetBtn = document.querySelector('.reset-btn');
-            const langButtons = document.querySelectorAll('.lang-btn');
-            const qrModalOverlay = document.getElementById('qr-modal-overlay');
-            const openQrModalBtn = document.getElementById('open-qr-modal');
-            const closeQrModalBtn = document.getElementById('close-qr-modal');
-            const helpModalOverlay = document.getElementById('help-modal-overlay');
-            const openHelpModalBtn = document.getElementById('open-help-modal');
-            const closeHelpModalBtn = document.getElementById('close-help-modal');
-            const manifestoModalOverlay = document.getElementById('manifesto-modal-overlay');
-            const openManifestoModalBtn = document.getElementById('open-manifesto-modal');
-            const closeManifestoModalBtn = document.getElementById('close-manifesto-modal');
 
-            // --- DICIONÁRIO DE TRADUÇÕES ---
-            const translations = {
-                pt: {
-                    siteName: "Time Well Spent?", heroTitle: "Seu tempo de vida é finito. Seu tempo de tela também deveria ser.", cardTitle: "O scrolling é um custo. É hora de descobrir o seu.", ageLabel: "Qual sua idade atual?", agePlaceholder: "Digite sua idade", hoursLabel: "Quantas horas por dia você usa o celular?", hoursPlaceholder: "Ex: 5.5", calculateButton: "Calcular", expectancyNote: "(Cálculo baseado em uma expectativa de vida de 80 anos)", slotLabel: "Tempo de tela em anos", yearsLabel: "da sua vida", resetButton: "Fazer novo cálculo", contactEmail: "larissajordaoto@gmail.com", siteNameCopyright: "Time Well Spent?", rightsReserved: "Todos os direitos reservados.", qrCodeCta: "Aponte a câmera do seu celular!", siteNameModal: "Time Well Spent?", siteNameCopyrightModal: "Time Well Spent?", rightsReservedModal: "Todos os direitos reservados.",
-                    totalHoursLabel: "Total de horas", totalDaysLabel: "Total de dias",
-                    equivalencyTitle: "O que você poderia fazer com esse tempo?",
-                    equivalencyBook: "Ler centenas de livros.",
-                    equivalencySkill: "Dominar uma nova habilidade, como cozinhar ou desenhar.",
-                    equivalencyFamily: "Criar memórias com amigos e família, sem interrupções.",
-                    equivalencyHealth: "Cuidar do seu corpo e mente com exercícios e meditação.",
-                    equivalencyTravel: "Fazer dezenas de viagens e explorar novos lugares.",
-                    helpLink: "Não sabe onde encontrar?", helpTitle: "Como encontrar seu tempo de tela", iosTitle: "iPhone (iOS)", iosStep1: "Abra os <strong>Ajustes</strong>.", iosStep2: "Toque em <strong>Tempo de Uso</strong>.", iosStep3: "Toque em <strong>Ver Todas as Atividades</strong> para ver sua média diária.", androidTitle: "Android", androidNote: "A localização pode variar um pouco, mas geralmente o caminho é este:", androidStep1: "Abra as <strong>Configurações</strong>.", androidStep2: "Procure por <strong>Bem-estar digital e controles parentais</strong>.", androidStep3: "O gráfico na tela principal mostrará seu tempo de uso diário.",
-                    manifestoLink: "Leia o manifesto", manifestoTitle: "Manifesto: Por um uso consciente do tempo digital", manifestoH1: "Sobre minha trajetória e motivações", manifestoP1: "Durante minha graduação em Terapia Ocupacional, desenvolvi um interesse profundo em estudar e me capacitar em sono e descanso. Sou uma grande defensora das Práticas Integrativas e Complementares em Saúde (PICS), considerando notável que exista uma política pública dedicada a essas abordagens. Meu interesse se estende também ao mindfulness e à tecnologia voltada para saúde mental digital.", manifestoH2: "O Propósito: Reflexão sobre o tempo", manifestoP2: "O intuito deste site é provocar uma reflexão profunda sobre o tempo que dedicamos ao uso do celular para atividades sem propósito definido ou objetivo claro. Especificamente, questiono quanto tempo desperdiçamos fazendo doomscrolling - o ato de rolar infinitamente pelas redes sociais e pelo celular como um todo, sem direcionamento ou intenção.", manifestoP3: "Esta é uma reflexão sobre como nosso tempo é um bem valioso e irrecuperável. Uma vez que passa, não retorna. A proposta é repensarmos nossa relação com o tempo, considerando formas diferentes e mais significativas de vivenciá-lo.", manifestoH4: "Alertas acerca das compreensões sobre descanso", manifestoP4: "Este projeto serve como alerta para questões fundamentais, incluindo a forma equivocada como nossa sociedade contemporânea compreende o descanso. Ver reels, TikToks e similares não constitui verdadeiro descanso - representa apenas mais hiperestimulação cerebral e liberação descontrolada de dopamina.", manifestoH5: "O impacto no sono", manifestoP5: "Sobre o sono, é provável que todos já tenham experimentado a situação de deitar, apoiar a cabeça no travesseiro, fechar os olhos e, subitamente, ter a mente invadida por um 'remix' de todo o conteúdo consumido nas horas anteriores ao repouso. Este fenômeno evidencia como o consumo digital desregulado interfere diretamente na qualidade do nosso descanso noturno.", manifestoH6: "O convite à reflexão", manifestoP6: "Convido você a acessar o Time Well Spent Calculator e permitir-se uma reflexão honesta sobre seus hábitos digitais. Que este seja o primeiro passo para uma relação mais consciente e intencional com seu tempo e com a tecnologia.", manifestoQuote: "\"O tempo que passa não retorna. A escolha de como vivê-lo é nossa responsabilidade.\""
-                },
-                en: { /* ... */ },
-                es: { /* ... */ }
-            };
-
-            const setLanguage = (lang) => {
-                document.querySelectorAll('[data-key]').forEach(el => {
-                    const key = el.dataset.key;
-                    if (translations[lang]?.[key]) el.innerHTML = translations[lang][key];
-                });
-                document.querySelectorAll('[data-key-placeholder]').forEach(el => {
-                    const key = el.dataset.keyPlaceholder;
-                    if (translations[lang]?.[key]) el.placeholder = translations[lang][key];
-                });
-                document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
-                localStorage.setItem('userLanguage', lang);
-                document.querySelectorAll('.lang-btn').forEach(btn => {
-                    btn.classList.toggle('active', btn.dataset.lang === lang);
-                });
-            };
-            
-            function calculateWastedTime() { if (isAnimating) return; const age = parseInt(document.getElementById('age').value); const dailyHours = parseFloat(document.getElementById('dailyHours').value); if (!age || !dailyHours || age < 1 || age > 79 || dailyHours < 0.1) { alert('Por favor, insira valores válidos!'); return; } finalResult = (80 - age) * 365 * dailyHours / 8760; isAnimating = true; inputForm.classList.add('animating-out'); inputForm.addEventListener('animationend', () => { inputForm.style.display = 'none'; inputForm.classList.remove('animating-out'); resultContainer.style.display = 'block'; resultContainer.classList.add('animating-in'); startAnimation(); resultContainer.addEventListener('animationend', () => { resultContainer.classList.remove('animating-in'); isAnimating = false; }, { once: true }); }, { once: true }); }
-            function startAnimation() { const slotNumber = document.getElementById('slotNumber'); resultContent.innerHTML = ''; resultContent.classList.remove('visible'); slotNumber.classList.add('spinning'); let cycles = 0; const maxCycles = 120; const interval = setInterval(() => { slotNumber.textContent = (Math.random() * 20).toFixed(1); cycles++; if (cycles > maxCycles) { clearInterval(interval); slotNumber.classList.remove('spinning'); let currentVal = parseFloat(slotNumber.textContent); const targetVal = finalResult; const diff = targetVal - currentVal; const steps = 30; const increment = diff / steps; let step = 0; const finalInterval = setInterval(() => { step++; currentVal += increment; slotNumber.textContent = currentVal.toFixed(1); if (step >= steps) { clearInterval(finalInterval); slotNumber.textContent = targetVal.toFixed(1); setTimeout(showResult, 500); } }, 20); } }, 50); }
-            function showResult() {
-                const lang = localStorage.getItem('userLanguage') || 'pt';
-                const age = parseInt(document.getElementById('age').value);
-                const dailyHours = parseFloat(document.getElementById('dailyHours').value);
-                const totalHours = Math.round((80 - age) * 365 * dailyHours);
-                const totalDays = Math.round(totalHours / 24);
-                
-                resultContent.innerHTML = `<div class="stats-grid"><div class="stat-item"><div class="stat-icon"><svg viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div class="stat-number">${totalHours.toLocaleString(lang === 'pt' ? 'pt-BR' : lang)}</div><div class="stat-label">${translations[lang].totalHoursLabel}</div></div><div class="stat-item"><div class="stat-icon"><svg viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><div class="stat-number">${totalDays.toLocaleString(lang === 'pt' ? 'pt-BR' : lang)}</div><div class="stat-label">${translations[lang].totalDaysLabel}</div></div></div><div class="equivalency-section"><h3 class="equivalency-title">${translations[lang].equivalencyTitle}</h3><ul class="equivalency-list"><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div><span class="equivalency-text">${translations[lang].equivalencyBook}</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3m0 12l-4-4m4 4l4-4"></path><path d="M10 9h4"></path><path d="M15 21H9a2 2 0 0 1-2-2V7h10v12a2 2 0 0 1-2 2z"></path></svg></div><span class="equivalency-text">${translations[lang].equivalencySkill}</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg></div><span class="equivalency-text">${translations[lang].equivalencyFamily}</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 0 0 9-9c0-4.97-4.03-9-9-9s-9 4.03-9 9a9 9 0 0 0 9 9z"></path><path d="M12 21V12"></path><path d="m5 12 2.5 3"></path><path d="m16.5 15-2.5-3"></path></svg></div><span class="equivalency-text">${translations[lang].equivalencyHealth}</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div><span class="equivalency-text">${translations[lang].equivalencyTravel}</span></li></ul></div>`;
-                resultContent.classList.add('visible');
-                isAnimating = false;
+        const translations = {
+            pt: {
+                siteName: "Time Well Spent?", heroTitle: "Seu tempo de vida é finito. Seu tempo de tela também deveria ser.", cardTitle: "O scrolling é um custo. É hora de descobrir o seu.", ageLabel: "Qual sua idade atual?", agePlaceholder: "Digite sua idade", hoursLabel: "Quantas horas por dia você usa o celular?", hoursPlaceholder: "Ex: 5.5", calculateButton: "Calcular", expectancyNote: "(Cálculo baseado em uma expectativa de vida de 80 anos)", slotLabel: "Tempo de tela em anos", yearsLabel: "da sua vida", resetButton: "Fazer novo cálculo", contactEmail: "larissajordaoto@gmail.com", siteNameCopyright: "Time Well Spent?", rightsReserved: "Todos os direitos reservados.", qrCodeCta: "Aponte a câmera do seu celular!", siteNameModal: "Time Well Spent?", siteNameCopyrightModal: "Time Well Spent?", rightsReservedModal: "Todos os direitos reservados.",
+                totalHoursLabel: "Total de horas", totalDaysLabel: "Total de dias",
+                equivalencyTitle: "O que você poderia fazer com esse tempo?",
+                equivalencyBook: "Ler centenas de livros.",
+                equivalencySkill: "Dominar uma nova habilidade, como cozinhar ou desenhar.",
+                equivalencyFamily: "Criar memórias com amigos e família, sem interrupções.",
+                equivalencyHealth: "Cuidar do seu corpo e mente com exercícios e meditação.",
+                equivalencyTravel: "Fazer dezenas de viagens e explorar novos lugares.",
+                helpLink: "Não sabe onde encontrar?", helpTitle: "Como encontrar seu tempo de tela", iosTitle: "iPhone (iOS)", iosStep1: "Abra os Ajustes.", iosStep2: "Toque em Tempo de Uso.", iosStep3: "Toque em Ver Todas as Atividades para ver sua média diária.", androidTitle: "Android", androidNote: "A localização pode variar um pouco, mas geralmente o caminho é este:", androidStep1: "Abra as Configurações.", androidStep2: "Procure por Bem-estar digital e controles parentais.", androidStep3: "O gráfico na tela principal mostrará seu tempo de uso diário."
+            },
+            en: {
+                siteName: "Time Well Spent?", heroTitle: "Your lifetime is finite. Your screen time should be too.", cardTitle: "Scrolling has a cost. It's time to find out yours.", ageLabel: "What is your current age?", agePlaceholder: "Enter your age", hoursLabel: "How many hours a day do you use your phone?", hoursPlaceholder: "E.g., 5.5", calculateButton: "Calculate", expectancyNote: "(Calculation based on an 80-year life expectancy)", slotLabel: "Screen time in years", yearsLabel: "of your life", resetButton: "New calculation", contactEmail: "larissajordaoto@gmail.com", siteNameCopyright: "Time Well Spent?", rightsReserved: "All rights reserved.", qrCodeCta: "Point your phone's camera!", siteNameModal: "Time Well Spent?", siteNameCopyrightModal: "Time Well Spent?", rightsReservedModal: "All rights reserved.",
+                totalHoursLabel: "Total hours", totalDaysLabel: "Total days",
+                equivalencyTitle: "What could you do with this time?",
+                equivalencyBook: "Read hundreds of books.",
+                equivalencySkill: "Master a new skill, like cooking or drawing.",
+                equivalencyFamily: "Create memories with friends and family, without interruptions.",
+                equivalencyHealth: "Take care of your body and mind with exercise and meditation.",
+                equivalencyTravel: "Go on dozens of trips and explore new places.",
+                helpLink: "Not sure where to find it?", helpTitle: "How to find your screen time", iosTitle: "iPhone (iOS)", iosStep1: "Open Settings.", iosStep2: "Tap on Screen Time.", iosStep3: "Tap See All Activity to view your daily average.", androidTitle: "Android", androidNote: "The location may vary slightly, but this is the usual path:", androidStep1: "Open Settings.", androidStep2: "Look for Digital Wellbeing & parental controls.", androidStep3: "The main chart will show your daily usage time."
+            },
+            es: {
+                siteName: "Time Well Spent?", heroTitle: "Tu tiempo de vida es finito. Tu tiempo de pantalla también debería serlo.", cardTitle: "El scrolling tiene un coste. Es hora de descubrir el tuyo.", ageLabel: "¿Cuál es tu edad actual?", agePlaceholder: "Introduce tu edad", hoursLabel: "¿Cuántas horas al día usas el móvil?", hoursPlaceholder: "Ej: 5.5", calculateButton: "Calcular", expectancyNote: "(Cálculo basado en una esperanza de vida de 80 años)", slotLabel: "Tiempo de pantalla en años", yearsLabel: "de tu vida", resetButton: "Nuevo cálculo", contactEmail: "larissajordaoto@gmail.com", siteNameCopyright: "Time Well Spent?", rightsReserved: "Todos los derechos reservados.", qrCodeCta: "¡Apunta la cámara de tu móvil!", siteNameModal: "Time Well Spent?", siteNameCopyrightModal: "Time Well Spent?", rightsReservedModal: "Todos los derechos reservados.",
+                totalHoursLabel: "Total de horas", totalDaysLabel: "Total de días",
+                equivalencyTitle: "¿Qué podrías hacer con este tiempo?",
+                equivalencyBook: "Leer cientos de libros.",
+                equivalencySkill: "Dominar una nueva habilidad, como cocinar o dibujar.",
+                equivalencyFamily: "Crear recuerdos con amigos y familia, sin interrupciones.",
+                equivalencyHealth: "Cuidar tu cuerpo y mente con ejercicio y meditación.",
+                equivalencyTravel: "Hacer docenas de viajes y explorar nuevos lugares.",
+                helpLink: "¿No sabes dónde encontrarlo?", helpTitle: "Cómo encontrar tu tiempo de pantalla", iosTitle: "iPhone (iOS)", iosStep1: "Abre Ajustes.", iosStep2: "Toca en Tiempo de uso.", iosStep3: "Toca Ver toda la actividad para ver tu promedio diario.", androidTitle: "Android", androidNote: "La ubicación puede variar un poco, pero generalmente la ruta es esta:", androidStep1: "Abre Configuración.", androidStep2: "Busca Bienestar digital y controles parentales.", androidStep3: "El gráfico principal mostrará tu tiempo de uso diario."
             }
-            function resetCalculator() { if(isAnimating) return; isAnimating = true; resultContainer.classList.add('animating-out'); resultContainer.addEventListener('animationend', () => { resultContainer.style.display = 'none'; resultContainer.classList.remove('animating-out'); document.getElementById('age').value = ''; document.getElementById('dailyHours').value = ''; inputForm.style.display = 'block'; inputForm.classList.add('animating-in'); inputForm.addEventListener('animationend', () => { inputForm.classList.remove('animating-in'); isAnimating = false; }, { once: true }); }, { once: true }); }
+        };
+
+
+        const setLanguage = (lang) => {
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.dataset.key;
+                if (translations[lang]?.[key]) el.textContent = translations[lang][key];
+            });
+            document.querySelectorAll('[data-key-placeholder]').forEach(el => {
+                const key = el.dataset.keyPlaceholder;
+                if (translations[lang]?.[key]) el.placeholder = translations[lang][key];
+            });
+            document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
+            localStorage.setItem('userLanguage', lang);
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+        };
+
+
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
+        
+        function calculateWastedTime() { if (isAnimating) return; const age = parseInt(document.getElementById('age').value); const dailyHours = parseFloat(document.getElementById('dailyHours').value); if (!age || !dailyHours || age < 1 || age > 79 || dailyHours < 0.1) { alert('Por favor, insira valores válidos!'); return; } finalResult = (80 - age) * 365 * dailyHours / 8760; isAnimating = true; inputForm.classList.add('animating-out'); inputForm.addEventListener('animationend', () => { inputForm.style.display = 'none'; inputForm.classList.remove('animating-out'); resultContainer.style.display = 'block'; resultContainer.classList.add('animating-in'); startAnimation(); resultContainer.addEventListener('animationend', () => { resultContainer.classList.remove('animating-in'); isAnimating = false; }, { once: true }); }, { once: true }); }
+        function startAnimation() { const slotNumber = document.getElementById('slotNumber'); resultContent.innerHTML = ''; resultContent.classList.remove('visible'); slotNumber.classList.add('spinning'); let cycles = 0; const maxCycles = 120; const interval = setInterval(() => { slotNumber.textContent = (Math.random() * 20).toFixed(1); cycles++; if (cycles > maxCycles) { clearInterval(interval); slotNumber.classList.remove('spinning'); let currentVal = parseFloat(slotNumber.textContent); const targetVal = finalResult; const diff = targetVal - currentVal; const steps = 30; const increment = diff / steps; let step = 0; const finalInterval = setInterval(() => { step++; currentVal += increment; slotNumber.textContent = currentVal.toFixed(1); if (step >= steps) { clearInterval(finalInterval); slotNumber.textContent = targetVal.toFixed(1); setTimeout(showResult, 500); } }, 20); } }, 50); }
+        function showResult() {
+            const lang = localStorage.getItem('userLanguage') || 'pt';
+            const age = parseInt(document.getElementById('age').value);
+            const dailyHours = parseFloat(document.getElementById('dailyHours').value);
+            const totalHours = Math.round((80 - age) * 365 * dailyHours);
+            const totalDays = Math.round(totalHours / 24);
             
-            // Lógica de inicialização e eventos
+            resultContent.innerHTML = `<div class="stats-grid"><div class="stat-item"><div class="stat-icon"><svg viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div class="stat-number">${totalHours.toLocaleString(lang === 'pt' ? 'pt-BR' : lang)}</div><div class="stat-label">${translations[lang].totalHoursLabel}</div></div><div class="stat-item"><div class="stat-icon"><svg viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><div class="stat-number">${totalDays.toLocaleString(lang === 'pt' ? 'pt-BR' : lang)}</div><div class="stat-label">${translations[lang].totalDaysLabel}</div></div></div><div class="equivalency-section"><h3 class="equivalency-title">${translations[lang].equivalencyTitle}</h3><ul class="equivalency-list"><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div><span class="equivalency-text">${translations[lang].equivalencyBook}</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3m0 12l-4-4m4 4l4-4"></path><path d="M10 9h4"></path><path d="M15 21H9a2 2 0 0 1-2-2V7h10v12a2 2 0 0 1-2 2z"></path></svg></div><span class="equivalency-text">${translations[lang].equivalencySkill}</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg></div><span class="equivalency-text">${translations[lang].equivalencyFamily}</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 0 0 9-9c0-4.97-4.03-9-9-9s-9 4.03-9 9a9 9 0 0 0 9 9z"></path><path d="M12 21V12"></path><path d="m5 12 2.5 3"></path><path d="m16.5 15-2.5-3"></path></svg></div><span class="equivalency-text">${translations[lang].equivalencyHealth}</span></li><li class="equivalency-item"><div class="equivalency-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div><span class="equivalency-text">${translations[lang].equivalencyTravel}</span></li></ul></div>`;
+            resultContent.classList.add('visible');
+            isAnimating = false;
+        }
+        function resetCalculator() { if(isAnimating) return; isAnimating = true; resultContainer.classList.add('animating-out'); resultContainer.addEventListener('animationend', () => { resultContainer.style.display = 'none'; resultContainer.classList.remove('animating-out'); document.getElementById('age').value = ''; document.getElementById('dailyHours').value = ''; inputForm.style.display = 'block'; inputForm.classList.add('animating-in'); inputForm.addEventListener('animationend', () => { inputForm.classList.remove('animating-in'); isAnimating = false; }, { once: true }); }, { once: true }); }
+        
+        document.addEventListener('DOMContentLoaded', () => {
             const savedLang = localStorage.getItem('userLanguage') || 'pt';
             setLanguage(savedLang);
             document.getElementById('current-year').textContent = new Date().getFullYear();
             document.getElementById('modal-current-year').textContent = new Date().getFullYear();
+        });
 
-            langButtons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    setLanguage(btn.dataset.lang);
-                });
-            });
-            
-            calculateBtn.addEventListener('click', calculateWastedTime);
-            resetBtn.addEventListener('click', resetCalculator);
 
-            const qrModalOverlay = document.getElementById('qr-modal-overlay');
-            const openQrModalBtn = document.getElementById('open-qr-modal');
-            const closeQrModalBtn = document.getElementById('close-qr-modal');
-            openQrModalBtn.addEventListener('click', (e) => { e.preventDefault(); qrModalOverlay.classList.add('visible'); });
-            closeQrModalBtn.addEventListener('click', () => qrModalOverlay.classList.remove('visible'));
-            qrModalOverlay.addEventListener('click', (event) => { if (event.target === qrModalOverlay) qrModalOverlay.classList.remove('visible'); });
-            
-            const helpModalOverlay = document.getElementById('help-modal-overlay');
-            const openHelpModalBtn = document.getElementById('open-help-modal');
-            const closeHelpModalBtn = document.getElementById('close-help-modal');
-            openHelpModalBtn.addEventListener('click', (e) => { e.preventDefault(); helpModalOverlay.classList.add('visible'); });
-            closeHelpModalBtn.addEventListener('click', () => helpModalOverlay.classList.remove('visible'));
-            helpModalOverlay.addEventListener('click', (event) => { if (event.target === helpModalOverlay) helpModalOverlay.classList.remove('visible'); });
-
-            const manifestoModalOverlay = document.getElementById('manifesto-modal-overlay');
-            const openManifestoModalBtn = document.getElementById('open-manifesto-modal');
-            const closeManifestoModalBtn = document.getElementById('close-manifesto-modal');
-            openManifestoModalBtn.addEventListener('click', (e) => { e.preventDefault(); manifestoModalOverlay.classList.add('visible'); });
-            closeManifestoModalBtn.addEventListener('click', () => manifestoModalOverlay.classList.remove('visible'));
-            manifestoModalOverlay.addEventListener('click', (event) => { if (event.target === manifestoModalOverlay) manifestoModalOverlay.classList.remove('visible'); });
-            
-            window.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape') {
-                    qrModalOverlay.classList.remove('visible');
-                    helpModalOverlay.classList.remove('visible');
-                    manifestoModalOverlay.classList.remove('visible');
-                }
-            });
+        const qrModalOverlay = document.getElementById('qr-modal-overlay');
+        const openQrModalBtn = document.getElementById('open-qr-modal');
+        const closeQrModalBtn = document.getElementById('close-qr-modal');
+        openQrModalBtn.addEventListener('click', (e) => { e.preventDefault(); qrModalOverlay.classList.add('visible'); });
+        closeQrModalBtn.addEventListener('click', () => qrModalOverlay.classList.remove('visible'));
+        qrModalOverlay.addEventListener('click', (event) => { if (event.target === qrModalOverlay) qrModalOverlay.classList.remove('visible'); });
+        
+        const helpModalOverlay = document.getElementById('help-modal-overlay');
+        const openHelpModalBtn = document.getElementById('open-help-modal');
+        const closeHelpModalBtn = document.getElementById('close-help-modal');
+        openHelpModalBtn.addEventListener('click', (e) => { e.preventDefault(); helpModalOverlay.classList.add('visible'); });
+        closeHelpModalBtn.addEventListener('click', () => helpModalOverlay.classList.remove('visible'));
+        helpModalOverlay.addEventListener('click', (event) => { if (event.target === helpModalOverlay) helpModalOverlay.classList.remove('visible'); });
+        
+        window.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                qrModalOverlay.classList.remove('visible');
+                helpModalOverlay.classList.remove('visible');
+            }
         });
     </script>
 </body>
